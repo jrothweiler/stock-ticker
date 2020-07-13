@@ -1,6 +1,6 @@
-const initialSate = {
-    ticker = "AAPL",
-    tickerInfo = {} //Dependent on Ticker
+const initialState = {
+    ticker: "AAPL",
+    tickerInfo: {} //Dependent on Ticker
 }
 
 export default (state = initialState, action) => {
@@ -8,8 +8,7 @@ export default (state = initialState, action) => {
     switch (action.type) {
       case 'search': { //User searches a new stock
           return {
-              ...state,
-              ticker: newTicker
+              ...state
           }
       }
       //Might need to go in middleware since it requires a payload v

@@ -4,8 +4,6 @@ import {Provider} from 'react-redux';
 
 import stockReducer from './reducers/stockReducer';
 
-const dataStore = createStore(stockReducer);
-
 //Listens for changes and orchestrates dispatches 
 const orchestratorMiddleware = (baseStore) => {
   let prevState = baseStore.getState();
