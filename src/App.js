@@ -46,6 +46,7 @@ const dataStore = orchestratorMiddleware(
 function App() {
   return (
     <Provider store={dataStore}>
+      <div>Hello world!</div>
     </Provider>
   );
 }
