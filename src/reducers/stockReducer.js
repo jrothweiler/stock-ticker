@@ -1,21 +1,31 @@
 const initialState = {
-    ticker: "AAPL",
-    tickerInfo: {} //Dependent on Ticker
+  ticker: "AAPL",
+  tickerInfo: {
+    quoteInfo: null,
+    newsInfo: null,
+    companyInfo: null,
+    statInfo: null,
+  }
+
 }
 
 export default (state = initialState, action) => {
     
-    switch (action.type) {
-      case 'search': { //User searches a new stock
-          return {
-              ...state
-          }
-      }
-      //Might need to go in middleware since it requires a payload v
-      case 'changeInterval': { //User selects a a different timescale for display (1 day, 5 day, 1 month, etc)
+  switch (action.type) {
+    case 'newQuoteData': {
         return {
-            ...state
+            ...state, 
+            tickerInfo: {
+              ...state.tickerInfo,
+              quoteInfo: action.payload
+            }
         }
+    }
+    case 'newTickerData': {
+      return {
+          ...state, 
+          tickerInfo: action.payload
       }
     }
   }
+}

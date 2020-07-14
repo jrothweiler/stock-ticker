@@ -23,5 +23,5 @@ export const statsFetch = (symbol) => {
 
 // Fetches news articles for the company, 5 for each call.
 export const newsFetch = (symbol) => {
-    return fetch(`/api/quote/${symbol}`).then(data => data.json());
+    return fetch(`/api/news/${symbol}`).then(data => data.json());
 }
