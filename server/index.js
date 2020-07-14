@@ -9,7 +9,7 @@ app.get('/api/quote/:symbol', async (req, res) => {
     const symbol = req.params.symbol;
     const quoteData = await iex.quote(symbol);
     res.setHeader('Content-Type', 'application/json');
-    const { previousClose, high, low, latestPrice, latestVolume, marketCap, open, avgTotalVolume } = quoteData;
+    const { previousClose, week52High, week52Low, high, low, latestPrice, latestVolume, marketCap, open, avgTotalVolume } = quoteData;
     res.send(JSON.stringify({ previousClose, week52High, week52Low, high, low, latestPrice, marketCap, latestVolume, open, avgTotalVolume }));
 });
 
@@ -35,7 +35,7 @@ app.get('/api/news/:symbol', async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     const returnData = newsData.map(article => {
         const {datetime, headline, source, url} = article;
-        return {datetime, headline, source, url, summary};
+        return {datetime, headline, source, url};
     })
     
     res.send(JSON.stringify(returnData));
