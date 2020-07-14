@@ -34,7 +34,7 @@ app.get('/api/news/:symbol', async (req, res) => {
     const newsData = await iex.news(symbol, 5);
     res.setHeader('Content-Type', 'application/json');
     const returnData = newsData.map(article => {
-        const {datetime, headline, source, url, summary} = article;
+        const {datetime, headline, source, url} = article;
         return {datetime, headline, source, url, summary};
     })
     
