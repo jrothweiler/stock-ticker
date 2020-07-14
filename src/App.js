@@ -15,15 +15,9 @@ const producerMiddleWare = (rawStore) => {
     //Trigger dispatches here
     switch (action.type) {
       case 'searchSymbol': {
-        
         let symbol = action.payload;
 
-        let companyFetchPromise = companyFetch(symbol);
-        let newsFetchPromise = newsFetch(symbol);
-        let statsFetchPromise =  statsFetch(symbol);
-
-
-        Promise.all([quoteFetch(symbol), companyFetchPromise, newsFetchPromise, statsFetchPromise]).then(dataArray => {
+        Promise.all([quoteFetch(symbol), companyFetch(symbol), newsFetch(symbol), statsFetch(symbol)]).then(dataArray => {
           let [quoteInfo, companyInfo, newsInfo, statInfo] = dataArray;
           rawStore.dispatch({type: 'newTickerData', payload: {
             quoteInfo,

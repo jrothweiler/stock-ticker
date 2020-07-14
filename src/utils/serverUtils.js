@@ -2,9 +2,6 @@
 // See server/index.js for server code.
 
 
-const delay = t => new Promise(resolve => setTimeout(resolve, t));
-
-
 // Generalized fetch function over any endpoint
 export const proxyFetch = async (symbol, endpoint) => {
     return fetch(`/api/${endpoint}/${symbol}`)

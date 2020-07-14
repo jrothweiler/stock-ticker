@@ -6,16 +6,21 @@ const app = express();
 
 const delay = t => new Promise(resolve => setTimeout(resolve, t));
 
+// Given an IEX fetch function (i.e. quote, keyStats, etc.), provides a wrapper that 
+// handles 429 rate limiting errors. 
 async function fetchWrapper(...args) {
     try {
+        // call the IEX Cloud function with the provided args, and return the data if no problems
         let [fetchFunction, ...functionArgs] = args;
         let data = await fetchFunction(...functionArgs);
         return data;
     } catch (e) {
         if (e.response.status === 429) {
+            // in the case of Too Many Requests, wait 100ms and try again
             await delay(100);
             return fetchWrapper(...args);
         } else {
+            // Propogate all other errors
             throw e;
         }
     }
