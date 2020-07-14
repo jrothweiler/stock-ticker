@@ -6,6 +6,12 @@ import {quoteFetch, companyFetch, newsFetch, statsFetch} from './utils/serverUti
 import stockReducer from './reducers/stockReducer';
 import { INITIAL_STOCK } from './utils/constants';
 
+import SearchBar from './components/searchBar';
+
+import './App.css';
+
+
+
 
 
 //Triggers dispatches (May need to be broken down into multiple Middlewares chained together)
@@ -20,11 +26,15 @@ const producerMiddleWare = (rawStore) => {
         Promise.all([quoteFetch(symbol), companyFetch(symbol), newsFetch(symbol), statsFetch(symbol)]).then(dataArray => {
           let [quoteInfo, companyInfo, newsInfo, statInfo] = dataArray;
           rawStore.dispatch({type: 'newTickerData', payload: {
-            quoteInfo,
-            newsInfo,
-            companyInfo,
-            statInfo
-          }})
+              symbol,
+              data: {
+                quoteInfo,
+                newsInfo,
+                companyInfo,
+                statInfo
+              }
+            }
+          })
         })
       }
       default:
@@ -47,7 +57,7 @@ function App() {
 
   return (
     <Provider store={dataStore}>
-      <div>Hello world!</div>
+      <SearchBar />
     </Provider>
   );
 }
