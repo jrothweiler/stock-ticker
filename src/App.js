@@ -6,7 +6,7 @@ import {quoteFetch, companyFetch, newsFetch, statsFetch} from './utils/serverUti
 import stockReducer from './reducers/stockReducer';
 import { INITIAL_STOCK } from './utils/constants';
 
-const delay = t => new Promise(resolve => setTimeout(resolve, t));
+
 
 //Triggers dispatches (May need to be broken down into multiple Middlewares chained together)
 const producerMiddleWare = (rawStore) => {
@@ -15,11 +15,12 @@ const producerMiddleWare = (rawStore) => {
     //Trigger dispatches here
     switch (action.type) {
       case 'searchSymbol': {
+        
         let symbol = action.payload;
 
-        let companyFetchPromise = delay(100).then(() => companyFetch(symbol));
-        let newsFetchPromise = delay(200).then(() => newsFetch(symbol));
-        let statsFetchPromise = delay(300).then(() => statsFetch(symbol));
+        let companyFetchPromise = companyFetch(symbol);
+        let newsFetchPromise = newsFetch(symbol);
+        let statsFetchPromise =  statsFetch(symbol);
 
 
         Promise.all([quoteFetch(symbol), companyFetchPromise, newsFetchPromise, statsFetchPromise]).then(dataArray => {
