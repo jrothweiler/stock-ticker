@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {createStore} from 'redux';
+import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import { VisualDisplay } from './components/visualDisplay' 
 import stockReducer from './reducers/stockReducer';

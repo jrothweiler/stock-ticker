@@ -28,6 +28,11 @@ export const Text = styled('p')(
       color: 'red',
       fontSize: '1.0rem',
       display: 'inline-block'
+    },
+    error: {
+      color: 'red',
+      fontSize: '1.0rem',
+      display: 'inline-block'
     }
   }
 }),

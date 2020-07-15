@@ -28,7 +28,7 @@ async function fetchWrapper(...args) {
     }
 }
 
-
+//iex.marketSymbols().then((data) => console.log(data));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 const server = http.createServer(app);
