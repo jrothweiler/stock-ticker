@@ -37,9 +37,9 @@ const producerMiddleWare = (rawStore) => {
               }
             }
           })
-        });
 
-        socket.emit('newSymbol', symbol);
+          socket.emit('newSymbol', symbol);
+        });
       }
       default:
         rawStore.dispatch(action);
