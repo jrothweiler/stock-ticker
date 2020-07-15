@@ -87,6 +87,7 @@ io.on("connection", (socket) => {
 
     let subscribeToSymbol = (symbol) => {
         return setInterval(async () => {
+            console.log('fetching data for ', symbol)
             const quoteData = await fetchWrapper(iex.quote, symbol);
             const { previousClose, week52High, week52Low, high, low, latestPrice, latestVolume, marketCap, open, avgTotalVolume } = quoteData;
             socket.emit('realTimeQuoteData', { previousClose, week52High, week52Low, high, low, latestPrice, latestVolume, marketCap, open, avgTotalVolume });
@@ -96,10 +97,10 @@ io.on("connection", (socket) => {
     let intervalId = null;
     
 
-    server.on("newSymbol", (newSym) => {
+    socket.on("newSymbol", (newSym) => {
         console.log("new symbol set:", newSym)
         clearInterval(intervalId);
-        let intervalId = subscribeToSymbol(newSym);
+        intervalId = subscribeToSymbol(newSym);
     })
 
     socket.on("disconnect", () => {
