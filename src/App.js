@@ -8,6 +8,8 @@ import { INITIAL_STOCK } from './utils/constants';
 
 import SearchBar from './components/searchBar';
 
+import socketIOClient from "socket.io-client";
+
 import './App.css';
 
 
@@ -16,6 +18,7 @@ import './App.css';
 
 //Triggers dispatches (May need to be broken down into multiple Middlewares chained together)
 const producerMiddleWare = (rawStore) => {
+  const socket = socketIOClient('http://localhost:3001')
 
   const dispatch = (action) => {
     //Trigger dispatches here
@@ -35,12 +38,18 @@ const producerMiddleWare = (rawStore) => {
               }
             }
           })
-        })
+        });
+
+        socket.emit('newSymbol', symbol);
       }
       default:
         rawStore.dispatch(action);
     }
   }
+
+  socket.on('realTimeQuoteData', (data) => {
+    rawStore.dispatch({ type: 'newQuoteData', payload: data })
+  })
 
   return {
     ...rawStore, 

@@ -1,5 +1,5 @@
 const initialState = {
-  ticker: "AAPL",
+  ticker: null,
   tickerInfo: {
     quoteInfo: null,
     newsInfo: null,

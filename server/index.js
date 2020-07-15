@@ -1,6 +1,8 @@
 const express = require('express');
+const http = require('http');
 const bodyParser = require('body-parser');
-const iex = require( 'iexcloud_api_wrapper' )
+const iex = require( 'iexcloud_api_wrapper' );
+const socketIo = require('socket.io');
 
 const app = express();
 
@@ -28,6 +30,9 @@ async function fetchWrapper(...args) {
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
+
+const server = http.createServer(app);
+const io = socketIo(server);
 
 app.get('/api/quote/:symbol', async (req, res) => {
     const symbol = req.params.symbol;
@@ -77,6 +82,32 @@ app.get('/api/news/:symbol', async (req, res) => {
     }
 });
 
-app.listen(3001, () =>
+io.on("connection", (socket) => {
+    console.log("A client has connected");
+
+    let subscribeToSymbol = (symbol) => {
+        return setInterval(async () => {
+            const quoteData = await fetchWrapper(iex.quote, symbol);
+            const { previousClose, week52High, week52Low, high, low, latestPrice, latestVolume, marketCap, open, avgTotalVolume } = quoteData;
+            socket.emit('realTimeQuoteData', { previousClose, week52High, week52Low, high, low, latestPrice, latestVolume, marketCap, open, avgTotalVolume });
+        }, 1000)
+    }
+
+    let intervalId = null;
+    
+
+    server.on("newSymbol", (newSym) => {
+        console.log("new symbol set:", newSym)
+        clearInterval(intervalId);
+        let intervalId = subscribeToSymbol(newSym);
+    })
+
+    socket.on("disconnect", () => {
+        console.log("A client has disconnected");
+        clearInterval(intervalId);
+    })
+})
+
+server.listen(3001, () =>
   console.log('Express server is running on localhost:3001')
 );
