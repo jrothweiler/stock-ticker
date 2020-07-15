@@ -1,13 +1,16 @@
 import React, {useState, useEffect} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { mdiMagnify } from '@mdi/js';
 import Icon from '@mdi/react'
 import {VALID_SEARCH_REGEXP} from '../utils/constants';
 import {Text} from '../components/generics/text';
+import {searchErrorsSelector} from '../selectors/errorsSelectors';
 
 const SearchBar = () => {
     let [currentText, setCurrentText] = useState('');
     let [showBadInputError, setShowBadInputError] = useState(false);
+    let searchError = useSelector(searchErrorsSelector);
+    
     let dispatch = useDispatch();
 
     function handleType(e) {
@@ -33,6 +36,11 @@ const SearchBar = () => {
             {
                 showBadInputError && (
                     <Text variant="error">Not a valid input, try again</Text>
+                )
+            }
+            {
+                !showBadInputError && searchError && (
+                    <Text variant="error">Error in search: {searchError}</Text>
                 )
             }
         </form>

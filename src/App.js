@@ -3,6 +3,7 @@ import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import { VisualDisplay } from './components/visualDisplay' 
 import stockReducer from './reducers/stockReducer';
+import errorReducer from './reducers/errorReducer';
 import { LatestNews } from './components/latestNews';
 import {quoteFetch, companyFetch, newsFetch, statsFetch} from './utils/serverUtils';
 import { INITIAL_STOCK } from './utils/constants';
@@ -39,6 +40,8 @@ const producerMiddleWare = (rawStore) => {
           })
 
           socket.emit('newSymbol', symbol);
+        }).catch(e => {
+          rawStore.dispatch({ type: 'searchError', payload: e.message})
         });
       }
       default:
@@ -56,7 +59,14 @@ const producerMiddleWare = (rawStore) => {
   }
 }
 //May need to break down producerMiddleware into multiple Middlewares to handle individual component requirements
-const dataStore = producerMiddleWare(createStore(stockReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
+const dataStore = producerMiddleWare(
+  createStore(
+    combineReducers({
+      stocks: stockReducer, 
+      errors: errorReducer
+    }),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+);
 
 
 
