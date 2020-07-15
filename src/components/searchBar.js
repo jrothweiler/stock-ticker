@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import { mdiMagnify } from '@mdi/js';
 import Icon from '@mdi/react'
@@ -16,13 +16,12 @@ const SearchBar = () => {
         e.preventDefault();
         dispatch({ type: 'searchSymbol', payload: currentText} );
         setCurrentText('');
-        
     }
 
     return (
         <form onSubmit={handleSubmit}>
-            <Icon className={"searchIcon"} path={mdiMagnify} size={1} color="#5496ff"/>
-            <input value={currentText} onChange={handleType}/>
+            <Icon className="searchIcon" path={mdiMagnify} size={1} color="#5496ff"/>
+            <input className="searchBar" value={currentText} onChange={handleType}/>
         </form>
         
     )

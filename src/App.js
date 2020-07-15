@@ -11,8 +11,6 @@ import SearchBar from './components/searchBar';
 
 import socketIOClient from "socket.io-client";
 
-import './App.css';
-
 
 
 
@@ -49,7 +47,6 @@ const producerMiddleWare = (rawStore) => {
   }
 
   socket.on('realTimeQuoteData', (data) => {
-    console.log("received new data")
     rawStore.dispatch({ type: 'newQuoteData', payload: data })
   })
 
@@ -60,6 +57,9 @@ const producerMiddleWare = (rawStore) => {
 }
 //May need to break down producerMiddleware into multiple Middlewares to handle individual component requirements
 const dataStore = producerMiddleWare(createStore(stockReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
+
+
+
 
 function App() {
   useEffect(() => {
