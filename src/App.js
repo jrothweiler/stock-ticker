@@ -3,6 +3,7 @@ import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import { VisualDisplay } from './components/visualDisplay' 
 import stockReducer from './reducers/stockReducer';
+import { LatestNews } from './components/latestNews';
 
 //Listens for changes and orchestrates dispatches 
 const orchestratorMiddleware = (baseStore) => {
@@ -46,6 +47,7 @@ const dataStore = orchestratorMiddleware(
 function App() {
   return (
     <Provider store={dataStore}>
+      
       <VisualDisplay/>
     </Provider>
   );

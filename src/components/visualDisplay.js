@@ -4,8 +4,7 @@ import { DisplayBadge } from "./generics/displayBadge";
 import { DisplayWrapper } from "./generics/displayWrapper";
 import { PriceDisplay } from "./generics/priceDisplay";
 import { TitleHeader } from "./generics/titleHeader";
-import { HeadlineText } from "./generics/headlineText";
-import { SubHeadlineText } from "./generics/subHeadlineText";
+import { Text } from "./generics/text";
 import { StatLine } from "./generics/statLine";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -14,21 +13,21 @@ export const VisualDisplay = () => {
   const dispatch = useDispatch();
 
   return (
-    <DisplayWrapper>
+    <DisplayWrapper width="50%" mr="auto" ml="auto">
       <BannerButton selected>Quotes</BannerButton>
       <DisplayBadge>NASDAQ</DisplayBadge>
-      <PriceDisplay>$160.03</PriceDisplay>
-      <PriceDisplay loss>2.94 | 1.88% </PriceDisplay>
+      <Text variant="primary">$160.03</Text>
+      <Text  variant="loss">2.94 | 1.88% </Text>
       <TitleHeader>Latest News</TitleHeader>
-      <HeadlineText highlight>
+      <Text fontSize="1.1rem" fontFamily="Sans-Serif" variant="highlighted">
         Global Consumer Markets Quick to Adopt a Latest Mobile Payment and
         Electronic Wallet...
-      </HeadlineText>
-      <SubHeadlineText> 58 min ago -WSJ</SubHeadlineText>
-      <HeadlineText>
+      </Text>
+      <Text fontSize="0.8rem" fontFamily="Sans-Serif" variant="secondary"> 58 min ago -WSJ</Text>
+      <Text fontSize="1.1rem" fontFamily="Sans-Serif" variant="primary">
         Amazon's market cap on track to pass Microsoft for first time
-      </HeadlineText>
-      <SubHeadlineText> 1hr ago -Morningstar</SubHeadlineText>
+      </Text>
+      <Text fontSize="0.8rem" fontFamily="Sans-Serif" variant="secondary"> 1hr ago -Morningstar</Text>
       <StatLine> Previous Close 158.73</StatLine>
     </DisplayWrapper>
   );
