@@ -12,3 +12,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.newsRow {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}

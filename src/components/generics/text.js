@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import {typography, variant} from "styled-system";
+import {typography, variant, space} from "styled-system";
 
-export const Text = styled('p')(
+export const Text = styled('div')(
   {
     fontFamily: 'Sans-Serif'
   },
@@ -31,5 +31,6 @@ export const Text = styled('p')(
     }
   }
 }),
-  typography
+  typography,
+  space
 );

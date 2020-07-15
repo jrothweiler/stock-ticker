@@ -7,8 +7,6 @@ import { LatestNews } from './components/latestNews';
 import {quoteFetch, companyFetch, newsFetch, statsFetch} from './utils/serverUtils';
 import { INITIAL_STOCK } from './utils/constants';
 
-
-
 //Triggers dispatches (May need to be broken down into multiple Middlewares chained together)
 const producerMiddleWare = (rawStore) => {
 
@@ -48,8 +46,7 @@ function App() {
 
   return (
     <Provider store={dataStore}>
-      
-      <VisualDisplay/>
+    <LatestNews/>
     </Provider>
   );
 }

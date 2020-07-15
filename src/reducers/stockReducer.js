@@ -6,7 +6,6 @@ const initialState = {
     companyInfo: null,
     statInfo: null,
   }
-
 }
 
 export default (state = initialState, action) => {
@@ -27,5 +26,7 @@ export default (state = initialState, action) => {
           tickerInfo: action.payload
       }
     }
+    default:
+      return state;
   }
 }
