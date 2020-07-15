@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
-import { VisualDisplay } from './components/visualDisplay' 
+import { KeyStats } from './components/keyStats'
 import stockReducer from './reducers/stockReducer';
 import { LatestNews } from './components/latestNews';
+import { CompanyOverview } from './components/companyOverview';
 import {quoteFetch, companyFetch, newsFetch, statsFetch} from './utils/serverUtils';
 import { INITIAL_STOCK } from './utils/constants';
 
@@ -47,6 +48,8 @@ function App() {
   return (
     <Provider store={dataStore}>
     <LatestNews/>
+    <CompanyOverview/>
+    <KeyStats/>
     </Provider>
   );
 }
