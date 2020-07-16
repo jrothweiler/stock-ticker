@@ -13,7 +13,7 @@ export const CompanyOverview = () => {
     const companyInfo = useSelector(companySelector);
     const ticker = useSelector(tickerSelector);
   return (
-    <DisplayWrapper width="25%" mr="auto" ml="auto">
+    <DisplayWrapper width="25%">
     <TitleHeader>Company Info</TitleHeader>
     {companyInfo && <Text variant="primary" fontSize="1.8rem">{companyInfo.companyName} ({ticker})</Text>}
     {companyInfo && <Text mt="0.5rem" variant="secondary">{companyInfo.website}</Text>}

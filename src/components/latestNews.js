@@ -18,7 +18,7 @@ export const LatestNews = () => {
     const quoteInfo = useSelector(quoteSelector)
     const statInfo = useSelector(statsSelector)
   return (
-    <DisplayWrapper width="25%" mr="auto" ml="auto">
+    <DisplayWrapper width="25%">
     <TitleHeader>Latest News</TitleHeader>
 
     {newsInfo && newsInfo.map((article) => <div className="newsRow"><Text variant="primary">{article.headline}</Text>
