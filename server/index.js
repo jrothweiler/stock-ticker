@@ -82,6 +82,24 @@ app.get('/api/news/:symbol', async (req, res) => {
     }
 });
 
+app.get('/api/history/:symbol', async (req,res) => {
+    const symbol = req.params.symbol;
+    try {
+        const historyData = await fetchWrapper(iex.history, symbol, { period: '1d' });
+        const returnData = historyData.map(day => {
+            return {
+                date: day.date,
+                minute: day.minute,
+                label: day.label,
+                price: day.average
+            }
+        })
+        res.json(returnData);
+    } catch (e) {
+        res.sendStatus(e.response.status);
+    }
+});
+
 io.on("connection", (socket) => {
     console.log("A client has connected");
 
@@ -108,6 +126,8 @@ io.on("connection", (socket) => {
         clearInterval(intervalId);
     })
 })
+
+iex.history("AAPL", {period: '1d'}).then(data => console.log(data));
 
 server.listen(3001, () =>
   console.log('Express server is running on localhost:3001')

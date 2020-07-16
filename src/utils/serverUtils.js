@@ -34,3 +34,7 @@ export const statsFetch = (symbol) => {
 export const newsFetch = (symbol) => {
     return proxyFetch(symbol, "news");
 }
+
+export const historyFetch = (symbol) => {
+    return proxyFetch(symbol, 'history');
+}
