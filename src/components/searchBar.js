@@ -34,12 +34,10 @@ const SearchBar = () => {
     }
 
     function onInputFocus() {
-        console.log("entering focus")
         setShowCompanyText(false);
     }
 
     function onLeaveInputFocus() {
-        console.log('leaving focus')
         setShowCompanyText(currentText === '');
     }
 
