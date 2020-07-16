@@ -16,11 +16,14 @@ export const LatestNews = () => {
 
   return (
     <DisplayWrapper width="25%">
-    <TitleHeader>Latest News</TitleHeader>
+      <TitleHeader>Latest News</TitleHeader>
 
-    {newsInfo && newsInfo.map((article) => <div className="newsRow"><Text variant="primary">{article.headline}</Text>
-        <Text mt="0.3rem" variant="secondary">{timeago.format(article.datetime)}  -{article.source}</Text>
-        </div>)}
+      {newsInfo && newsInfo.map((article) => 
+        <div key={article.headline} className="newsRow">
+          <Text variant="primary">{article.headline}</Text>
+          <Text mt="0.3rem" variant="secondary">{timeago.format(article.datetime)} - {article.source}</Text>
+        </div>)
+      }
     </DisplayWrapper>
   );
 };

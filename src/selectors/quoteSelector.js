@@ -1,3 +1,3 @@
 export const quoteSelector = (state) => {
-    return state.tickerInfo.quoteInfo;
+    return state.stocks.tickerInfo.quoteInfo;
 }
