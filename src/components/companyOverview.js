@@ -10,14 +10,14 @@ import { useDispatch, useSelector } from "react-redux";
 export const CompanyOverview = () => {
   //Call necessary selectors for display data
   const dispatch = useDispatch();
-    const companyInfo = useSelector(companySelector);
-    const ticker = useSelector(tickerSelector);
+  const companyInfo = useSelector(companySelector);
+  const ticker = useSelector(tickerSelector);
   return (
-    <DisplayWrapper width="25%">
+    <DisplayWrapper width="25%" height="25%">
     <TitleHeader>Company Info</TitleHeader>
     {companyInfo && <Text variant="primary" fontSize="1.8rem">{companyInfo.companyName} ({ticker})</Text>}
-    {companyInfo && <Text mt="0.5rem" variant="secondary">{companyInfo.website}</Text>}
-    {companyInfo && <Text  mt="0.5rem" variant="primary">{companyInfo.description}</Text>}
+    {companyInfo && <Text mt="0.5rem" variant="secondary" fontStyle="italic">{companyInfo.website}</Text>}
+    {companyInfo && <Text mt="0.5rem" variant="primary" overflow="auto" height="15.0rem">{companyInfo.description}</Text>}
     </DisplayWrapper>
   );
 };

@@ -13,6 +13,9 @@ code {
     monospace;
 }
 
+.newsRow {
+  margin-bottom: 1rem;
+}
 .searchIcon {
   vertical-align: middle;
 }

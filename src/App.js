@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {createStore, combineReducers} from 'redux';
-import {Provider} from 'react-redux';
+import {Provider, useSelector} from 'react-redux';
 import { KeyStats } from './components/keyStats'
 import stockReducer from './reducers/stockReducer';
 import errorReducer from './reducers/errorReducer';
@@ -10,6 +10,8 @@ import {quoteFetch, companyFetch, newsFetch, statsFetch} from './utils/serverUti
 import { INITIAL_STOCK } from './utils/constants';
 import SearchBar from './components/searchBar';
 import socketIOClient from "socket.io-client";
+import { PriceDisplay } from './components/priceDisplay';
+import {tickerSelector} from './selectors/tickerSelector';
 
 //Triggers dispatches (May need to be broken down into multiple Middlewares chained together)
 const producerMiddleWare = (rawStore) => {
@@ -73,10 +75,13 @@ function App() {
 
   return (
     <Provider store={dataStore}>
-    <SearchBar />
-    <LatestNews/>
-    <CompanyOverview/>
-    <KeyStats/>
+    <div>
+      <SearchBar />
+      <LatestNews/>
+      <CompanyOverview/>
+      <KeyStats/>
+      <PriceDisplay/>
+    </div>
     </Provider>
   );
 }
