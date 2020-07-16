@@ -6,12 +6,8 @@ import { quoteSelector } from "../selectors/quoteSelector";
 import { DisplayWrapper } from "./generics/displayWrapper";
 import { TitleHeader } from "./generics/titleHeader";
 import { Text } from "./generics/text";
-import TimeAgo from 'timeago-react';
 import * as timeago from 'timeago.js';
-import en from 'timeago.js/lib/lang/vi';
 import { useDispatch, useSelector } from "react-redux";
-
-timeago.register('en', en);
 
 export const LatestNews = () => {
   //Call necessary selectors for display data

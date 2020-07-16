@@ -66,7 +66,7 @@ export const KeyStats = () => {
             {stats && 
                 <StatWrapper>
                     <Text variant="statLabel">Dividend& Yield</Text>
-                    <Text variant="statValue">{stats.dividendYield.toLocaleString('en')}</Text>}
+                    <Text variant="statValue">{(stats.dividendYield*100).toLocaleString('en')}%</Text>}
                 </StatWrapper>}
         </DisplayWrapper>
     </DisplayWrapper>

@@ -33,6 +33,7 @@ export const Text = styled('div')(
       color: 'gray',
       fontSize: '1.0rem',
       display: 'inline-block',
+      paddingBottom: '1.0rem'
     },
     statValue: {
       color: 'white',
@@ -40,6 +41,7 @@ export const Text = styled('div')(
       display: 'inline-block', 
       textAlign: 'right', 
       float: 'right',
+      paddingBottom: '1.0rem'
     }
   }
 }),
