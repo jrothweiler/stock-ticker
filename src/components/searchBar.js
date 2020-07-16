@@ -31,7 +31,6 @@ const SearchBar = () => {
         } else {
             setShowBadInputError(true);
         }
-        
     }
 
     function onInputFocus() {
@@ -54,14 +53,12 @@ const SearchBar = () => {
                 showCompanyText && (
                     <div className="companyText" onClick={onCompanyTextClick}>
                         <Text variant="primary" size="large" display="inline-block" >{companyName}</Text>
+                        {' '}
                         <Text variant="secondary" size="large" display="inline-block">{symbolText}</Text>
                     </div>
                 )
             }
 
-            
-            
-            
             {
                 showBadInputError && (
                     <Text variant="error">Not a valid input, try again</Text>
@@ -73,7 +70,6 @@ const SearchBar = () => {
                 )
             }
         </form>
-        
     )
 };
 
