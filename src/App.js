@@ -6,10 +6,11 @@ import stockReducer from './reducers/stockReducer';
 import errorReducer from './reducers/errorReducer';
 import { LatestNews } from './components/latestNews';
 import { CompanyOverview } from './components/companyOverview';
-import {quoteFetch, companyFetch, newsFetch, statsFetch} from './utils/serverUtils';
+import {quoteFetch, companyFetch, newsFetch, statsFetch, historyFetch} from './utils/serverUtils';
 import { INITIAL_STOCK } from './utils/constants';
 import SearchBar from './components/searchBar';
 import socketIOClient from "socket.io-client";
+import {VisualDisplay} from './components/visualDisplay';
 
 //Triggers dispatches (May need to be broken down into multiple Middlewares chained together)
 const producerMiddleWare = (rawStore) => {
@@ -21,15 +22,16 @@ const producerMiddleWare = (rawStore) => {
       case 'searchSymbol': {
         let symbol = action.payload;
 
-        Promise.all([quoteFetch(symbol), companyFetch(symbol), newsFetch(symbol), statsFetch(symbol)]).then(dataArray => {
-          let [quoteInfo, companyInfo, newsInfo, statInfo] = dataArray;
+        Promise.all([quoteFetch(symbol), companyFetch(symbol), newsFetch(symbol), statsFetch(symbol), historyFetch(symbol)]).then(dataArray => {
+          let [quoteInfo, companyInfo, newsInfo, statInfo, historyInfo] = dataArray;
           rawStore.dispatch({type: 'newTickerData', payload: {
               symbol,
               data: {
                 quoteInfo,
                 newsInfo,
                 companyInfo,
-                statInfo
+                statInfo,
+                historyInfo
               }
             }
           })
@@ -73,10 +75,7 @@ function App() {
 
   return (
     <Provider store={dataStore}>
-    <SearchBar />
-    <LatestNews/>
-    <CompanyOverview/>
-    <KeyStats/>
+      <VisualDisplay />
     </Provider>
   );
 }
