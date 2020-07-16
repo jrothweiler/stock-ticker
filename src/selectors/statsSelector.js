@@ -1,3 +1,3 @@
 export const statsSelector = (state) => {
-    return state.tickerInfo.statInfo;
+    return state.stocks.tickerInfo.statInfo;
 }
