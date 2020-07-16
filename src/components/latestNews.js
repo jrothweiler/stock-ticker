@@ -1,24 +1,26 @@
 import React from "react";
-import { newsSelector} from "../selectors/newsSelector"
-import { BannerButton } from "./generics/bannerButton";
-import { DisplayBadge } from "./generics/displayBadge";
+import { newsSelector } from "../selectors/newsSelector";
+import { companySelector} from "../selectors/companySelector";
+import { statsSelector } from "../selectors/statsSelector";
+import { quoteSelector } from "../selectors/quoteSelector";
 import { DisplayWrapper } from "./generics/displayWrapper";
-import { PriceDisplay } from "./generics/priceDisplay";
 import { TitleHeader } from "./generics/titleHeader";
 import { Text } from "./generics/text";
-import { StatLine } from "./generics/statLine";
-
+import * as timeago from 'timeago.js';
 import { useDispatch, useSelector } from "react-redux";
 
 export const LatestNews = () => {
   //Call necessary selectors for display data
   const dispatch = useDispatch();
-    const newsArticles = useSelector(newsSelector);
+    const newsInfo = useSelector(newsSelector);
+
   return (
-    <DisplayWrapper width="25%" mr="auto" ml="auto">
-    {newsArticles.map((article) => <div><Text variant="primary">article.headline</Text>
-        <Text variant="secondary">article.datetime</Text>
-        <Text variant="secondary">article.source</Text></div>)}
+    <DisplayWrapper width="25%">
+    <TitleHeader>Latest News</TitleHeader>
+
+    {newsInfo && newsInfo.map((article) => <div className="newsRow"><Text variant="primary">{article.headline}</Text>
+        <Text mt="0.3rem" variant="secondary">{timeago.format(article.datetime)}  -{article.source}</Text>
+        </div>)}
     </DisplayWrapper>
   );
 };

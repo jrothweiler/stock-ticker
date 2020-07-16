@@ -6,7 +6,6 @@ const initialState = {
     companyInfo: null,
     statInfo: null,
   }
-
 }
 
 export default (state = initialState, action) => {

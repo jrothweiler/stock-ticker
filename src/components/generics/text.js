@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {typography, layout, variant} from "styled-system";
+import {layout, typography, variant, space, color} from "styled-system";
 
 export const Text = styled('div')(
   {
@@ -43,10 +43,26 @@ export const Text = styled('div')(
     error: {
       color: 'red',
       display: 'inline-block'
+    },
+    statLabel: {
+      color: 'gray',
+      fontSize: '1.0rem',
+      display: 'inline-block',
+      paddingBottom: '1.0rem'
+    },
+    statValue: {
+      color: 'white',
+      fontSize: '1.0rem',
+      display: 'inline-block', 
+      textAlign: 'right', 
+      float: 'right',
+      paddingBottom: '1.0rem'
     }
   },
 
 }),
   typography,
+  space,
+  color, 
   layout
 );
