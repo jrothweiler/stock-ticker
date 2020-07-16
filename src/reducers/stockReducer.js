@@ -28,5 +28,7 @@ export default (state = initialState, action) => {
           tickerInfo: action.payload.data
       }
     }
+    default:
+      return state;
   }
 }
