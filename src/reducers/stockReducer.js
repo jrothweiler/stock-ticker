@@ -1,5 +1,5 @@
 const initialState = {
-  ticker: "AAPL",
+  ticker: null,
   tickerInfo: {
     quoteInfo: null,
     newsInfo: null,
@@ -23,7 +23,8 @@ export default (state = initialState, action) => {
     case 'newTickerData': {
       return {
           ...state, 
-          tickerInfo: action.payload
+          ticker: action.payload.symbol,
+          tickerInfo: action.payload.data
       }
     }
     default:

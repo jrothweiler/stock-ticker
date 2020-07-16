@@ -5,7 +5,14 @@
 // Generalized fetch function over any endpoint
 export const proxyFetch = async (symbol, endpoint) => {
     return fetch(`/api/${endpoint}/${symbol}`)
-        .then(data => data.json())
+        .then(data => {
+            if (data.ok) {
+                return data.json();
+            } else {
+                throw Error(data.statusText)
+            }
+        })
+        
 }
 
 // Fetches real time information (price, volume, high, low, etc) for the symbol
