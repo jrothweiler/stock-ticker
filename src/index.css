@@ -12,3 +12,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.searchIcon {
+  vertical-align: middle;
+}
+
+.searchBar {
+  background: inherit;
+  border: none;
+  color: white;
+}
+
+.searchBar:focus {
+  outline-width: 0;
+}
