@@ -25,7 +25,7 @@ const SearchBar = () => {
     function handleSubmit(e) {
         e.preventDefault();
         if (currentText.match(VALID_SEARCH_REGEXP)) {
-            dispatch({ type: 'searchSymbol', payload: currentText} );
+            dispatch({ type: 'searchSymbol', payload: currentText.toUpperCase()} );
             setCurrentText('');
             setShowBadInputError(false);
         } else {
@@ -34,10 +34,12 @@ const SearchBar = () => {
     }
 
     function onInputFocus() {
+        console.log("entering focus")
         setShowCompanyText(false);
     }
 
     function onLeaveInputFocus() {
+        console.log('leaving focus')
         setShowCompanyText(currentText === '');
     }
 
