@@ -14,9 +14,6 @@ export const LatestNews = () => {
   const dispatch = useDispatch();
     const newsInfo = useSelector(newsSelector);
 
-    const companyInfo = useSelector(companySelector);
-    const quoteInfo = useSelector(quoteSelector)
-    const statInfo = useSelector(statsSelector)
   return (
     <DisplayWrapper width="25%">
     <TitleHeader>Latest News</TitleHeader>

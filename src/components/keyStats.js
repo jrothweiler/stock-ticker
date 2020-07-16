@@ -13,7 +13,7 @@ export const KeyStats = () => {
     const stats = useSelector(statsSelector);
     const quote = useSelector(quoteSelector);
   return (
-    <DisplayWrapper width="70%" mr="auto" ml="auto">
+    <DisplayWrapper width="70%"g>
         <TitleHeader>Key Stats</TitleHeader>
         <DisplayWrapper display="inline-block" width="46%" mr="4%">
             {quote && 
