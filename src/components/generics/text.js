@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {typography, variant, space} from "styled-system";
+import {layout, typography, variant, space, color} from "styled-system";
 
 export const Text = styled('div')(
   {
@@ -28,9 +28,23 @@ export const Text = styled('div')(
       color: 'red',
       fontSize: '1.0rem',
       display: 'inline-block'
+    },
+    statLabel: {
+      color: 'gray',
+      fontSize: '1.0rem',
+      display: 'inline-block',
+    },
+    statValue: {
+      color: 'white',
+      fontSize: '1.0rem',
+      display: 'inline-block', 
+      textAlign: 'right', 
+      float: 'right',
     }
   }
 }),
   typography,
-  space
+  space,
+  color, 
+  layout
 );
