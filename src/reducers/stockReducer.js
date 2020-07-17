@@ -5,6 +5,7 @@ const initialState = {
     newsInfo: null,
     companyInfo: null,
     statInfo: null,
+    historyInfo: null
   }
 }
 
