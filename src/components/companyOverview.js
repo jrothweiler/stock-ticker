@@ -14,23 +14,25 @@ export const CompanyOverview = () => {
   return (
     <DisplayWrapper width="25%" height="25%">
       <TitleHeader>Company Info</TitleHeader>
-      {companyInfo && (
-        <Text variant="primary" fontSize="1.8rem">
-          {companyInfo.companyName} ({ticker})
-        </Text>
-      )}
-      {companyInfo && (
-        <a href={`http://${companyInfo.website}`} target="_blank">
-          <Text mt="0.5rem" variant="secondary" fontStyle="italic">
-            {companyInfo.website}
+      <Text overflow="auto" height="15.0rem">
+        {companyInfo && (
+          <Text variant="primary" fontSize="1.8rem">
+            {companyInfo.companyName} ({ticker})
           </Text>
-        </a>
-      )}
-      {companyInfo && (
-        <Text mt="0.5rem" variant="primary" overflow="auto" height="15.0rem">
-          {companyInfo.description}
-        </Text>
-      )}
+        )}
+        {companyInfo && (
+          <a href={`http://${companyInfo.website}`} target="_blank">
+            <Text mt="0.5rem" variant="secondary" fontStyle="italic">
+              {companyInfo.website}
+            </Text>
+          </a>
+        )}
+        {companyInfo && (
+          <Text mt="0.5rem" variant="primary">
+            {companyInfo.description}
+          </Text>
+        )}
+      </Text>
     </DisplayWrapper>
   );
 };
