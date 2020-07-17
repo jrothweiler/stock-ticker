@@ -17,9 +17,11 @@ export const LatestNews = () => {
       <DisplayWrapper overflow="auto" height="20.0rem">
         {newsInfo &&
           newsInfo.map((article) => (
-            <div key={article.headline} className="newsRow">
-              <Text variant="primary">{article.headline}</Text>
-              <Text mt="0.3rem" variant="secondary">
+            <div key={article.headline}>
+              <a href={`http://${article.url}`} target="_blank">
+                <Text variant="primary">{article.headline}</Text>
+              </a>
+              <Text mt="0.3rem" variant="secondary" mb="1.0rem">
                 {timeago.format(article.datetime)} - {article.source}
               </Text>
             </div>

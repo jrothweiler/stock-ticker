@@ -13,9 +13,6 @@ code {
     monospace;
 }
 
-.newsRow {
-  margin-bottom: 1rem;
-}
 .searchIcon {
   vertical-align: middle;
 }
@@ -35,8 +32,12 @@ code {
   position: absolute;
   top: 0;
   left: 38px;
-  opacity: .75;
+  opacity: 0.75;
 }
 .searchForm {
   position: relative;
+}
+
+a {
+  text-decoration: none;
 }

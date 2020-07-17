@@ -88,10 +88,10 @@ function App() {
     <Provider store={dataStore}>
       <div>
         <SearchBar />
+        <PriceDisplay />
         <LatestNews />
         <CompanyOverview />
         <KeyStats />
-        <PriceDisplay />
       </div>
     </Provider>
   );
