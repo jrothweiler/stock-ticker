@@ -30,12 +30,14 @@ async function fetchWrapper(...args) {
 
 async function getQuoteData(symbol) {
     const [quoteData, dailyData] = await Promise.all([fetchWrapper(iex.quote, symbol), fetchWrapper(iex.history, symbol, { period: '1d' })]);
-    
+    // some data has null entries, so filter it out before processing it
+    const filteredDailyData = dailyData.filter(minute => minute.high !== null)
+
     // some data has been deprecated from the quote api, so as a workaround, calculate these fields off of the current day's price data minute by minute.
-    const high = Math.max(...dailyData.map(minute => minute.high));
-    const low = Math.min(...dailyData.map(minute => minute.low));
-    const latestVolume = dailyData.reduce((acc, currentMinute) => currentMinute.volume + acc, 0)
-    const open = dailyData[0]?.open || null;
+    const high = Math.max(...filteredDailyData.map(minute => minute.high));
+    const low = Math.min(...filteredDailyData.map(minute => minute.low));
+    const latestVolume = filteredDailyData.reduce((acc, currentMinute) => currentMinute.volume + acc, 0)
+    const open = filteredDailyData[0]?.open || null;
     const {
       previousClose,
       week52High,
@@ -139,7 +141,7 @@ io.on("connection", (socket) => {
     return setInterval(async () => {
       let quoteData = await getQuoteData(symbol)
       socket.emit("realTimeQuoteData", quoteData);
-    }, 1000);
+    }, 5000);
   };
 
   let intervalId = null;
