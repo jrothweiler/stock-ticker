@@ -12,8 +12,8 @@ export const LatestNews = () => {
   const newsInfo = useSelector(newsSelector);
 
   return (
-    <DisplayWrapper width="25%" height="25%">
-      <TitleHeader>Latest News</TitleHeader>
+    <DisplayWrapper>
+      <TitleHeader variant="blueUnderline">LATEST NEWS</TitleHeader>
       <DisplayWrapper overflow="auto" height="20.0rem">
         {newsInfo &&
           newsInfo.map((article) => (

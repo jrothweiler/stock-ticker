@@ -26,7 +26,7 @@ export const PriceDisplay = () => {
                   ? mdiArrowUp
                   : mdiArrowDown
               }
-              size={1.3}
+              size={1.35}
               color={
                 quote.latestPrice - quote.previousClose >= 0 ? "green" : "red"
               }

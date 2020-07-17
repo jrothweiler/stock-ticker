@@ -12,8 +12,8 @@ export const CompanyOverview = () => {
   const companyInfo = useSelector(companySelector);
   const ticker = useSelector(tickerSelector);
   return (
-    <DisplayWrapper width="25%" height="25%">
-      <TitleHeader>Company Info</TitleHeader>
+    <DisplayWrapper>
+      <TitleHeader variant="blueUnderline">COMPANY OVERVIEW</TitleHeader>
       <Text overflow="auto" height="15.0rem">
         {companyInfo && (
           <Text variant="primary" fontSize="1.8rem">

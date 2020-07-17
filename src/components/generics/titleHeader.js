@@ -1,7 +1,23 @@
 import styled from "styled-components";
+import { variant } from "styled-system";
 
-export const TitleHeader = styled.h3`
-  font-size: 1.3rem;
-  color: #6491d3;
-  border-bottom: 0.2rem solid #6491d3;
-`;
+export const TitleHeader = styled("div")(
+  {
+    marginUp: "1.0rem",
+    marginBottom: "1.0rem",
+  },
+  variant({
+    variants: {
+      blueUnderline: {
+        borderBottom: "0.2rem solid #6491d3",
+        fontSize: "1.3rem",
+        fontWeight: "bold",
+        color: "#6491d3",
+      },
+      grayUnderline: {
+        paddingDown: "0.5rem",
+        borderBottom: "0.1rem solid gray",
+      },
+    },
+  })
+);
