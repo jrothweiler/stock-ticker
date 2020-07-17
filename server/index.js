@@ -112,6 +112,7 @@ app.get('/api/history/:symbol', async (req,res) => {
     const symbol = req.params.symbol;
     try {
         const historyData = await fetchWrapper(iex.history, symbol, { period: '1d' });
+        console.log(historyData)
         const returnData = historyData.map(day => {
             return {
                 date: day.date,

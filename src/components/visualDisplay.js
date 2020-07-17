@@ -22,11 +22,27 @@ export const VisualDisplay = () => {
     datasets: [
       {
         data: formattedHistoryData,
-        borderColor: '#FFFFFF'
+        lineTension: 0,
+        borderColor: '#FFFFFF',
+        borderWidth: 1,
       }
     ]
   }
   const options = {
+    annotation: {
+      annotations: [{
+        type: 'line',
+        mode: 'horizontal',
+        scaleID: 'y-axis-0',
+        value: 400,
+        borderColor: 'rgb(75, 192, 192)',
+        borderWidth: 4,
+        label: {
+          enabled: false,
+          content: 'Test label'
+        }
+      }]
+    },
     legend: {
       display: false
     },
