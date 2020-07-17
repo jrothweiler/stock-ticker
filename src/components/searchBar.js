@@ -28,18 +28,17 @@ const SearchBar = () => {
             dispatch({ type: 'searchSymbol', payload: currentText.toUpperCase()} );
             setCurrentText('');
             setShowBadInputError(false);
+            dispatch({ type: 'clearSearchErrors' })
         } else {
             setShowBadInputError(true);
         }
     }
 
     function onInputFocus() {
-        console.log("entering focus")
         setShowCompanyText(false);
     }
 
     function onLeaveInputFocus() {
-        console.log('leaving focus')
         setShowCompanyText(currentText === '');
     }
 

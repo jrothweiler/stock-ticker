@@ -10,6 +10,11 @@ export default (state = initialState, action) => {
                 ...state,
                 search: action.payload
             }
+        case 'clearSearchErrors': 
+            return {
+                ...state, 
+                search: null
+            }
         default: 
             return state;
     }
