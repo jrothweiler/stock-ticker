@@ -108,6 +108,7 @@ app.get("/api/news/:symbol", async (req, res) => {
 });
 
 app.get('/api/history/:symbol', async (req,res) => {
+    console.log("app.get history");
     const symbol = req.params.symbol;
     try {
         const historyData = await fetchWrapper(iex.history, symbol, { period: '1d' });
@@ -115,7 +116,6 @@ app.get('/api/history/:symbol', async (req,res) => {
             return {
                 date: day.date,
                 minute: day.minute,
-                label: day.label,
                 price: day.average
             }
         })
@@ -130,7 +130,6 @@ io.on("connection", (socket) => {
 
   let subscribeToSymbol = (symbol) => {
     return setInterval(async () => {
-      console.log("fetching data for ", symbol);
       const quoteData = await fetchWrapper(iex.quote, symbol);
       const {
         previousClose,
