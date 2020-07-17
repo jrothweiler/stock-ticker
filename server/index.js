@@ -172,8 +172,6 @@ io.on("connection", (socket) => {
   });
 });
 
-iex.history("AAPL", {period: '1d'}).then(data => console.log(data));
-
 server.listen(3001, () =>
   console.log("Express server is running on localhost:3001")
 );
