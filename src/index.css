@@ -38,6 +38,10 @@ code {
   position: relative;
 }
 
+.headline:hover {
+  color: #8b7f6b;
+}
+
 a {
   text-decoration: none;
 }

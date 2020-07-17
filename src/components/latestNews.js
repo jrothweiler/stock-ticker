@@ -19,7 +19,9 @@ export const LatestNews = () => {
           newsInfo.map((article) => (
             <div key={article.headline}>
               <a href={`http://${article.url}`} target="_blank">
-                <Text variant="primary">{article.headline}</Text>
+                <Text className="headline" variant="primary">
+                  {article.headline}
+                </Text>
               </a>
               <Text mt="0.3rem" variant="secondary" mb="1.0rem">
                 {timeago.format(article.datetime)} - {article.source}
