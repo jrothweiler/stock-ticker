@@ -17,7 +17,6 @@ export const VisualDisplay = () => {
       y: point.price
     }
   })
-  console.log(formattedHistoryData)
 
   const data = {
     datasets: [
