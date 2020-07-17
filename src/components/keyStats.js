@@ -13,7 +13,7 @@ export const KeyStats = () => {
     const stats = useSelector(statsSelector);
     const quote = useSelector(quoteSelector);
   return (
-    <DisplayWrapper width="70%"g>
+    <DisplayWrapper width="70%">
         <TitleHeader>Key Stats</TitleHeader>
         <DisplayWrapper display="inline-block" width="46%" mr="4%">
             {quote && 
@@ -24,12 +24,12 @@ export const KeyStats = () => {
             {quote &&
             <StatWrapper>
                 <Text variant="statLabel">Day Range</Text>
-                <Text variant="statValue">{quote.low} - {quote.high}</Text>}
+                <Text variant="statValue">{quote.low} - {quote.high}</Text>
             </StatWrapper>}
             {quote && 
             <StatWrapper>
                 <Text variant="statLabel">Volume</Text>
-                <Text variant="statValue">{quote.latestVolume}</Text>}
+                <Text variant="statValue">{quote.latestVolume}</Text>
             </StatWrapper>}
             {quote && 
             <StatWrapper>
@@ -66,7 +66,7 @@ export const KeyStats = () => {
             {stats && 
                 <StatWrapper>
                     <Text variant="statLabel">Dividend& Yield</Text>
-                    <Text variant="statValue">{(stats.dividendYield*100).toLocaleString('en')}%</Text>}
+                    <Text variant="statValue">{(stats.dividendYield*100).toLocaleString('en')}%</Text>
                 </StatWrapper>}
         </DisplayWrapper>
     </DisplayWrapper>
