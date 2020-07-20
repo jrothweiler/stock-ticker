@@ -10,12 +10,13 @@ export const TitleHeader = styled("div")(
     variants: {
       blueUnderline: {
         borderBottom: "0.2rem solid #6491d3",
-        fontSize: "1.3rem",
+        fontSize: "16px",
         fontWeight: "bold",
+        fontFamily: "Lato",
         color: "#6491d3",
       },
       grayUnderline: {
-        paddingDown: "0.5rem",
+        paddingDown: "1.0rem",
         borderBottom: "0.1rem solid gray",
       },
     },

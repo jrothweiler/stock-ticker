@@ -3,7 +3,7 @@ import { layout, typography, variant, space, color } from "styled-system";
 
 export const Text = styled("div")(
   {
-    fontFamily: "Sans-Serif",
+    fontFamily: "Lato",
     display: "block",
     size: "medium",
   },
@@ -11,13 +11,13 @@ export const Text = styled("div")(
     prop: "size",
     variants: {
       large: {
-        fontSize: "2.2rem",
+        fontSize: "40px",
       },
       medium: {
-        fontSize: "1.1rem",
+        fontSize: "16px",
       },
       small: {
-        fontSize: "0.8rem",
+        fontSize: "14px",
       },
     },
   }),

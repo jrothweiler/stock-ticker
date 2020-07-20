@@ -39,8 +39,7 @@ export const PriceDisplay = () => {
             size="large"
             display="inline-block"
           >
-            {Math.abs(quote.latestPrice - quote.previousClose).toFixed(2)}{" "}
-            &nbsp;{" "}
+            {Math.abs(quote.latestPrice - quote.previousClose).toFixed(2)} | 
           </Text>
           <Text
             variant={

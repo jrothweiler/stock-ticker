@@ -15,37 +15,36 @@ export const StockTrader = () => {
   //Call necessary selectors for display data
   const dispatch = useDispatch();
   return (
-    <DisplayWrapper>
-      <DisplayWrapper ml="5%" float="right">
+    <DisplayWrapper ml="5%" mr="5%" max-width="100%">
+      <DisplayWrapper float="right">
         <Header />
       </DisplayWrapper>
-      <DisplayWrapper ml="5%">
-        <TitleHeader variant="grayUnderline" mb="2.0rem">
-          <Text display="inline-block">
+      <DisplayWrapper>
+        <TitleHeader variant="grayUnderline">
+          <DisplayWrapper display="inline-block">
             <SearchBar />
-          </Text>
-          <Text display="inline-block" float="right" text-align="right">
+            </DisplayWrapper>
+          <DisplayWrapper display="inline-block" variant="right">
             <PriceDisplay />
-          </Text>
+            </DisplayWrapper>
         </TitleHeader>
       </DisplayWrapper>
-      <DisplayWrapper width="100%">
-        <DisplayWrapper width="50%" height="40%" ml="5%" display="inline-block">
+      <DisplayWrapper>
+        <DisplayWrapper width="55%" height="40%" display="inline-block">
           <VisualDisplay />
         </DisplayWrapper>
-        <DisplayWrapper width="30%" height="40%" ml="5%" display="inline-block">
+        <DisplayWrapper width="30%" height="40%" variant = "right" display="inline-block">
           <LatestNews />
         </DisplayWrapper>
       </DisplayWrapper>
       <DisplayWrapper width="100%">
-        <DisplayWrapper width="50%" height="35%" ml="5%" display="inline-block">
+        <DisplayWrapper width="55%" height="35%" display="inline-block">
           <KeyStats />
         </DisplayWrapper>
         <DisplayWrapper
-          float="right"
+          variant="right"
           width="30%"
           height="35%"
-          ml="5%"
           display="inline-block"
         >
           <CompanyOverview />
