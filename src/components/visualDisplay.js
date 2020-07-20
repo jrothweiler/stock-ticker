@@ -4,6 +4,7 @@ import { Line } from 'react-chartjs-2';
 import { useSelector } from "react-redux";
 import { historySelector } from '../selectors/historySelector';
 import { currentPriceSelector } from '../selectors/quoteSelector';
+import { formatTimeForGraph } from '../utils/timeUtils';
 import 'chartjs-plugin-annotation';
 
 export const VisualDisplay = () => {
@@ -22,6 +23,14 @@ export const VisualDisplay = () => {
       x: `${point.date} ${point.minute}`,
       y: point.price
     }
+  })
+
+  let currentDate = new Date();
+
+  // add the current price as a data point
+  formattedHistoryData.push({
+    x: formatTimeForGraph(currentDate),
+    y: currentPrice
   })
 
   const data = {
@@ -52,7 +61,6 @@ export const VisualDisplay = () => {
       display: false
     },
     scales: {
-      
       xAxes: [{
         type: 'time',
         time: {
@@ -60,13 +68,14 @@ export const VisualDisplay = () => {
         },
         gridLines: {
           display: true,
-          color: "#4F5CAB"
+          color: "rgba(29,77,104, .3)"
         },
       }],
       yAxes: [{
+        position: 'right',
         gridLines: {
           display: true,
-          color: "#4F5CAB"
+          color: "rgba(29,77,104, .3)"
         },
       }]
     }
@@ -76,7 +85,7 @@ export const VisualDisplay = () => {
     {
       id: 'syncGradient', 
 
-      // whenever the chart's layout is created, set the background gradient based on 
+      // whenever the chart's sets its layout (on initial render or after resizing), set the background gradient based on 
       // the new layout's height
       afterLayout: (chart) => {
         const newGradient = chart.ctx.createLinearGradient(0,0,0,chart.height);
