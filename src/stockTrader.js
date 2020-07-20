@@ -33,7 +33,7 @@ export const StockTrader = () => {
         <DisplayWrapper width="55%" height="40%" display="inline-block">
           <VisualDisplay />
         </DisplayWrapper>
-        <DisplayWrapper width="30%" height="40%" variant = "right" display="inline-block">
+        <DisplayWrapper width="35%" height="40%" variant = "right" display="inline-block">
           <LatestNews />
         </DisplayWrapper>
       </DisplayWrapper>
@@ -43,7 +43,7 @@ export const StockTrader = () => {
         </DisplayWrapper>
         <DisplayWrapper
           variant="right"
-          width="30%"
+          width="35%"
           height="35%"
           display="inline-block"
         >
