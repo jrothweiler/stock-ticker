@@ -3,11 +3,15 @@ import { DisplayWrapper } from "./generics/displayWrapper";
 import { Line } from 'react-chartjs-2';
 import { useSelector } from "react-redux";
 import { historySelector } from '../selectors/historySelector';
+import { currentPriceSelector } from '../selectors/quoteSelector';
+import 'chartjs-plugin-annotation';
 
 export const VisualDisplay = () => {
 
+  const currentPrice = useSelector(currentPriceSelector)
+
   const historyData = useSelector(historySelector);
-  if (!historyData) {
+  if (!historyData || !currentPrice) {
     return ( <div>loading</div>)
   }
   
@@ -35,13 +39,10 @@ export const VisualDisplay = () => {
         type: 'line',
         mode: 'horizontal',
         scaleID: 'y-axis-0',
-        value: 400,
-        borderColor: 'rgb(75, 192, 192)',
-        borderWidth: 4,
-        label: {
-          enabled: false,
-          content: 'Test label'
-        }
+        value: currentPrice,
+        borderColor: 'rgb(233, 86, 86)',
+        borderWidth: 2,
+        borderDash: [5, 3],
       }]
     },
     legend: {
