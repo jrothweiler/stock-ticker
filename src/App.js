@@ -52,7 +52,7 @@ const producerMiddleWare = (rawStore) => {
               },
             });
 
-            //socket.emit("newSymbol", symbol);
+            socket.emit("newSymbol", symbol);
           })
           .catch((e) => {
             rawStore.dispatch({ type: "searchError", payload: e.message });
