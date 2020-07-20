@@ -46,7 +46,7 @@ export const KeyStats = () => {
             {quote && 
             <StatWrapper>
                 <Text variant="statLabel">Open</Text>
-                <Text display="statValue">{quote.open}</Text>
+                <Text variant="statValue">{quote.open}</Text>
             </StatWrapper>}
             {quote && 
             <StatWrapper>
