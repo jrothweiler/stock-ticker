@@ -23,8 +23,9 @@ export const VisualDisplay = () => {
       {
         data: formattedHistoryData,
         lineTension: 0,
-        borderColor: '#FFFFFF',
+        borderColor: '#7fb3ff',
         borderWidth: 1,
+        pointRadius: 0
       }
     ]
   }
@@ -68,7 +69,7 @@ export const VisualDisplay = () => {
   }
 
   return (
-    <DisplayWrapper width="50%">
+    <DisplayWrapper width="80%">
       <Line data={data} options={options}/>
     </DisplayWrapper>
   );
