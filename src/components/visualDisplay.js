@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import { DisplayWrapper } from "./generics/displayWrapper";
 import { Line } from 'react-chartjs-2';
 import { useSelector } from "react-redux";
@@ -7,6 +7,8 @@ import { currentPriceSelector } from '../selectors/quoteSelector';
 import 'chartjs-plugin-annotation';
 
 export const VisualDisplay = () => {
+
+  const chartRef = useRef();
 
   const currentPrice = useSelector(currentPriceSelector)
 
@@ -22,18 +24,39 @@ export const VisualDisplay = () => {
     }
   })
 
-  const data = {
-    datasets: [
-      {
-        data: formattedHistoryData,
-        lineTension: 0,
-        borderColor: '#7fb3ff',
-        borderWidth: 1,
-        pointRadius: 0
-      }
-    ]
+  const data = (canvas) => {
+    console.log(canvas.height)
+    const ctx = canvas.getContext('2d');
+    const gradient = ctx.createLinearGradient(0,0, 0, canvas.height);
+    gradient.addColorStop(0, 'rgba(127,149,255,1)');
+    gradient.addColorStop(1, 'rgba(1,30,72,0)');
+
+    return {
+      datasets: [
+        {
+          data: formattedHistoryData,
+          backgroundColor: gradient,
+          lineTension: 0,
+          borderColor: '#7fb3ff',
+          borderWidth: 1,
+          pointRadius: 0,
+          spanGaps: true,
+        }
+      ]
+    }
   }
   const options = {
+    onResize: (chart, newSize) => {
+      console.log("I CHANGED!!!!!");
+      console.log(chart);
+      console.log(newSize);
+
+      const newGradient = chart.ctx.createLinearGradient(0,0,0,newSize.height);
+      newGradient.addColorStop(0, 'rgba(127,149,255,1)');
+      newGradient.addColorStop(1, 'rgba(1,30,72,0)');
+
+      chart.config.data.datasets[0].backgroundColor = newGradient;
+    },
     annotation: {
       annotations: [{
         type: 'line',
@@ -71,7 +94,7 @@ export const VisualDisplay = () => {
 
   return (
     <DisplayWrapper width="80%">
-      <Line data={data} options={options}/>
+      <Line ref={chartRef} data={data} options={options}/>
     </DisplayWrapper>
   );
 };
