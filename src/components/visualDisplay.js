@@ -24,39 +24,19 @@ export const VisualDisplay = () => {
     }
   })
 
-  const data = (canvas) => {
-    console.log(canvas.height)
-    const ctx = canvas.getContext('2d');
-    const gradient = ctx.createLinearGradient(0,0, 0, canvas.height);
-    gradient.addColorStop(0, 'rgba(127,149,255,1)');
-    gradient.addColorStop(1, 'rgba(1,30,72,0)');
-
-    return {
-      datasets: [
-        {
-          data: formattedHistoryData,
-          backgroundColor: gradient,
-          lineTension: 0,
-          borderColor: '#7fb3ff',
-          borderWidth: 1,
-          pointRadius: 0,
-          spanGaps: true,
-        }
-      ]
-    }
+  const data = {
+    datasets: [
+      {
+        data: formattedHistoryData,
+        lineTension: 0,
+        borderColor: '#7fb3ff',
+        borderWidth: 1,
+        pointRadius: 0,
+        spanGaps: true,
+      }
+    ]
   }
   const options = {
-    onResize: (chart, newSize) => {
-      console.log("I CHANGED!!!!!");
-      console.log(chart);
-      console.log(newSize);
-
-      const newGradient = chart.ctx.createLinearGradient(0,0,0,newSize.height);
-      newGradient.addColorStop(0, 'rgba(127,149,255,1)');
-      newGradient.addColorStop(1, 'rgba(1,30,72,0)');
-
-      chart.config.data.datasets[0].backgroundColor = newGradient;
-    },
     annotation: {
       annotations: [{
         type: 'line',
@@ -92,9 +72,25 @@ export const VisualDisplay = () => {
     }
   }
 
+  const plugins = [
+    {
+      id: 'syncGradient', 
+
+      // whenever the chart's layout is created, set the background gradient based on 
+      // the new layout's height
+      afterLayout: (chart) => {
+        const newGradient = chart.ctx.createLinearGradient(0,0,0,chart.height);
+        newGradient.addColorStop(0, 'rgba(127,149,255,.7)');
+        newGradient.addColorStop(1, 'rgba(1,30,72,0)');
+
+        chart.config.data.datasets[0].backgroundColor = newGradient;
+      }
+    }
+  ]
+
   return (
     <DisplayWrapper width="80%">
-      <Line ref={chartRef} data={data} options={options}/>
+      <Line ref={chartRef} data={data} options={options} plugins={plugins}/>
     </DisplayWrapper>
   );
 };
