@@ -4,7 +4,6 @@ import { Line } from "react-chartjs-2";
 import { useSelector } from "react-redux";
 import { historySelector } from '../selectors/historySelector';
 import { currentPriceSelector } from '../selectors/quoteSelector';
-import { formatTimeForGraph } from '../utils/timeUtils';
 import 'chartjs-plugin-annotation';
 
 export const VisualDisplay = () => {
@@ -13,7 +12,7 @@ export const VisualDisplay = () => {
 
   const currentPrice = useSelector(currentPriceSelector)
 
-  const historyData = useSelector(historySelector);
+  const historyData = useSelector(historySelector); 
   if (!historyData || !currentPrice) {
     return ( <div>loading</div>)
   }
@@ -24,14 +23,6 @@ export const VisualDisplay = () => {
       y: point.price,
     };
   });
-
-  let currentDate = new Date();
-
-  // add the current price as a data point
-  formattedHistoryData.push({
-    x: formatTimeForGraph(currentDate),
-    y: currentPrice
-  })
 
   const data = {
     datasets: [
