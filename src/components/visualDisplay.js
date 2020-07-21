@@ -5,7 +5,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { historySelector, chartRangeSelector } from '../selectors/historySelector';
 import { currentPriceSelector } from '../selectors/quoteSelector';
 import { tickerSelector } from '../selectors/tickerSelector';
+import { POSSIBLE_CHART_RANGES } from '../utils/constants';
+import { Text } from '../components/generics/text';
 import 'chartjs-plugin-annotation';
+
+
 
 export const VisualDisplay = () => {
 
@@ -18,6 +22,10 @@ export const VisualDisplay = () => {
   const chartRange = useSelector(chartRangeSelector);
   const historyData = useSelector(historySelector); 
   const currentSymbol = useSelector(tickerSelector);
+
+  const handleChartRangeClick = (period) => {
+    dispatch({ type: 'newChartRange', payload: period })
+  }
 
   useEffect(() => {
     if (currentSymbol) {
@@ -33,7 +41,7 @@ export const VisualDisplay = () => {
 
   let formattedHistoryData = historyData.map((point) => {
     return {
-      x: `${point.date} ${point.minute}`,
+      x: point.minute ? `${point.date} ${point.minute}` : point.date,
       y: point.price,
     };
   });
@@ -111,6 +119,11 @@ export const VisualDisplay = () => {
 
   return (
     <DisplayWrapper width="80%">
+      {
+        POSSIBLE_CHART_RANGES.map(period => (
+          <Text mr="8px" display="inline-block" variant={period === chartRange ? "primary" : "secondary"} onClick={() => handleChartRangeClick(period)}>{period}</Text>
+        ))
+      }
       <Line ref={chartRef} data={data} options={options} plugins={plugins}/>
     </DisplayWrapper>
   );

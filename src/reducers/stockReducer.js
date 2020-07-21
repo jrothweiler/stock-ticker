@@ -2,7 +2,7 @@ import { INITIAL_CHART_RANGE } from '../utils/constants';
 
 const initialState = {
   ticker: null,
-  chartRange: '1d',
+  chartRange: INITIAL_CHART_RANGE,
   tickerInfo: {
     quoteInfo: null,
     newsInfo: null,
