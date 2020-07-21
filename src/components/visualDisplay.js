@@ -10,8 +10,6 @@ import { Text } from '../components/generics/text';
 import { Button } from '../components/generics/button';
 import 'chartjs-plugin-annotation';
 
-
-
 export const VisualDisplay = () => {
 
   const dispatch = useDispatch();

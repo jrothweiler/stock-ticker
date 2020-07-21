@@ -13,7 +13,7 @@ import {
   statsFetch,
   historyFetch,
 } from "./utils/serverUtils";
-import { INITIAL_STOCK, INITIAL_CHART_RANGE } from "./utils/constants";
+import { INITIAL_STOCK } from "./utils/constants";
 import SearchBar from "./components/searchBar";
 import socketIOClient from "socket.io-client";
 import { PriceDisplay } from "./components/priceDisplay";
