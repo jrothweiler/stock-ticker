@@ -1,3 +1,3 @@
 export const companySelector = (state) => {
-    return state.stocks.tickerInfo.companyInfo;
-}
+  return state.stocks.tickerInfo.companyInfo;
+};
