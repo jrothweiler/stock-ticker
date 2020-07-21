@@ -79,8 +79,17 @@ export const VisualDisplay = () => {
     scales: {
       xAxes: [{
         type: 'time',
+        distribution: "series",
         time: {
-          format: 'YYYY-MM-DD HH:mm'
+          minUnit: 'hour',
+          displayFormats: {
+            hour: 'MMM DD  h:mm a'
+          },
+          format: 'YYYY-MM-DD HH:mm',
+        },
+        ticks: {
+          autoSkip: true,
+          maxTicksLimit: 10
         },
         gridLines: {
           display: true,
