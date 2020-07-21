@@ -1,13 +1,20 @@
-import React from "react";
+import React, {useRef} from "react";
 import { DisplayWrapper } from "./generics/displayWrapper";
 import { Line } from "react-chartjs-2";
 import { useSelector } from "react-redux";
-import { historySelector } from "../selectors/historySelector";
+import { historySelector } from '../selectors/historySelector';
+import { currentPriceSelector } from '../selectors/quoteSelector';
+import 'chartjs-plugin-annotation';
 
 export const VisualDisplay = () => {
-  const historyData = useSelector(historySelector);
-  if (!historyData) {
-    return <div>loading</div>;
+
+  const chartRef = useRef();
+
+  const currentPrice = useSelector(currentPriceSelector)
+
+  const historyData = useSelector(historySelector); 
+  if (!historyData || !currentPrice) {
+    return ( <div>loading</div>)
   }
 
   let formattedHistoryData = historyData.map((point) => {
@@ -21,41 +28,76 @@ export const VisualDisplay = () => {
     datasets: [
       {
         data: formattedHistoryData,
-        borderColor: "#FFFFFF",
-      },
-    ],
-  };
+        lineTension: 0,
+        borderColor: '#7fb3ff',
+        borderWidth: 1,
+        pointRadius: 0,
+        spanGaps: true,
+      }
+    ]
+  }
   const options = {
+    annotation: {
+      annotations: [{
+        
+        type: 'line',
+        mode: 'horizontal',
+        scaleID: 'y-axis-0',
+        value: currentPrice,
+        borderColor: 'rgb(233, 86, 86)',
+        borderWidth: 2,
+        borderDash: [5, 3],
+        label: {
+          position: 'right',
+          content: currentPrice,
+          enabled: true,
+          backgroundColor: 'rgb(233,86,86)',
+        }
+      }]
+    },
     legend: {
       display: false,
     },
     scales: {
-      xAxes: [
-        {
-          type: "time",
-          time: {
-            format: "YYYY-MM-DD HH:mm",
-          },
-          gridLines: {
-            display: true,
-            color: "#4F5CAB",
-          },
+      xAxes: [{
+        type: 'time',
+        time: {
+          format: 'YYYY-MM-DD HH:mm'
         },
-      ],
-      yAxes: [
-        {
-          gridLines: {
-            display: true,
-            color: "#4F5CAB",
-          },
+        gridLines: {
+          display: true,
+          color: "rgba(29,77,104, .3)"
         },
-      ],
-    },
-  };
+      }],
+      yAxes: [{
+        position: 'right',
+        gridLines: {
+          display: true,
+          color: "rgba(29,77,104, .3)"
+        },
+      }]
+    }
+  }
+
+  const plugins = [
+    {
+      id: 'syncGradient', 
+
+      // whenever the chart's sets its layout (on initial render or after resizing), set the background gradient based on 
+      // the new layout's height
+      afterLayout: (chart) => {
+        const newGradient = chart.ctx.createLinearGradient(0,0,0,chart.height);
+        newGradient.addColorStop(0, 'rgba(127,149,255,.7)');
+        newGradient.addColorStop(1, 'rgba(1,30,72,0)');
+
+        chart.config.data.datasets[0].backgroundColor = newGradient;
+      }
+    }
+  ]
 
   return (
-    <DisplayWrapper width="50%">
-      <Line data={data} options={options} />
+    <DisplayWrapper width="80%">
+      <Line ref={chartRef} data={data} options={options} plugins={plugins}/>
     </DisplayWrapper>
   );
 };
