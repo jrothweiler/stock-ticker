@@ -1,13 +1,33 @@
 import styled from "styled-components";
-import { variant, layout, space } from "styled-system";
-export const DisplayWrapper = styled("div")({
+import {
+  position,
+  flexbox,
+  border,
+  variant,
+  layout,
+  space,
+} from "styled-system";
+export const DisplayWrapper = styled("div")(
+  {
     maxWidth: "100%",
+  },
+  variant({
+    variants: {
+      flexRow: {
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        justifyContent: "space-between",
+        alignItems: "flex-end",
+      },
+      inlineRow: {
+        display: "inline-block",
+      },
     },
-    variant({
-        variants: {
-          right: {
-            float: "right"
-          }
-        }
-    }),
-    layout, space)
+  }),
+  layout,
+  space,
+  border,
+  flexbox,
+  position
+);

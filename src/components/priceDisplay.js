@@ -9,7 +9,6 @@ export const PriceDisplay = () => {
   //Call necessary selectors for display data
   const dispatch = useDispatch();
   const quote = useSelector(quoteSelector);
-
   return (
     <div>
       {quote && (
@@ -39,7 +38,7 @@ export const PriceDisplay = () => {
             size="large"
             display="inline-block"
           >
-            {Math.abs(quote.latestPrice - quote.previousClose).toFixed(2)} | 
+            {Math.abs(quote.latestPrice - quote.previousClose).toFixed(2)} |
           </Text>
           <Text
             variant={

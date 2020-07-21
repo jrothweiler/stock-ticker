@@ -16,7 +16,7 @@ export const TitleHeader = styled("div")(
         color: "#6491d3",
       },
       grayUnderline: {
-        paddingDown: "1.0rem",
+        paddingBottom: "1.0rem",
         borderBottom: "0.1rem solid gray",
       },
     },

@@ -16,37 +16,32 @@ export const StockTrader = () => {
   const dispatch = useDispatch();
   return (
     <DisplayWrapper ml="5%" mr="5%" max-width="100%">
-      <DisplayWrapper float="right">
+      <DisplayWrapper variant="flexRow" justifyContent="flex-end" mb="2.0rem">
         <Header />
       </DisplayWrapper>
-      <DisplayWrapper>
-        <TitleHeader variant="grayUnderline">
-          <DisplayWrapper display="inline-block">
-            <SearchBar />
-            </DisplayWrapper>
-          <DisplayWrapper display="inline-block" variant="right">
-            <PriceDisplay />
-            </DisplayWrapper>
-        </TitleHeader>
+      <DisplayWrapper
+        mb="3.0rem"
+        variant="flexRow"
+        paddingBottom="1.0rem"
+        borderBottom="0.1rem solid gray"
+        width="100%"
+      >
+        <SearchBar />
+        <PriceDisplay />
       </DisplayWrapper>
-      <DisplayWrapper>
-        <DisplayWrapper width="55%" height="40%" display="inline-block">
+      <DisplayWrapper variant="flexRow" mb="3.0rem">
+        <DisplayWrapper flexBasis="66%">
           <VisualDisplay />
         </DisplayWrapper>
-        <DisplayWrapper width="35%" height="40%" variant = "right" display="inline-block">
+        <DisplayWrapper flexBasis="30%">
           <LatestNews />
         </DisplayWrapper>
       </DisplayWrapper>
-      <DisplayWrapper width="100%">
-        <DisplayWrapper width="55%" height="35%" display="inline-block">
+      <DisplayWrapper variant="flexRow">
+        <DisplayWrapper flexBasis="66%">
           <KeyStats />
         </DisplayWrapper>
-        <DisplayWrapper
-          variant="right"
-          width="35%"
-          height="35%"
-          display="inline-block"
-        >
+        <DisplayWrapper flexBasis="30%">
           <CompanyOverview />
         </DisplayWrapper>
       </DisplayWrapper>

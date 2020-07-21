@@ -8,10 +8,15 @@ export const Header = () => {
   const dispatch = useDispatch();
 
   return (
-    <DisplayWrapper float="right" mb="2.0rem">
-      <BannerButton variant="selected">QUOTES</BannerButton>
-      <BannerButton>MARKETS</BannerButton>
-      <BannerButton>WATCHLISTS</BannerButton>
+    <DisplayWrapper variant="flexRow" mb="2.0rem">
+      <DisplayWrapper>
+        <img src="./assets/AdaptiveLogo.jpg"></img>
+      </DisplayWrapper>
+      <DisplayWrapper justifyContent="flex-end">
+        <BannerButton variant="selected">QUOTES</BannerButton>
+        <BannerButton>MARKETS</BannerButton>
+        <BannerButton>WATCHLISTS</BannerButton>
+      </DisplayWrapper>
     </DisplayWrapper>
   );
 };

@@ -14,7 +14,7 @@ export const CompanyOverview = () => {
   return (
     <DisplayWrapper>
       <TitleHeader variant="blueUnderline">COMPANY OVERVIEW</TitleHeader>
-      <Text overflow="auto" height="15.0rem">
+      <Text overflow="auto">
         {companyInfo && (
           <Text variant="primary" fontSize="1.8rem">
             {companyInfo.companyName} ({ticker})
