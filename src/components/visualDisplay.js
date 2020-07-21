@@ -7,6 +7,7 @@ import { currentPriceSelector } from '../selectors/quoteSelector';
 import { tickerSelector } from '../selectors/tickerSelector';
 import { POSSIBLE_CHART_RANGES } from '../utils/constants';
 import { Text } from '../components/generics/text';
+import { Button } from '../components/generics/button';
 import 'chartjs-plugin-annotation';
 
 
@@ -20,7 +21,7 @@ export const VisualDisplay = () => {
   const currentPrice = useSelector(currentPriceSelector)
   
   const chartRange = useSelector(chartRangeSelector);
-  const historyData = useSelector(historySelector); 
+  const historyData = useSelector(historySelector) || []; 
   const currentSymbol = useSelector(tickerSelector);
 
   const handleChartRangeClick = (period) => {
@@ -33,11 +34,6 @@ export const VisualDisplay = () => {
     }
     
   }, [currentSymbol, chartRange])
-
-
-  if (!historyData || !currentPrice) {
-    return ( <div>loading</div>)
-  }
 
   let formattedHistoryData = historyData.map((point) => {
     return {
@@ -119,11 +115,15 @@ export const VisualDisplay = () => {
 
   return (
     <DisplayWrapper width="80%">
-      {
-        POSSIBLE_CHART_RANGES.map(period => (
-          <Text mr="8px" display="inline-block" variant={period === chartRange ? "primary" : "secondary"} onClick={() => handleChartRangeClick(period)}>{period}</Text>
-        ))
-      }
+      <DisplayWrapper display="flex" justifyContent="flex-end" mb="8px">
+        {
+          POSSIBLE_CHART_RANGES.map(period => (
+          <Button variant="unstyled" mr="8px"  onClick={() => handleChartRangeClick(period)}>
+            <Text variant={period === chartRange ? "primary" : "secondary"}>{period}</Text>
+          </Button>
+          ))
+        }
+      </DisplayWrapper>
       <Line ref={chartRef} data={data} options={options} plugins={plugins}/>
     </DisplayWrapper>
   );
