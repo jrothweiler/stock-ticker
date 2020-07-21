@@ -39,6 +39,7 @@ export const VisualDisplay = () => {
   const options = {
     annotation: {
       annotations: [{
+        
         type: 'line',
         mode: 'horizontal',
         scaleID: 'y-axis-0',
@@ -46,6 +47,12 @@ export const VisualDisplay = () => {
         borderColor: 'rgb(233, 86, 86)',
         borderWidth: 2,
         borderDash: [5, 3],
+        label: {
+          position: 'right',
+          content: currentPrice,
+          enabled: true,
+          backgroundColor: 'rgb(233,86,86)',
+        }
       }]
     },
     legend: {
