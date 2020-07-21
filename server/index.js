@@ -116,16 +116,23 @@ app.get("/api/news/:symbol", async (req, res) => {
   }
 });
 
-app.get('/api/history/:symbol', async (req,res) => {
+app.get('/api/history/:symbol/:period', async (req,res) => {
     console.log("app.get history");
     const symbol = req.params.symbol;
+    let period = req.params.period;
+    // if the user wants 5d, give them interday data
+    if (period === '5d') {
+      period = '5dm';
+    }
+
     try {
-        const historyData = await fetchWrapper(iex.history, symbol, { period: '1d' });
+        const historyData = await fetchWrapper(iex.history, symbol, { period: period });
+        console.log(historyData);
         const returnData = historyData.map(day => {
             return {
                 date: day.date,
                 minute: day.minute,
-                price: day.average
+                price: day.average || day.close
             }
         })
         res.json(returnData);

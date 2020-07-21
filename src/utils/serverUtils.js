@@ -32,6 +32,7 @@ export const newsFetch = (symbol) => {
   return proxyFetch(symbol, "news");
 };
 
-export const historyFetch = (symbol) => {
-  return proxyFetch(symbol, "history");
+// collect historical data over the given period, either "1d", "5d", "1m", "1y", "5y", or "max"
+export const historyFetch = (symbol, period) => {
+  return proxyFetch(`${symbol}/${period}`, `history`);
 };
