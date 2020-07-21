@@ -1,5 +1,8 @@
+import { INITIAL_CHART_RANGE } from '../utils/constants';
+
 const initialState = {
   ticker: null,
+  chartRange: '1d',
   tickerInfo: {
     quoteInfo: null,
     newsInfo: null,
@@ -24,8 +27,27 @@ export default (state = initialState, action) => {
       return {
         ...state,
         ticker: action.payload.symbol,
-        tickerInfo: action.payload.data,
+        tickerInfo: { 
+          ...state.tickerInfo,
+          ...action.payload.data
+        },
       };
+    }
+    case "newHistoryData": {
+      return {
+        ...state,
+        tickerInfo: {
+          ...state.tickerInfo, 
+          historyInfo: action.payload
+          
+        }
+      }
+    }
+    case "newChartRange": {
+      return {
+        ...state, 
+        chartRange: action.payload
+      }
     }
     default:
       return state;

@@ -5,12 +5,14 @@ import Icon from "@mdi/react";
 import { VALID_SEARCH_REGEXP } from "../utils/constants";
 import { Text } from "../components/generics/text";
 import { searchErrorsSelector } from "../selectors/errorsSelectors";
+import { chartRangeSelector } from '../selectors/historySelector';
 
 const SearchBar = () => {
   let [currentText, setCurrentText] = useState("");
   let [showBadInputError, setShowBadInputError] = useState(false);
   let [showCompanyText, setShowCompanyText] = useState(true);
   let searchError = useSelector(searchErrorsSelector);
+  let chartRange = useSelector(chartRangeSelector);
   let companyName =
     useSelector(
       (state) => state?.stocks?.tickerInfo?.companyInfo?.companyName

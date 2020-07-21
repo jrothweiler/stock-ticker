@@ -13,7 +13,7 @@ import {
   statsFetch,
   historyFetch,
 } from "./utils/serverUtils";
-import { INITIAL_STOCK } from "./utils/constants";
+import { INITIAL_STOCK, INITIAL_CHART_RANGE } from "./utils/constants";
 import SearchBar from "./components/searchBar";
 import socketIOClient from "socket.io-client";
 import { PriceDisplay } from "./components/priceDisplay";
@@ -34,7 +34,6 @@ const producerMiddleWare = (rawStore) => {
           companyFetch(symbol),
           newsFetch(symbol),
           statsFetch(symbol),
-          historyFetch(symbol, '1m'),
         ])
           .then((dataArray) => {
             let [
@@ -42,7 +41,6 @@ const producerMiddleWare = (rawStore) => {
               companyInfo,
               newsInfo,
               statInfo,
-              historyInfo,
             ] = dataArray;
             rawStore.dispatch({
               type: "newTickerData",
@@ -53,7 +51,6 @@ const producerMiddleWare = (rawStore) => {
                   newsInfo,
                   companyInfo,
                   statInfo,
-                  historyInfo,
                 },
               },
             });
@@ -63,6 +60,13 @@ const producerMiddleWare = (rawStore) => {
           .catch((e) => {
             rawStore.dispatch({ type: "searchError", payload: e.message });
           });
+        break;
+      }
+      case 'fetchHistory': {
+        let { symbol, period } = action.payload;
+        historyFetch(symbol, period).then(data => {
+          rawStore.dispatch({ type: "newHistoryData", payload: data })
+        })
       }
       default:
         rawStore.dispatch(action);

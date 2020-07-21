@@ -1,18 +1,32 @@
-import React, {useRef} from "react";
+import React, {useRef, useEffect} from "react";
 import { DisplayWrapper } from "./generics/displayWrapper";
 import { Line } from "react-chartjs-2";
-import { useSelector } from "react-redux";
-import { historySelector } from '../selectors/historySelector';
+import { useSelector, useDispatch } from "react-redux";
+import { historySelector, chartRangeSelector } from '../selectors/historySelector';
 import { currentPriceSelector } from '../selectors/quoteSelector';
+import { tickerSelector } from '../selectors/tickerSelector';
 import 'chartjs-plugin-annotation';
 
 export const VisualDisplay = () => {
 
+  const dispatch = useDispatch();
+
   const chartRef = useRef();
 
   const currentPrice = useSelector(currentPriceSelector)
-
+  
+  const chartRange = useSelector(chartRangeSelector);
   const historyData = useSelector(historySelector); 
+  const currentSymbol = useSelector(tickerSelector);
+
+  useEffect(() => {
+    if (currentSymbol) {
+      dispatch({ type: 'fetchHistory', payload: { symbol: currentSymbol, period: chartRange }})
+    }
+    
+  }, [currentSymbol, chartRange])
+
+
   if (!historyData || !currentPrice) {
     return ( <div>loading</div>)
   }
