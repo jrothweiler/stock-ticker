@@ -23,25 +23,25 @@ export const StockTrader = () => {
         mb="3.0rem"
         variant="flexRow"
         paddingBottom="1.0rem"
-        borderBottom="0.1rem solid gray"
+        borderBottom="0.2rem solid #6491d3"
         width="100%"
       >
         <SearchBar />
         <PriceDisplay />
       </DisplayWrapper>
       <DisplayWrapper variant="flexRow" mb="3.0rem">
-        <DisplayWrapper flexBasis="66%">
+        <DisplayWrapper flexBasis="68%">
           <VisualDisplay />
         </DisplayWrapper>
-        <DisplayWrapper flexBasis="30%">
+        <DisplayWrapper flexBasis="27%">
           <LatestNews />
         </DisplayWrapper>
       </DisplayWrapper>
       <DisplayWrapper variant="flexRow">
-        <DisplayWrapper flexBasis="66%">
+        <DisplayWrapper flexBasis="68%">
           <KeyStats />
         </DisplayWrapper>
-        <DisplayWrapper flexBasis="30%">
+        <DisplayWrapper flexBasis="27%">
           <CompanyOverview />
         </DisplayWrapper>
       </DisplayWrapper>

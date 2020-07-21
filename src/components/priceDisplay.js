@@ -38,7 +38,17 @@ export const PriceDisplay = () => {
             size="large"
             display="inline-block"
           >
-            {Math.abs(quote.latestPrice - quote.previousClose).toFixed(2)} |
+            {Math.abs(quote.latestPrice - quote.previousClose).toFixed(2)}
+          </Text>
+          <Text
+            variant={
+              quote.latestPrice - quote.previousClose >= 0 ? "gain" : "loss"
+            }
+            size="large"
+            display="inline-block"
+            fontWeight="lighter"
+          >
+            {"  "}|{"  "}
           </Text>
           <Text
             variant={
