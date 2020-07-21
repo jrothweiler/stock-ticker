@@ -11,13 +11,13 @@ import {
   companyFetch,
   newsFetch,
   statsFetch,
-  historyFetch
+  historyFetch,
 } from "./utils/serverUtils";
 import { INITIAL_STOCK } from "./utils/constants";
 import SearchBar from "./components/searchBar";
 import socketIOClient from "socket.io-client";
 import { PriceDisplay } from "./components/priceDisplay";
-import {VisualDisplay} from './components/visualDisplay';
+import { VisualDisplay } from "./components/visualDisplay";
 
 //Triggers dispatches (May need to be broken down into multiple Middlewares chained together)
 const producerMiddleWare = (rawStore) => {
@@ -34,10 +34,16 @@ const producerMiddleWare = (rawStore) => {
           companyFetch(symbol),
           newsFetch(symbol),
           statsFetch(symbol),
-          historyFetch(symbol)
+          historyFetch(symbol),
         ])
           .then((dataArray) => {
-            let [quoteInfo, companyInfo, newsInfo, statInfo, historyInfo] = dataArray;
+            let [
+              quoteInfo,
+              companyInfo,
+              newsInfo,
+              statInfo,
+              historyInfo,
+            ] = dataArray;
             rawStore.dispatch({
               type: "newTickerData",
               payload: {
@@ -47,7 +53,7 @@ const producerMiddleWare = (rawStore) => {
                   newsInfo,
                   companyInfo,
                   statInfo,
-                  historyInfo
+                  historyInfo,
                 },
               },
             });
@@ -97,7 +103,6 @@ function App() {
         <LatestNews />
         <CompanyOverview />
         <KeyStats />
-        
       </div>
     </Provider>
   );

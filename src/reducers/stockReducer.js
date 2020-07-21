@@ -5,30 +5,29 @@ const initialState = {
     newsInfo: null,
     companyInfo: null,
     statInfo: null,
-    historyInfo: null
-  }
-}
+    historyInfo: null,
+  },
+};
 
 export default (state = initialState, action) => {
-    
   switch (action.type) {
-    case 'newQuoteData': {
-        return {
-            ...state, 
-            tickerInfo: {
-              ...state.tickerInfo,
-              quoteInfo: action.payload
-            }
-        }
-    }
-    case 'newTickerData': {
+    case "newQuoteData": {
       return {
-          ...state, 
-          ticker: action.payload.symbol,
-          tickerInfo: action.payload.data
-      }
+        ...state,
+        tickerInfo: {
+          ...state.tickerInfo,
+          quoteInfo: action.payload,
+        },
+      };
+    }
+    case "newTickerData": {
+      return {
+        ...state,
+        ticker: action.payload.symbol,
+        tickerInfo: action.payload.data,
+      };
     }
     default:
       return state;
   }
-}
+};

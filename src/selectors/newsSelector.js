@@ -1,3 +1,3 @@
 export const newsSelector = (state) => {
-    return state.stocks.tickerInfo.newsInfo;
-}
+  return state.stocks.tickerInfo.newsInfo;
+};

@@ -1,6 +1,6 @@
 import React, {useRef} from "react";
 import { DisplayWrapper } from "./generics/displayWrapper";
-import { Line } from 'react-chartjs-2';
+import { Line } from "react-chartjs-2";
 import { useSelector } from "react-redux";
 import { historySelector } from '../selectors/historySelector';
 import { currentPriceSelector } from '../selectors/quoteSelector';
@@ -17,13 +17,13 @@ export const VisualDisplay = () => {
   if (!historyData || !currentPrice) {
     return ( <div>loading</div>)
   }
-  
-  let formattedHistoryData = historyData.map(point => {
+
+  let formattedHistoryData = historyData.map((point) => {
     return {
       x: `${point.date} ${point.minute}`,
-      y: point.price
-    }
-  })
+      y: point.price,
+    };
+  });
 
   let currentDate = new Date();
 
@@ -58,7 +58,7 @@ export const VisualDisplay = () => {
       }]
     },
     legend: {
-      display: false
+      display: false,
     },
     scales: {
       xAxes: [{
