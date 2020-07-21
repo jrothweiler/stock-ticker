@@ -116,10 +116,10 @@ app.get("/api/news/:symbol", async (req, res) => {
   }
 });
 
-app.get('/api/history/:symbol/:period', async (req,res) => {
+app.get('/api/history/:symbol', async (req,res) => {
     console.log("app.get history");
     const symbol = req.params.symbol;
-    let period = req.params.period;
+    let period = req.query.period;
     // if the user wants 5d, give them interday data
     if (period === '5d') {
       period = '5dm';

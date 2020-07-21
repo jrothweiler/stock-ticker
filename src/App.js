@@ -34,7 +34,7 @@ const producerMiddleWare = (rawStore) => {
           companyFetch(symbol),
           newsFetch(symbol),
           statsFetch(symbol),
-          historyFetch(symbol, '5d'),
+          historyFetch(symbol, '1m'),
         ])
           .then((dataArray) => {
             let [

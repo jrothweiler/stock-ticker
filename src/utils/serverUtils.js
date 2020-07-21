@@ -2,8 +2,15 @@
 // See server/index.js for server code.
 
 // Generalized fetch function over any endpoint
-export const proxyFetch = async (symbol, endpoint) => {
-  return fetch(`/api/${endpoint}/${symbol}`).then((data) => {
+export const proxyFetch = async (symbol, endpoint, queryParams) => {
+  // unfortunately, fetch does not support a query object, so we need 
+  // to build the query string ourselves.
+  let queryString = queryParams ? '?' : '';
+  for (let field in queryParams) {
+    queryString += `${field}=${queryParams[field]}`;
+  }
+
+  return fetch(`/api/${endpoint}/${symbol}${queryString}`).then((data) => {
     if (data.ok) {
       return data.json();
     } else {
@@ -34,5 +41,5 @@ export const newsFetch = (symbol) => {
 
 // collect historical data over the given period, either "1d", "5d", "1m", "1y", "5y", or "max"
 export const historyFetch = (symbol, period) => {
-  return proxyFetch(`${symbol}/${period}`, `history`);
+  return proxyFetch(symbol, `history`, { period });
 };
