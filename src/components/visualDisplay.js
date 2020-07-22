@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from "react";
+import React, {useRef, useState, useEffect} from "react";
 import { DisplayWrapper } from "./generics/displayWrapper";
 import { Line } from "react-chartjs-2";
 import { useSelector, useDispatch } from "react-redux";
@@ -19,12 +19,25 @@ export const VisualDisplay = () => {
   const currentPrice = useSelector(currentPriceSelector)
   
   const chartRange = useSelector(chartRangeSelector);
+  // we keep track of the previous range in the middle of a fetch of new history data,
+  // so we don't change the formatting of the x axis times until new data is fetched
+  const [prevRange, setPrevRange] = useState(null);
+
   const historyData = useSelector(historySelector) || []; 
   const currentSymbol = useSelector(tickerSelector);
 
+  // when a chart range button is clicked, track the current range, and store the new
+  // range in redux
   const handleChartRangeClick = (period) => {
+    setPrevRange(chartRange);
     dispatch({ type: 'newChartRange', payload: period })
   }
+
+  // when history data is successfully fetched, clear the previous range so we format 
+  // according to the current range
+  useEffect(() => {
+    setPrevRange(null);
+  }, [historyData])
 
   useEffect(() => {
     if (currentSymbol) {
@@ -32,6 +45,9 @@ export const VisualDisplay = () => {
     }
     
   }, [currentSymbol, chartRange])
+
+  // if we have a previous range, format according to that, otherwise format according to redux one
+  const xAxisRange = prevRange || chartRange;
 
   let formattedHistoryData = historyData.map((point) => {
     return {
@@ -81,7 +97,7 @@ export const VisualDisplay = () => {
         time: {
           minUnit: 'hour',
           displayFormats: {
-            hour: 'MMM DD  h:mm a'
+            hour: xAxisRange === '1D' ? 'h:mm a' : 'MMM DD  h:mm a'
           },
           format: 'YYYY-MM-DD HH:mm',
         },
