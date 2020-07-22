@@ -9,7 +9,6 @@ export const PriceDisplay = () => {
   //Call necessary selectors for display data
   const dispatch = useDispatch();
   const quote = useSelector(quoteSelector);
-
   return (
     <div>
       {quote && (
@@ -26,7 +25,7 @@ export const PriceDisplay = () => {
                   ? mdiArrowUp
                   : mdiArrowDown
               }
-              size={1.3}
+              size={1.35}
               color={
                 quote.latestPrice - quote.previousClose >= 0 ? "green" : "red"
               }
@@ -39,8 +38,19 @@ export const PriceDisplay = () => {
             size="large"
             display="inline-block"
           >
-            {Math.abs(quote.latestPrice - quote.previousClose).toFixed(2)}{" "}
-            &nbsp;{" "}
+            {Math.abs(quote.latestPrice - quote.previousClose).toFixed(2)}
+          </Text>
+          <Text
+            variant={
+              quote.latestPrice - quote.previousClose >= 0 ? "gain" : "loss"
+            }
+            size="large"
+            display="inline-block"
+            fontWeight="lighter"
+            mr="0.5rem"
+            ml="0.5rem"
+          >
+            |
           </Text>
           <Text
             variant={

@@ -1,11 +1,8 @@
 import React, { useEffect } from "react";
 import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
-import { KeyStats } from "./components/keyStats";
 import stockReducer from "./reducers/stockReducer";
 import errorReducer from "./reducers/errorReducer";
-import { LatestNews } from "./components/latestNews";
-import { CompanyOverview } from "./components/companyOverview";
 import {
   quoteFetch,
   companyFetch,
@@ -14,11 +11,8 @@ import {
   historyFetch,
 } from "./utils/serverUtils";
 import { INITIAL_STOCK } from "./utils/constants";
-import SearchBar from "./components/searchBar";
 import socketIOClient from "socket.io-client";
-import { PriceDisplay } from "./components/priceDisplay";
-import { VisualDisplay } from "./components/visualDisplay";
-
+import { StockTrader } from "./stockTrader";
 //Triggers dispatches (May need to be broken down into multiple Middlewares chained together)
 const producerMiddleWare = (rawStore) => {
   const socket = socketIOClient("http://localhost:3001");
@@ -36,12 +30,7 @@ const producerMiddleWare = (rawStore) => {
           statsFetch(symbol),
         ])
           .then((dataArray) => {
-            let [
-              quoteInfo,
-              companyInfo,
-              newsInfo,
-              statInfo,
-            ] = dataArray;
+            let [quoteInfo, companyInfo, newsInfo, statInfo] = dataArray;
             rawStore.dispatch({
               type: "newTickerData",
               payload: {
@@ -62,11 +51,11 @@ const producerMiddleWare = (rawStore) => {
           });
         break;
       }
-      case 'fetchHistory': {
+      case "fetchHistory": {
         let { symbol, period } = action.payload;
-        historyFetch(symbol, period).then(data => {
-          rawStore.dispatch({ type: "newHistoryData", payload: data })
-        })
+        historyFetch(symbol, period).then((data) => {
+          rawStore.dispatch({ type: "newHistoryData", payload: data });
+        });
       }
       default:
         rawStore.dispatch(action);
@@ -100,14 +89,7 @@ function App() {
 
   return (
     <Provider store={dataStore}>
-      <div>
-        <SearchBar />
-        <PriceDisplay />
-        <VisualDisplay />
-        <LatestNews />
-        <CompanyOverview />
-        <KeyStats />
-      </div>
+      <StockTrader />
     </Provider>
   );
 }

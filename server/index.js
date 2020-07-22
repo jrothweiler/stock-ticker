@@ -29,35 +29,41 @@ async function fetchWrapper(...args) {
 }
 
 async function getQuoteData(symbol) {
-    const [quoteData, dailyData] = await Promise.all([fetchWrapper(iex.quote, symbol), fetchWrapper(iex.history, symbol, { period: '1d' })]);
-    // some data has null entries, so filter it out before processing it
-    const filteredDailyData = dailyData.filter(minute => minute.high !== null)
+  const [quoteData, dailyData] = await Promise.all([
+    fetchWrapper(iex.quote, symbol),
+    fetchWrapper(iex.history, symbol, { period: "1d" }),
+  ]);
+  // some data has null entries, so filter it out before processing it
+  const filteredDailyData = dailyData.filter((minute) => minute.high !== null);
 
-    // some data has been deprecated from the quote api, so as a workaround, calculate these fields off of the current day's price data minute by minute.
-    const high = Math.max(...filteredDailyData.map(minute => minute.high));
-    const low = Math.min(...filteredDailyData.map(minute => minute.low));
-    const latestVolume = filteredDailyData.reduce((acc, currentMinute) => currentMinute.volume + acc, 0)
-    const open = filteredDailyData[0]?.open || null;
-    const {
-      previousClose,
-      week52High,
-      week52Low,
-      latestPrice,
-      marketCap,
-      avgTotalVolume,
-    } = quoteData;
-    return {
-      previousClose,
-      week52High,
-      week52Low,
-      high,
-      low,
-      latestPrice,
-      marketCap,
-      latestVolume,
-      open,
-      avgTotalVolume,
-    };
+  // some data has been deprecated from the quote api, so as a workaround, calculate these fields off of the current day's price data minute by minute.
+  const high = Math.max(...filteredDailyData.map((minute) => minute.high));
+  const low = Math.min(...filteredDailyData.map((minute) => minute.low));
+  const latestVolume = filteredDailyData.reduce(
+    (acc, currentMinute) => currentMinute.volume + acc,
+    0
+  );
+  const open = filteredDailyData[0].open || null;
+  const {
+    previousClose,
+    week52High,
+    week52Low,
+    latestPrice,
+    marketCap,
+    avgTotalVolume,
+  } = quoteData;
+  return {
+    previousClose,
+    week52High,
+    week52Low,
+    high,
+    low,
+    latestPrice,
+    marketCap,
+    latestVolume,
+    open,
+    avgTotalVolume,
+  };
 }
 
 //iex.marketSymbols().then((data) => console.log(data));
@@ -70,7 +76,7 @@ app.get("/api/quote/:symbol", async (req, res) => {
   console.log("app.get quotes");
   const symbol = req.params.symbol;
   try {
-    let quoteData = await getQuoteData(symbol)
+    let quoteData = await getQuoteData(symbol);
     res.json(quoteData);
   } catch (e) {
     res.sendStatus(e.response.status);
@@ -116,31 +122,31 @@ app.get("/api/news/:symbol", async (req, res) => {
   }
 });
 
-app.get('/api/history/:symbol', async (req,res) => {
-    console.log("app.get history");
-    const symbol = req.params.symbol;
-    let period = req.query.period;
-    // if the user wants 5d, give them minute by minute data
-    if (period === '5D') {
-      period = '5DM';
-    }
+app.get("/api/history/:symbol", async (req, res) => {
+  console.log("app.get history");
+  const symbol = req.params.symbol;
+  let period = req.query.period;
+  // if the user wants 5d, give them minute by minute data
+  if (period === "5D") {
+    period = "5DM";
+  }
 
-    try {
-        const historyData = await fetchWrapper(iex.history, symbol, { period });
-        const returnData = historyData.map(day => {
-            return {
-                date: day.date,
-                minute: day.minute,
+  try {
+    const historyData = await fetchWrapper(iex.history, symbol, { period });
+    const returnData = historyData.map((day) => {
+      return {
+        date: day.date,
+        minute: day.minute,
 
-                // if the data is minute to minute, go by average price for that period
-                // on a day by day frequency, go by the closing price
-                price: day.average || day.close
-            }
-        })
-        res.json(returnData);
-    } catch (e) {
-        res.sendStatus(e.response.status);
-    }
+        // if the data is minute to minute, go by average price for that period
+        // on a day by day frequency, go by the closing price
+        price: day.average || day.close,
+      };
+    });
+    res.json(returnData);
+  } catch (e) {
+    res.sendStatus(e.response.status);
+  }
 });
 
 io.on("connection", (socket) => {
@@ -148,7 +154,7 @@ io.on("connection", (socket) => {
 
   let subscribeToSymbol = (symbol) => {
     return setInterval(async () => {
-      let quoteData = await getQuoteData(symbol)
+      let quoteData = await getQuoteData(symbol);
       socket.emit("realTimeQuoteData", quoteData);
     }, 5000);
   };

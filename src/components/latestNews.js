@@ -6,15 +6,15 @@ import { Text } from "./generics/text";
 import * as timeago from "timeago.js";
 import { useDispatch, useSelector } from "react-redux";
 
-export const LatestNews = () => {
+export const LatestNews = (props) => {
   //Call necessary selectors for display data
   const dispatch = useDispatch();
   const newsInfo = useSelector(newsSelector);
 
   return (
-    <DisplayWrapper width="25%" height="25%">
-      <TitleHeader>Latest News</TitleHeader>
-      <DisplayWrapper overflow="auto" height="20.0rem">
+    <DisplayWrapper height={props.height}>
+      <TitleHeader variant="blueUnderline">LATEST NEWS</TitleHeader>
+      <DisplayWrapper overflow="auto" height="100%">
         {newsInfo &&
           newsInfo.map((article) => (
             <div key={article.headline}>

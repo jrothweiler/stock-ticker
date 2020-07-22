@@ -6,15 +6,15 @@ import { TitleHeader } from "./generics/titleHeader";
 import { Text } from "./generics/text";
 import { useDispatch, useSelector } from "react-redux";
 
-export const CompanyOverview = () => {
+export const CompanyOverview = (props) => {
   //Call necessary selectors for display data
   const dispatch = useDispatch();
   const companyInfo = useSelector(companySelector);
   const ticker = useSelector(tickerSelector);
   return (
-    <DisplayWrapper width="25%" height="25%">
-      <TitleHeader>Company Info</TitleHeader>
-      <Text overflow="auto" height="15.0rem">
+    <DisplayWrapper height={props.height}>
+      <TitleHeader variant="blueUnderline">COMPANY OVERVIEW</TitleHeader>
+      <Text height="100%" overflow="auto">
         {companyInfo && (
           <Text variant="primary" fontSize="1.8rem">
             {companyInfo.companyName} ({ticker})
