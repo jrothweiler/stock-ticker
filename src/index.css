@@ -36,6 +36,7 @@ code {
 }
 .searchForm {
   position: relative;
+  width: 50%;
 }
 
 .headline:hover {

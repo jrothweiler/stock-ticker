@@ -14,6 +14,7 @@ export const proxyFetch = async (symbol, endpoint, queryParams) => {
     if (data.ok) {
       return data.json();
     } else {
+      console.log(endpoint);
       throw Error(data.statusText);
     }
   });
