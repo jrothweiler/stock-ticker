@@ -49,3 +49,22 @@ a {
 .searchIcon {
   transform: translateY(-10%);
 }
+
+.dollarSign {
+  transform: translateY(22%);
+  display: inline-block;
+}
+
+.arrow {
+  transform: translateY(11%);
+  margin-right: -6px;
+}
+
+.separator {
+  transform: translateY(-7%);
+}
+
+.percentSign {
+  transform: translateY(20%);
+  display: inline-block;
+}

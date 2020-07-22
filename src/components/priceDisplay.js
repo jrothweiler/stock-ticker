@@ -14,7 +14,9 @@ export const PriceDisplay = () => {
       {quote && (
         <div>
           <Text variant="primary" size="large" display="inline-block">
-            <sup>$</sup>
+            <sup>
+              <div className="dollarSign">$</div>
+            </sup>
             {quote.latestPrice.toLocaleString("en")} &nbsp;
           </Text>
           <sup>
@@ -49,6 +51,7 @@ export const PriceDisplay = () => {
             fontWeight="lighter"
             mr="0.5rem"
             ml="0.5rem"
+            className="separator"
           >
             |
           </Text>
@@ -64,7 +67,9 @@ export const PriceDisplay = () => {
                 (quote.latestPrice - quote.previousClose) / quote.previousClose
               ) * 100
             ).toFixed(2)}
-            <sup>%</sup>
+            <sup>
+              <div className="percentSign">%</div>
+            </sup>
           </Text>
         </div>
       )}
