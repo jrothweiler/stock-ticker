@@ -12,9 +12,7 @@ import {
 } from "./utils/serverUtils";
 import { INITIAL_STOCK } from "./utils/constants";
 import socketIOClient from "socket.io-client";
-import { PriceDisplay } from "./components/priceDisplay";
-import { VisualDisplay } from "./components/visualDisplay";
-
+import { StockTrader } from "./stockTrader";
 //Triggers dispatches (May need to be broken down into multiple Middlewares chained together)
 const producerMiddleWare = (rawStore) => {
   const socket = socketIOClient("http://localhost:3001");
@@ -91,14 +89,7 @@ function App() {
 
   return (
     <Provider store={dataStore}>
-      <div>
-        <SearchBar />
-        <PriceDisplay />
-        <VisualDisplay />
-        <LatestNews />
-        <CompanyOverview />
-        <KeyStats />
-      </div>
+      <StockTrader />
     </Provider>
   );
 }

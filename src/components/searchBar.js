@@ -6,11 +6,7 @@ import { VALID_SEARCH_REGEXP } from "../utils/constants";
 import { Text } from "../components/generics/text";
 import { searchErrorsSelector } from "../selectors/errorsSelectors";
 
-<<<<<<< HEAD
 export const SearchBar = () => {
-=======
-const SearchBar = () => {
->>>>>>> master
   let [currentText, setCurrentText] = useState("");
   let [showBadInputError, setShowBadInputError] = useState(false);
   let [showCompanyText, setShowCompanyText] = useState(true);
@@ -89,5 +85,3 @@ const SearchBar = () => {
     </form>
   );
 };
-
-export default SearchBar;
