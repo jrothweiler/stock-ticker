@@ -1,3 +1,3 @@
 export const tickerSelector = (state) => {
-    return state.stocks.ticker;
-}
+  return state.stocks.ticker;
+};

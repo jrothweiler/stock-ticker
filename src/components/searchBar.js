@@ -6,7 +6,11 @@ import { VALID_SEARCH_REGEXP } from "../utils/constants";
 import { Text } from "../components/generics/text";
 import { searchErrorsSelector } from "../selectors/errorsSelectors";
 
+<<<<<<< HEAD
 export const SearchBar = () => {
+=======
+const SearchBar = () => {
+>>>>>>> master
   let [currentText, setCurrentText] = useState("");
   let [showBadInputError, setShowBadInputError] = useState(false);
   let [showCompanyText, setShowCompanyText] = useState(true);
@@ -51,14 +55,12 @@ export const SearchBar = () => {
 
   return (
     <form className="searchForm" onSubmit={handleSubmit}>
-      <sup>
-        <Icon
-          className="searchIcon"
-          path={mdiMagnify}
-          size={1.5}
-          color="#5496ff"
-        />
-      </sup>
+      <Icon
+        className="searchIcon"
+        path={mdiMagnify}
+        size={1.5}
+        color="#5496ff"
+      />
       <input
         ref={inputRef}
         className="searchBar"
@@ -87,3 +89,5 @@ export const SearchBar = () => {
     </form>
   );
 };
+
+export default SearchBar;

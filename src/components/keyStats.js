@@ -59,7 +59,11 @@ export const KeyStats = () => {
         {quote && (
           <StatWrapper>
             <Text variant="statLabel">Open</Text>
+<<<<<<< HEAD
             <Text display="statValue">{quote.open}</Text>
+=======
+            <Text variant="statValue">{quote.open}</Text>
+>>>>>>> master
           </StatWrapper>
         )}
         {quote && (

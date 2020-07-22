@@ -12,7 +12,8 @@ import {
 } from "./utils/serverUtils";
 import { INITIAL_STOCK } from "./utils/constants";
 import socketIOClient from "socket.io-client";
-import { StockTrader } from "./stockTrader";
+import { PriceDisplay } from "./components/priceDisplay";
+import { VisualDisplay } from "./components/visualDisplay";
 
 //Triggers dispatches (May need to be broken down into multiple Middlewares chained together)
 const producerMiddleWare = (rawStore) => {
@@ -29,16 +30,9 @@ const producerMiddleWare = (rawStore) => {
           companyFetch(symbol),
           newsFetch(symbol),
           statsFetch(symbol),
-          historyFetch(symbol),
         ])
           .then((dataArray) => {
-            let [
-              quoteInfo,
-              companyInfo,
-              newsInfo,
-              statInfo,
-              historyInfo,
-            ] = dataArray;
+            let [quoteInfo, companyInfo, newsInfo, statInfo] = dataArray;
             rawStore.dispatch({
               type: "newTickerData",
               payload: {
@@ -48,7 +42,6 @@ const producerMiddleWare = (rawStore) => {
                   newsInfo,
                   companyInfo,
                   statInfo,
-                  historyInfo,
                 },
               },
             });
@@ -58,6 +51,13 @@ const producerMiddleWare = (rawStore) => {
           .catch((e) => {
             rawStore.dispatch({ type: "searchError", payload: e.message });
           });
+        break;
+      }
+      case "fetchHistory": {
+        let { symbol, period } = action.payload;
+        historyFetch(symbol, period).then((data) => {
+          rawStore.dispatch({ type: "newHistoryData", payload: data });
+        });
       }
       default:
         rawStore.dispatch(action);
@@ -91,7 +91,14 @@ function App() {
 
   return (
     <Provider store={dataStore}>
-      <StockTrader />
+      <div>
+        <SearchBar />
+        <PriceDisplay />
+        <VisualDisplay />
+        <LatestNews />
+        <CompanyOverview />
+        <KeyStats />
+      </div>
     </Provider>
   );
 }
