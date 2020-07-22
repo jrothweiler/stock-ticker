@@ -13,7 +13,8 @@ import { Text } from "../components/generics/text";
 import { Button } from "../components/generics/button";
 import "chartjs-plugin-annotation";
 
-export const VisualDisplay = () => {
+export const VisualDisplay = (props) => {
+  console.log(props.height);
   const dispatch = useDispatch();
 
   const chartRef = useRef();
@@ -151,7 +152,7 @@ export const VisualDisplay = () => {
   ];
 
   return (
-    <DisplayWrapper>
+    <DisplayWrapper height={props.height}>
       <DisplayWrapper display="flex" justifyContent="flex-end" mb="8px">
         {POSSIBLE_CHART_RANGES.map((period) => (
           <Button

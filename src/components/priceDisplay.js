@@ -9,7 +9,6 @@ export const PriceDisplay = () => {
   //Call necessary selectors for display data
   const dispatch = useDispatch();
   const quote = useSelector(quoteSelector);
-  const space = " ";
   return (
     <div>
       {quote && (

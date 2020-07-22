@@ -7,13 +7,13 @@ import { Text } from "./generics/text";
 import { StatWrapper } from "./generics/statWrapper";
 import { useDispatch, useSelector } from "react-redux";
 
-export const KeyStats = () => {
+export const KeyStats = (props) => {
   //Call necessary selectors for display data
   const dispatch = useDispatch();
   const stats = useSelector(statsSelector);
   const quote = useSelector(quoteSelector);
   return (
-    <DisplayWrapper>
+    <DisplayWrapper height={props.height}>
       <TitleHeader variant="blueUnderline">KEY STATS</TitleHeader>
       <DisplayWrapper display="inline-block" width="46%" mr="4%">
         {quote && (
