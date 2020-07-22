@@ -155,6 +155,7 @@ export const VisualDisplay = (props) => {
       <DisplayWrapper display="flex" justifyContent="flex-end" mb="8px">
         {POSSIBLE_CHART_RANGES.map((period) => (
           <Button
+            key={period}
             variant="unstyled"
             mr="8px"
             onClick={() => handleChartRangeClick(period)}
