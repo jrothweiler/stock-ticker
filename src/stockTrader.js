@@ -34,15 +34,15 @@ export const StockTrader = () => {
           <DisplayWrapper height="50%">
             <VisualDisplay />
           </DisplayWrapper>
-          <DisplayWrapper height="40%">
+          <DisplayWrapper height="45%">
             <KeyStats />
           </DisplayWrapper>
         </DisplayWrapper>
         <DisplayWrapper width="27.5%" variant="flexColumn">
-          <DisplayWrapper maxHeight="50%">
+          <DisplayWrapper height="50%">
             <LatestNews />
           </DisplayWrapper>
-          <DisplayWrapper maxHeight="50%">
+          <DisplayWrapper height="45%">
             <CompanyOverview />
           </DisplayWrapper>
         </DisplayWrapper>
