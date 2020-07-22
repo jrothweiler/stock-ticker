@@ -33,10 +33,16 @@ code {
   top: 0;
   left: 38px;
   opacity: 0.75;
+
+  overflow: hidden;
+  max-width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .searchForm {
   position: relative;
   width: 50%;
+  color: white;
 }
 
 .headline:hover {
