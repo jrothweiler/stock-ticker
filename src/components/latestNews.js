@@ -14,7 +14,7 @@ export const LatestNews = () => {
   return (
     <DisplayWrapper>
       <TitleHeader variant="blueUnderline">LATEST NEWS</TitleHeader>
-      <DisplayWrapper overflow="auto" height="20.0rem">
+      <DisplayWrapper overflow="auto">
         {newsInfo &&
           newsInfo.map((article) => (
             <div key={article.headline}>

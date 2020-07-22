@@ -1,5 +1,6 @@
 import React from "react";
 import { DisplayWrapper } from "./generics/displayWrapper";
+import logo from "./assets/AdaptiveLogo.jpg";
 import { BannerButton } from "./generics/bannerButton";
 import { useDispatch } from "react-redux";
 
@@ -8,11 +9,11 @@ export const Header = () => {
   const dispatch = useDispatch();
 
   return (
-    <DisplayWrapper variant="flexRow" mb="2.0rem">
-      <DisplayWrapper>
-        <img src="./assets/AdaptiveLogo.jpg"></img>
+    <DisplayWrapper width="100%" variant="flexRow" mb="2.0rem">
+      <DisplayWrapper height="50%" width="50%">
+        <img src={logo}></img>
       </DisplayWrapper>
-      <DisplayWrapper justifyContent="flex-end">
+      <DisplayWrapper>
         <BannerButton variant="selected">QUOTES</BannerButton>
         <BannerButton>MARKETS</BannerButton>
         <BannerButton>WATCHLISTS</BannerButton>

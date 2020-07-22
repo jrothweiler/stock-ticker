@@ -9,6 +9,7 @@ export const PriceDisplay = () => {
   //Call necessary selectors for display data
   const dispatch = useDispatch();
   const quote = useSelector(quoteSelector);
+  const space = " ";
   return (
     <div>
       {quote && (
@@ -47,8 +48,10 @@ export const PriceDisplay = () => {
             size="large"
             display="inline-block"
             fontWeight="lighter"
+            mr="0.5rem"
+            ml="0.5rem"
           >
-            {"  "}|{"  "}
+            |
           </Text>
           <Text
             variant={
