@@ -45,3 +45,7 @@ code {
 a {
   text-decoration: none;
 }
+
+.searchIcon {
+  transform: translateY(-10%);
+}
