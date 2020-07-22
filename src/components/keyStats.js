@@ -90,7 +90,7 @@ export const KeyStats = (props) => {
         )}
         {stats && (
           <StatWrapper>
-            <Text variant="statLabel">Dividend& Yield</Text>
+            <Text variant="statLabel">Dividend & Yield</Text>
             <Text variant="statValue">
               {(stats.dividendYield * 100).toLocaleString("en")}%
             </Text>

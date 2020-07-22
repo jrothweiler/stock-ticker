@@ -14,7 +14,6 @@ import { Button } from "../components/generics/button";
 import "chartjs-plugin-annotation";
 
 export const VisualDisplay = (props) => {
-  console.log(props.height);
   const dispatch = useDispatch();
 
   const chartRef = useRef();
