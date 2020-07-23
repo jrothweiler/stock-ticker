@@ -13,7 +13,7 @@ export const PriceDisplay = () => {
     <div>
       {quote && (
         <div>
-          <Text variant="primary" size="large" display="inline-block">
+          <Text variant="primary" fontWeight="lighter" size="large" display="inline-block">
             <sup>
               <div className="dollarSign">$</div>
             </sup>
@@ -23,28 +23,29 @@ export const PriceDisplay = () => {
             <Icon
               className="arrow"
               path={
-                quote.latestPrice - quote.previousClose >= 0
+                quote.latestPrice - quote.open >= 0
                   ? mdiArrowUp
                   : mdiArrowDown
               }
               size={1.35}
               color={
-                quote.latestPrice - quote.previousClose >= 0 ? "green" : "red"
+                quote.latestPrice - quote.open >= 0 ? "#91e4a5" : "#E95656"
               }
             />
           </sup>
           <Text
             variant={
-              quote.latestPrice - quote.previousClose >= 0 ? "gain" : "loss"
+              quote.latestPrice - quote.open >= 0 ? "gain" : "loss"
             }
+            fontWeight="lighter"
             size="large"
             display="inline-block"
           >
-            {Math.abs(quote.latestPrice - quote.previousClose).toFixed(2)}
+            {Math.abs(quote.latestPrice - quote.open).toFixed(2)}
           </Text>
           <Text
             variant={
-              quote.latestPrice - quote.previousClose >= 0 ? "gain" : "loss"
+              quote.latestPrice - quote.open >= 0 ? "gain" : "loss"
             }
             size="large"
             display="inline-block"
@@ -57,14 +58,15 @@ export const PriceDisplay = () => {
           </Text>
           <Text
             variant={
-              quote.latestPrice - quote.previousClose >= 0 ? "gain" : "loss"
+              quote.latestPrice - quote.open >= 0 ? "gain" : "loss"
             }
             size="large"
             display="inline-block"
+            fontWeight="lighter"
           >
             {(
               Math.abs(
-                (quote.latestPrice - quote.previousClose) / quote.previousClose
+                (quote.latestPrice - quote.open) / quote.open
               ) * 100
             ).toFixed(2)}
             <sup>

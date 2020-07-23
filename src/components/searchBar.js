@@ -67,10 +67,10 @@ export const SearchBar = () => {
       />
       {showCompanyText && (
         <div className="companyText" onClick={onCompanyTextClick}>
-          <Text variant="primary" size="large" display="inline-block">
+          <Text variant="primary" fontWeight="lighter" size="large" display="inline-block">
             {companyName}
           </Text>{" "}
-          <Text variant="secondary" size="large" display="inline-block">
+          <Text variant="secondary" fontWeight="lighter" size="large" display="inline-block">
             {symbolText}
           </Text>
         </div>
