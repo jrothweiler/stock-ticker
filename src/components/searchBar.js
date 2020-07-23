@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { mdiMagnify } from "@mdi/js";
 import Icon from "@mdi/react";
 import { VALID_SEARCH_REGEXP } from "../utils/constants";
+import { DisplayWrapper } from '../components/generics/displayWrapper';
 import { Text } from "../components/generics/text";
 import { searchErrorsSelector } from "../selectors/errorsSelectors";
 
@@ -49,6 +50,8 @@ export const SearchBar = () => {
     inputRef.current.focus();
   }
 
+
+
   return (
     <form className="searchForm" onSubmit={handleSubmit}>
       <Icon
@@ -76,12 +79,16 @@ export const SearchBar = () => {
         </div>
       )}
 
-      {showBadInputError && (
-        <Text variant="error">Not a valid input, try again</Text>
-      )}
-      {!showBadInputError && searchError && (
-        <Text variant="error">Error in search: {searchError}</Text>
-      )}
+      <div>
+        {showBadInputError && (
+          <Text mt="8px" variant="error">Not a valid input, searches should contain only letters</Text>
+        )}
+        {!showBadInputError && searchError && (
+          <Text mt="8px" variant="error">Error in search: {searchError}</Text>
+        )}
+      </div>
+
+      
     </form>
   );
 };
