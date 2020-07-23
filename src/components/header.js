@@ -9,9 +9,9 @@ export const Header = () => {
   const dispatch = useDispatch();
 
   return (
-    <DisplayWrapper width="100%" variant="flexRow" mb="2.0rem">
-      <DisplayWrapper height="50%" width="50%">
-        <img src={logo}></img>
+    <DisplayWrapper width="100%" variant="flexRow">
+      <DisplayWrapper>
+        <img src={logo} height="65%"></img>
       </DisplayWrapper>
       <DisplayWrapper>
         <BannerButton variant="selected">QUOTES</BannerButton>

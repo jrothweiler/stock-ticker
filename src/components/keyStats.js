@@ -28,14 +28,14 @@ export const KeyStats = (props) => {
           <StatWrapper>
             <Text variant="statLabel">Day Range</Text>
             <Text variant="statValue">
-              {quote.low} - {quote.high}
+              {quote.low.toLocaleString("en")} - {quote.high.toLocaleString("en")}
             </Text>
           </StatWrapper>
         )}
         {quote && (
           <StatWrapper>
             <Text variant="statLabel">Volume</Text>
-            <Text variant="statValue">{quote.latestVolume}</Text>
+            <Text variant="statValue">{quote.latestVolume.toLocaleString("en")}</Text>
           </StatWrapper>
         )}
         {quote && (
@@ -59,7 +59,7 @@ export const KeyStats = (props) => {
         {quote && (
           <StatWrapper>
             <Text variant="statLabel">Open</Text>
-            <Text variant="statValue">{quote.open}</Text>
+            <Text variant="statValue">{quote.open.toLocaleString("en")}</Text>
           </StatWrapper>
         )}
         {quote && (

@@ -30,11 +30,11 @@ export const Text = styled("div")(
         color: "gray",
       },
       gain: {
-        color: "green",
+        color: "#91e4a5",
         display: "inline-block",
       },
       loss: {
-        color: "red",
+        color: "#e95656",
         display: "inline-block",
       },
       error: {
