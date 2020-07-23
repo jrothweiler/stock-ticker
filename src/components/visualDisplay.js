@@ -123,6 +123,13 @@ export const VisualDisplay = (props) => {
       yAxes: [
         {
           position: "right",
+          ticks: {
+            fontWeight: "lighter",
+            fontFamily: "Lato", 
+            callback: function(label) {
+              return label.toFixed(2);
+          }
+          },
           gridLines: {
             display: true,
             color: "rgba(29,77,104, .3)",

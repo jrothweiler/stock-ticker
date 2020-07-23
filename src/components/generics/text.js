@@ -28,7 +28,8 @@ export const Text = styled("div")(
       },
       secondary: {
         color: "#beccdc",
-        opacity: 0.6
+        opacity: 0.8,
+        fontWeight: 'lighter'
       },
       gain: {
         color: "#91e4a5",
@@ -44,8 +45,9 @@ export const Text = styled("div")(
       },
       statLabel: {
         color: "#beccdc",
-        opacity: 0.6,
+        opacity: 0.8,
         fontSize: "1.0rem",
+        fontWeight: 'lighter',
         display: "inline-block",
         paddingBottom: "1.0rem",
       },
