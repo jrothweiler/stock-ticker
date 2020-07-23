@@ -92,7 +92,7 @@ export const KeyStats = (props) => {
           <StatWrapper>
             <Text variant="statLabel">Dividend & Yield</Text>
             <Text variant="statValue">
-              {(stats.dividendYield * 100).toLocaleString("en")}%
+              {stats.dividendYield ? `${(stats.dividendYield * 100).toLocaleString("en")}%` : "N/A"}
             </Text>
           </StatWrapper>
         )}
