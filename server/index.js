@@ -31,7 +31,7 @@ async function fetchWrapper(...args) {
 async function getQuoteData(symbol) {
   const [quoteData, dailyData] = await Promise.all([
     fetchWrapper(iex.quote, symbol),
-    fetchWrapper(iex.history, symbol, { period: "1d" }),
+    fetchWrapper(iex.history, symbol, { period: "1d", chartCloseOnly: true }),
   ]);
   // some data has null entries, so filter it out before processing it
   const filteredDailyData = dailyData.filter((minute) => minute.high !== null);
@@ -53,15 +53,15 @@ async function getQuoteData(symbol) {
     avgTotalVolume,
   } = quoteData;
   return {
-    previousClose,
-    week52High,
-    week52Low,
-    high,
-    low,
-    latestPrice,
+    previousClose: previousClose.toFixed(2),
+    week52High: week52High.toFixed(2),
+    week52Low: week52Low.toFixed(2),
+    high: high.toFixed(2),
+    low: low.toFixed(2),
+    latestPrice: latestPrice.toFixed(2),
     marketCap,
     latestVolume,
-    open,
+    open: open.toFixed(2),
     avgTotalVolume,
   };
 }
@@ -89,7 +89,7 @@ app.get("/api/stats/:symbol", async (req, res) => {
   try {
     const statData = await fetchWrapper(iex.keyStats, symbol);
     const { dividendYield, ttmEPS, peRatio } = statData;
-    res.json({ dividendYield, earningsPerShare: ttmEPS, peRatio });
+    res.json({ dividendYield: dividendYield?.toFixed(4) || null, earningsPerShare: ttmEPS.toFixed(2), peRatio: peRatio.toFixed(2) });
   } catch (e) {
     res.sendStatus(e.response.status);
   }
@@ -132,15 +132,16 @@ app.get("/api/history/:symbol", async (req, res) => {
   }
 
   try {
-    const historyData = await fetchWrapper(iex.history, symbol, { period });
+    const historyData = await fetchWrapper(iex.history, symbol, { period, chartCloseOnly: true });
     const returnData = historyData.map((day) => {
+      let price = day.average?.toFixed(2) || day.close?.toFixed(2) || null;
       return {
         date: day.date,
         minute: day.minute,
 
         // if the data is minute to minute, go by average price for that period
         // on a day by day frequency, go by the closing price
-        price: day.average || day.close,
+        price: price,
       };
     });
     res.json(returnData);

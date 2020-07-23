@@ -15,7 +15,6 @@ import "chartjs-plugin-annotation";
 import { layout } from "styled-system";
 
 export const VisualDisplay = (props) => {
-  console.log(props.height);
   const dispatch = useDispatch();
 
   const chartRef = useRef();
@@ -124,6 +123,13 @@ export const VisualDisplay = (props) => {
       yAxes: [
         {
           position: "right",
+          ticks: {
+            fontWeight: "lighter",
+            fontFamily: "Lato", 
+            callback: function(label) {
+              return label.toFixed(2);
+          }
+          },
           gridLines: {
             display: true,
             color: "rgba(29,77,104, .3)",
@@ -159,6 +165,7 @@ export const VisualDisplay = (props) => {
       <DisplayWrapper display="flex" justifyContent="flex-end" mb="8px">
         {POSSIBLE_CHART_RANGES.map((period) => (
           <Button
+            key={period}
             variant="unstyled"
             mr="8px"
             onClick={() => handleChartRangeClick(period)}

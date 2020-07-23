@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { variant } from "styled-system";
 export const BannerButton = styled("button")(
   {
-    fontFamily: "Sans-Serif",
+    fontFamily: 'Lato',
     fontSize: "1.4rem",
     border: "none",
     borderRadius: "5px",

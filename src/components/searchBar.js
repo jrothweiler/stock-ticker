@@ -1,8 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { mdiMagnify } from "@mdi/js";
 import Icon from "@mdi/react";
 import { VALID_SEARCH_REGEXP } from "../utils/constants";
+import { DisplayWrapper } from '../components/generics/displayWrapper';
 import { Text } from "../components/generics/text";
 import { searchErrorsSelector } from "../selectors/errorsSelectors";
 
@@ -10,6 +11,7 @@ export const SearchBar = () => {
   let [currentText, setCurrentText] = useState("");
   let [showBadInputError, setShowBadInputError] = useState(false);
   let [showCompanyText, setShowCompanyText] = useState(true);
+  let [isInputFocused, setIsInputFocused] = useState(false);
   let searchError = useSelector(searchErrorsSelector);
   let companyName =
     useSelector(
@@ -32,22 +34,31 @@ export const SearchBar = () => {
       setCurrentText("");
       setShowBadInputError(false);
       dispatch({ type: "clearSearchErrors" });
+      inputRef.current.blur();
     } else {
       setShowBadInputError(true);
     }
   }
 
   function onInputFocus() {
-    setShowCompanyText(false);
+    setIsInputFocused(true);
   }
 
   function onLeaveInputFocus() {
-    setShowCompanyText(currentText === "");
+    setIsInputFocused(false);
   }
 
   function onCompanyTextClick() {
     inputRef.current.focus();
   }
+
+  useEffect(() => {
+    if (isInputFocused) {
+      setShowCompanyText(false);
+    } else if (currentText === '') {
+      setShowCompanyText(true);
+    }
+  }, [isInputFocused, currentText])
 
   return (
     <form className="searchForm" onSubmit={handleSubmit}>
@@ -76,12 +87,16 @@ export const SearchBar = () => {
         </div>
       )}
 
-      {showBadInputError && (
-        <Text variant="error">Not a valid input, try again</Text>
-      )}
-      {!showBadInputError && searchError && (
-        <Text variant="error">Error in search: {searchError}</Text>
-      )}
+      <div>
+        {showBadInputError && (
+          <Text mt="8px" variant="error">Not a valid input, searches should contain only letters</Text>
+        )}
+        {!showBadInputError && searchError && (
+          <Text mt="8px" variant="error">Error in search: {searchError}</Text>
+        )}
+      </div>
+
+      
     </form>
   );
 };

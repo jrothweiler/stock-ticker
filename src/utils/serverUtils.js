@@ -1,3 +1,6 @@
+import { formatErrorMessage } from './errorUtils';
+
+
 // Helper functions for fetching financial data from the proxy server
 // See server/index.js for server code.
 
@@ -14,7 +17,7 @@ export const proxyFetch = async (symbol, endpoint, queryParams) => {
     if (data.ok) {
       return data.json();
     } else {
-      throw Error(data.statusText);
+      throw Error(formatErrorMessage(symbol, data));
     }
   });
 };
