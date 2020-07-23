@@ -15,14 +15,14 @@ export const StockTrader = () => {
   //Call necessary selectors for display data
   const dispatch = useDispatch();
   return (
-    <DisplayWrapper ml="5%" mr="5%" mt="2.5%" mb="2.5%" max-width="100%">
+    <DisplayWrapper ml="5%" mr="5%" mt="2.5%" mb="5%" max-width="100%">
       <DisplayWrapper variant="flexRow" mb="2.0rem">
         <Header />
       </DisplayWrapper>
       <DisplayWrapper
         mb="3.0rem"
         variant="flexRow"
-        paddingBottom="0.8rem"
+        paddingBottom="0.7rem"
         borderBottom="0.2rem solid #6491d3"
         width="100%"
       >
@@ -36,7 +36,7 @@ export const StockTrader = () => {
         </DisplayWrapper>
         <DisplayWrapper width="27.5%" variant="flexColumn">
           <LatestNews height="50%" />
-          <CompanyOverview height="40%" />
+          <CompanyOverview height="35%" />
         </DisplayWrapper>
       </DisplayWrapper>
     </DisplayWrapper>

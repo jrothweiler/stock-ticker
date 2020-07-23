@@ -7,7 +7,7 @@ export const BannerButton = styled("button")(
     border: "none",
     borderRadius: "5px",
     padding: "7px 10px",
-    background: "#011e48",
+    background: "inherit",
     color: "white",
     paddingRight: "2rem",
     paddingLeft: "2rem",
@@ -16,7 +16,7 @@ export const BannerButton = styled("button")(
   variant({
     variants: {
       selected: {
-        background: "#0041a1",
+        background: "#0068ff",
       },
     },
   })

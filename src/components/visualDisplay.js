@@ -12,6 +12,7 @@ import { POSSIBLE_CHART_RANGES } from "../utils/constants";
 import { Text } from "../components/generics/text";
 import { Button } from "../components/generics/button";
 import "chartjs-plugin-annotation";
+import { layout } from "styled-system";
 
 export const VisualDisplay = (props) => {
   const dispatch = useDispatch();
@@ -108,6 +109,8 @@ export const VisualDisplay = (props) => {
             format: "YYYY-MM-DD HH:mm",
           },
           ticks: {
+            fontWeight: "lighter",
+            fontFamily: "Lato", 
             autoSkip: true,
             maxTicksLimit: 10,
           },
