@@ -8,6 +8,9 @@ const app = express();
 
 const delay = (t) => new Promise((resolve) => setTimeout(resolve, t));
 
+// does a "safe" toFixed operation on a number that won't break, returning null if the operation fails
+const safeToFixed = (num, decimals) => num?.toFixed(decimals) || null;
+
 // Given an IEX fetch function (i.e. quote, keyStats, etc.), provides a wrapper that
 // handles 429 rate limiting errors.
 async function fetchWrapper(...args) {
@@ -53,15 +56,15 @@ async function getQuoteData(symbol) {
     avgTotalVolume,
   } = quoteData;
   return {
-    previousClose: previousClose.toFixed(2),
-    week52High: week52High.toFixed(2),
-    week52Low: week52Low.toFixed(2),
-    high: high.toFixed(2),
-    low: low.toFixed(2),
-    latestPrice: latestPrice.toFixed(2),
+    previousClose: safeToFixed(previousClose, 2),
+    week52High: safeToFixed(week52High, 2),
+    week52Low: safeToFixed(week52Low, 2),
+    high: safeToFixed(high, 2),
+    low: safeToFixed(low, 2),
+    latestPrice: safeToFixed(latestPrice, 2),
     marketCap,
     latestVolume,
-    open: open.toFixed(2),
+    open: safeToFixed(open, 2),
     avgTotalVolume,
   };
 }
@@ -89,7 +92,7 @@ app.get("/api/stats/:symbol", async (req, res) => {
   try {
     const statData = await fetchWrapper(iex.keyStats, symbol);
     const { dividendYield, ttmEPS, peRatio } = statData;
-    res.json({ dividendYield: dividendYield?.toFixed(4) || null, earningsPerShare: ttmEPS.toFixed(2), peRatio: peRatio.toFixed(2) });
+    res.json({ dividendYield: safeToFixed(dividendYield, 4), earningsPerShare: safeToFixed(ttmEPS, 2), peRatio: safeToFixed(peRatio, 2) });
   } catch (e) {
     res.sendStatus(e.response.status);
   }

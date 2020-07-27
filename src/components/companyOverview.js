@@ -21,7 +21,7 @@ export const CompanyOverview = (props) => {
           </Text>
         )}
         {companyInfo && (
-          <a href={`http://${companyInfo.website}`} target="_blank">
+          <a href={`${companyInfo.website}`} target="_blank">
             <Text className="companyLink" mt="0.5rem" variant="secondary" fontStyle="italic">
               {companyInfo.website}
             </Text>
