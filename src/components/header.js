@@ -10,9 +10,7 @@ export const Header = () => {
 
   return (
     <DisplayWrapper width="100%" variant="flexRow">
-      <DisplayWrapper>
-        <img src={logo} height="65%"></img>
-      </DisplayWrapper>
+      <img src={logo} height="65%"></img>
       <DisplayWrapper>
         <BannerButton variant="selected">QUOTES</BannerButton>
         <BannerButton>MARKETS</BannerButton>
