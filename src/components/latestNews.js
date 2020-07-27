@@ -13,7 +13,7 @@ export const LatestNews = (props) => {
 
   return (
     <DisplayWrapper height={props.height}>
-      <TitleHeader variant="blueUnderline">LATEST NEWS</TitleHeader>
+      <TitleHeader>LATEST NEWS</TitleHeader>
       <DisplayWrapper overflow="auto" height="100%">
         {newsInfo &&
           newsInfo.map((article) => (

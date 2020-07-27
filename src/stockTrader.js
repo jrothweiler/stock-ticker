@@ -7,8 +7,8 @@ import { SearchBar } from "./components/searchBar";
 import { Header } from "./components/header";
 import { VisualDisplay } from "./components/visualDisplay";
 import { PriceDisplay } from "./components/priceDisplay";
-import { Text } from "./components/generics/text";
-import { TitleHeader } from "./components/generics/titleHeader";
+import { TopPeers} from "./components/topPeers";
+import { Footer } from "./components/footer"
 import { useDispatch } from "react-redux";
 
 export const StockTrader = () => {
@@ -30,15 +30,17 @@ export const StockTrader = () => {
         <PriceDisplay />
       </DisplayWrapper>
       <DisplayWrapper variant="flexRow">
-        <DisplayWrapper width="65%" variant="flexColumn">
+        <DisplayWrapper width="70%" variant="flexColumn">
           <VisualDisplay height="55%" />
           <KeyStats height="35%" />
         </DisplayWrapper>
-        <DisplayWrapper width="27.5%" variant="flexColumn">
-          <LatestNews height="50%" />
-          <CompanyOverview height="35%" />
+        <DisplayWrapper width="25%" variant="flexColumn">
+          <LatestNews height="40%" />
+          <CompanyOverview height="30%" />
+          <TopPeers height="15%" />
         </DisplayWrapper>
       </DisplayWrapper>
+
     </DisplayWrapper>
   );
 };

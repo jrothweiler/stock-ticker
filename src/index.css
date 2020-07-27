@@ -42,6 +42,11 @@ body {
   color: #e0be86;
 }
 
+.topPeer:hover {
+  color: #e0be86;
+  cursor: pointer;
+}
+
 a {
   text-decoration: none;
 }

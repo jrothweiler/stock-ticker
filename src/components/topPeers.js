@@ -1,29 +1,32 @@
 import React from "react";
-import { newsSelector } from "../selectors/newsSelector";
-import { companySelector } from "../selectors/companySelector";
-import { statsSelector } from "../selectors/statsSelector";
-import { quoteSelector } from "../selectors/quoteSelector";
+import { peersSelector } from "../selectors/peersSelector";
 import { DisplayWrapper } from "./generics/displayWrapper";
 import { TitleHeader } from "./generics/titleHeader";
 import { Text } from "./generics/text";
-import TimeAgo from "timeago-react";
-import * as timeago from "timeago.js";
-import en from "timeago.js/lib/lang/vi";
 import { useDispatch, useSelector } from "react-redux";
 
-timeago.register("en", en);
+export const TopPeers = (props) => {
+    const dispatch = useDispatch();
+    const peersInfo = useSelector(peersSelector);
 
-export const TopPeers = () => {
-  //Call necessary selectors for display data
-  const dispatch = useDispatch();
-  const newsInfo = useSelector(newsSelector);
+  const handleSearch = (peer) => {
+    dispatch({ type: "searchSymbol", payload: peer });
+}
 
-  const companyInfo = useSelector(companySelector);
-  const quoteInfo = useSelector(quoteSelector);
-  const statInfo = useSelector(statsSelector);
   return (
-    <DisplayWrapper width="25%" mr="auto" ml="auto">
-      <TitleHeader>Top Peers</TitleHeader>
+    <DisplayWrapper height={props.height}>
+      <TitleHeader>TOP PEERS</TitleHeader>
+      {peersInfo &&
+        peersInfo.map((peer) => (
+              <Text key={peer} className="topPeer" mr="1.0rem" display="inline-block" variant="secondary" onClick={() => handleSearch(peer)}>
+                {peer}
+              </Text>
+        ))
+      }
+      {/* WORK is added here as a valid default stock for demonstration purposes */}
+      <Text className="topPeer" display="inline-block" variant="secondary" onClick={() => handleSearch("WORK")}>
+      WORK
+    </Text>
     </DisplayWrapper>
   );
 };

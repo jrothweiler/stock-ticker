@@ -5,12 +5,12 @@ import { mdiArrowDown, mdiArrowUp } from "@mdi/js";
 import Icon from "@mdi/react";
 import { useDispatch, useSelector } from "react-redux";
 
-export const PriceDisplay = () => {
+export const PriceDisplay = (props) => {
   //Call necessary selectors for display data
   const dispatch = useDispatch();
   const quote = useSelector(quoteSelector);
   return (
-    <div>
+    <div display={props.display}>
       {quote && (
         <div>
           <Text variant="primary" fontWeight="lighter" size="large" display="inline-block">
