@@ -13,6 +13,9 @@ import {
 import { INITIAL_STOCK } from "./utils/constants";
 import socketIOClient from "socket.io-client";
 import { StockTrader } from "./stockTrader";
+import useMedia from 'use-media';
+
+
 //Triggers dispatches (May need to be broken down into multiple Middlewares chained together)
 const producerMiddleWare = (rawStore) => {
   const socket = socketIOClient("http://localhost:3001");
@@ -83,13 +86,17 @@ const dataStore = producerMiddleWare(
 );
 
 function App() {
+  const isDesktopSize = useMedia({ minWidth: 750 });
+  const isTabletSize = useMedia({ minWidth: 588});
+  const layout = isDesktopSize ? 'desktop' : isTabletSize ? 'tablet' : 'mobile' 
+  
   useEffect(() => {
     dataStore.dispatch({ type: "searchSymbol", payload: INITIAL_STOCK });
   }, []);
 
   return (
     <Provider store={dataStore}>
-      <StockTrader />
+      <StockTrader layout={layout} />
     </Provider>
   );
 }
