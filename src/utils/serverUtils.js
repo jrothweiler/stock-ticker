@@ -42,6 +42,11 @@ export const newsFetch = (symbol) => {
   return proxyFetch(symbol, "news");
 };
 
+// Fetches top peers for the selected stock
+export const peersFetch = (symbol) => {
+  return proxyFetch(symbol, "peers");
+};
+
 // collect historical data over the given period, either "1D", "5D", "1M", "1Y", "5Y", or "MAX"
 export const historyFetch = (symbol, period) => {
   return proxyFetch(symbol, `history`, { period });

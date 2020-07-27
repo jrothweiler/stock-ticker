@@ -9,6 +9,7 @@ import { VisualDisplay } from "./components/visualDisplay";
 import { PriceDisplay } from "./components/priceDisplay";
 import { selectLayout } from "./selectors/layoutSelectors";
 import { useSelector } from "react-redux";
+import { TopPeers} from "./components/topPeers";
 
 export const StockTrader = () => {
   const layout = useSelector(selectLayout);
@@ -17,13 +18,14 @@ export const StockTrader = () => {
 
   const bodyLayout = layout === "desktop" ? (
     <DisplayWrapper variant="flexRow">
-      <DisplayWrapper width="65%" variant="flexColumn">
+      <DisplayWrapper width="70%" variant="flexColumn">
         <VisualDisplay height="55%" />
         <KeyStats height="35%" />
       </DisplayWrapper>
-      <DisplayWrapper width="27.5%" variant="flexColumn">
-        <LatestNews height="50%" />
-        <CompanyOverview height="35%" />
+      <DisplayWrapper width="25%" variant="flexColumn">
+        <LatestNews height="40%" />
+        <CompanyOverview height="30%" />
+        <TopPeers height="15%" />
       </DisplayWrapper>
     </DisplayWrapper>
   ) : (
@@ -39,6 +41,9 @@ export const StockTrader = () => {
       </DisplayWrapper>
       <DisplayWrapper mb="32px">
         <CompanyOverview />
+      </DisplayWrapper>
+      <DisplayWrapper mb="32px">
+        <TopPeers />
       </DisplayWrapper>
     </DisplayWrapper>
   );

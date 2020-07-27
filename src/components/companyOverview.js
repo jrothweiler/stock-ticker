@@ -13,7 +13,7 @@ export const CompanyOverview = (props) => {
   const ticker = useSelector(tickerSelector);
   return (
     <DisplayWrapper height={props.height}>
-      <TitleHeader variant="blueUnderline">COMPANY OVERVIEW</TitleHeader>
+      <TitleHeader>COMPANY OVERVIEW</TitleHeader>
       <Text height="100%" overflow="auto">
         {companyInfo && (
           <Text variant="primary" fontSize="1.8rem">
@@ -21,7 +21,7 @@ export const CompanyOverview = (props) => {
           </Text>
         )}
         {companyInfo && (
-          <a href={`http://${companyInfo.website}`} target="_blank">
+          <a href={`${companyInfo.website}`} target="_blank">
             <Text className="companyLink" mt="0.5rem" variant="secondary" fontStyle="italic">
               {companyInfo.website}
             </Text>
