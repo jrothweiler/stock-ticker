@@ -25,12 +25,12 @@ const handleSearch = (peer) => {
       <TitleHeader>TOP PEERS</TitleHeader>
       {peersInfo &&
         peersInfo.map((peer) => (
-              <Text key={peer} className="topPeer" display="inline-block" variant="secondary" onClick={handleSearch(peer)}>
+              <Text key={peer} className="topPeer" display="inline-block" variant="secondary" onClick={() => handleSearch(peer)}>
                 {peer}&nbsp;&nbsp;&nbsp;
               </Text>
         ))
       }
-      <Text className="topPeer" display="inline-block" variant="secondary">
+      <Text className="topPeer" display="inline-block" variant="secondary" onClick={() => handleSearch("WORK")}>
       WORK&nbsp;&nbsp;&nbsp;
     </Text>
     </DisplayWrapper>
