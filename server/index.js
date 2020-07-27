@@ -155,7 +155,7 @@ app.get("/api/peers/:symbol", async (req, res) => {
   console.log("app.get peers");
   const symbol = req.params.symbol;
   try {
-    const peersData = await fetchWrapper(iex.peers, symbol, 5);
+    const peersData = await fetchWrapper(iex.peers, symbol);
     res.json(peersData);
   } catch (e) {
     res.sendStatus(e.response.status);

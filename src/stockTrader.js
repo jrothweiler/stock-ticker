@@ -8,8 +8,7 @@ import { Header } from "./components/header";
 import { VisualDisplay } from "./components/visualDisplay";
 import { PriceDisplay } from "./components/priceDisplay";
 import { TopPeers} from "./components/topPeers";
-import { Text } from "./components/generics/text";
-import { TitleHeader } from "./components/generics/titleHeader";
+import { Footer } from "./components/footer"
 import { useDispatch } from "react-redux";
 
 export const StockTrader = () => {
@@ -40,6 +39,9 @@ export const StockTrader = () => {
           <CompanyOverview height="30%" />
           <TopPeers height="15%" />
         </DisplayWrapper>
+      </DisplayWrapper>
+      <DisplayWrapper variant="flexRow">
+       <Footer/>
       </DisplayWrapper>
     </DisplayWrapper>
   );

@@ -47,6 +47,10 @@ body {
   cursor: pointer;
 }
 
+.footer {
+  background-image: linear-gradient(to bottom, #00265d, #00204f);
+}
+
 a {
   text-decoration: none;
 }

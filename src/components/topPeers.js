@@ -19,10 +19,11 @@ export const TopPeers = (props) => {
       {peersInfo &&
         peersInfo.map((peer) => (
               <Text key={peer} className="topPeer" display="inline-block" variant="secondary" onClick={() => handleSearch(peer)}>
-                {peer}&nbsp;&nbsp;&nbsp;
+                {peer}&nbsp;&nbsp;&nbsp;&nbsp;
               </Text>
         ))
       }
+      {/* WORK is added here as a valid default stock for demonstration purposes */}
       <Text className="topPeer" display="inline-block" variant="secondary" onClick={() => handleSearch("WORK")}>
       WORK&nbsp;&nbsp;&nbsp;&nbsp;
     </Text>
