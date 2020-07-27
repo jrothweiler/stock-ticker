@@ -3,23 +3,16 @@ import { peersSelector } from "../selectors/peersSelector";
 import { DisplayWrapper } from "./generics/displayWrapper";
 import { TitleHeader } from "./generics/titleHeader";
 import { Text } from "./generics/text";
-import TimeAgo from "timeago-react";
-import * as timeago from "timeago.js";
-import en from "timeago.js/lib/lang/vi";
 import { useDispatch, useSelector } from "react-redux";
 
-timeago.register("en", en);
-
 export const TopPeers = (props) => {
-  let currentText = "WORK";
+    const dispatch = useDispatch();
+    const peersInfo = useSelector(peersSelector);
 
-const handleSearch = (peer) => {
-  console.log(`search ${peer}`)
-  dispatch({ type: "searchSymbol", payload: peer });
+  const handleSearch = (peer) => {
+    dispatch({ type: "searchSymbol", payload: peer });
 }
-  //Call necessary selectors for display data
-  const dispatch = useDispatch();
-  const peersInfo = useSelector(peersSelector);
+
   return (
     <DisplayWrapper height={props.height}>
       <TitleHeader>TOP PEERS</TitleHeader>
@@ -31,7 +24,7 @@ const handleSearch = (peer) => {
         ))
       }
       <Text className="topPeer" display="inline-block" variant="secondary" onClick={() => handleSearch("WORK")}>
-      WORK&nbsp;&nbsp;&nbsp;
+      WORK&nbsp;&nbsp;&nbsp;&nbsp;
     </Text>
     </DisplayWrapper>
   );
