@@ -18,14 +18,14 @@ export const TopPeers = (props) => {
       <TitleHeader>TOP PEERS</TitleHeader>
       {peersInfo &&
         peersInfo.map((peer) => (
-              <Text key={peer} className="topPeer" display="inline-block" variant="secondary" onClick={() => handleSearch(peer)}>
-                {peer}&nbsp;&nbsp;&nbsp;&nbsp;
+              <Text key={peer} className="topPeer" mr="1.0rem" display="inline-block" variant="secondary" onClick={() => handleSearch(peer)}>
+                {peer}
               </Text>
         ))
       }
       {/* WORK is added here as a valid default stock for demonstration purposes */}
       <Text className="topPeer" display="inline-block" variant="secondary" onClick={() => handleSearch("WORK")}>
-      WORK&nbsp;&nbsp;&nbsp;&nbsp;
+      WORK
     </Text>
     </DisplayWrapper>
   );
