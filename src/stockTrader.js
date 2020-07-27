@@ -12,8 +12,6 @@ import { TitleHeader } from "./components/generics/titleHeader";
 import { useDispatch } from "react-redux";
 
 export const StockTrader = () => {
-  //Call necessary selectors for display data
-  const dispatch = useDispatch();
   return (
     <DisplayWrapper ml="5%" mr="5%" mt="2.5%" mb="5%" max-width="100%">
       <DisplayWrapper variant="flexRow" mb="2.0rem">

@@ -3,6 +3,7 @@ import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import stockReducer from "./reducers/stockReducer";
 import errorReducer from "./reducers/errorReducer";
+import layoutReducer from './reducers/layoutReducer';
 import {
   quoteFetch,
   companyFetch,
@@ -80,6 +81,7 @@ const dataStore = producerMiddleWare(
     combineReducers({
       stocks: stockReducer,
       errors: errorReducer,
+      layout: layoutReducer
     }),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
@@ -87,8 +89,11 @@ const dataStore = producerMiddleWare(
 
 function App() {
   const isDesktopSize = useMedia({ minWidth: 750 });
-  const isTabletSize = useMedia({ minWidth: 588});
-  const layout = isDesktopSize ? 'desktop' : isTabletSize ? 'tablet' : 'mobile' 
+  const isTabletSize = useMedia({ minWidth: 588 });
+
+  useEffect(() => {
+    dataStore.dispatch({ type: 'windowSizeChange', payload: { isDesktopSize, isTabletSize } })
+  }, [isDesktopSize, isTabletSize])
   
   useEffect(() => {
     dataStore.dispatch({ type: "searchSymbol", payload: INITIAL_STOCK });
@@ -96,7 +101,7 @@ function App() {
 
   return (
     <Provider store={dataStore}>
-      <StockTrader layout={layout} />
+      <StockTrader />
     </Provider>
   );
 }
