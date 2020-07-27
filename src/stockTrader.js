@@ -40,9 +40,7 @@ export const StockTrader = () => {
           <TopPeers height="15%" />
         </DisplayWrapper>
       </DisplayWrapper>
-      <DisplayWrapper variant="flexRow">
-       <Footer/>
-      </DisplayWrapper>
+
     </DisplayWrapper>
   );
 };
