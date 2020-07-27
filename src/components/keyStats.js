@@ -14,7 +14,7 @@ export const KeyStats = (props) => {
   const quote = useSelector(quoteSelector);
   return (
     <DisplayWrapper height={props.height}>
-      <TitleHeader variant="blueUnderline">KEY STATS</TitleHeader>
+      <TitleHeader>KEY STATS</TitleHeader>
       <DisplayWrapper display="inline-block" width="46%" mr="4%">
         {quote && (
           <StatWrapper>

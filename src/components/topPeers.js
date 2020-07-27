@@ -1,8 +1,5 @@
 import React from "react";
-import { newsSelector } from "../selectors/newsSelector";
-import { companySelector } from "../selectors/companySelector";
-import { statsSelector } from "../selectors/statsSelector";
-import { quoteSelector } from "../selectors/quoteSelector";
+import { peersSelector } from "../selectors/peersSelector";
 import { DisplayWrapper } from "./generics/displayWrapper";
 import { TitleHeader } from "./generics/titleHeader";
 import { Text } from "./generics/text";
@@ -13,17 +10,29 @@ import { useDispatch, useSelector } from "react-redux";
 
 timeago.register("en", en);
 
-export const TopPeers = () => {
+export const TopPeers = (props) => {
+  let currentText = "WORK";
+
+const handleSearch = (peer="WORK") => {
+  console.log(`search ${peer}`)
+  dispatch({ type: "searchSymbol", payload: peer });
+}
   //Call necessary selectors for display data
   const dispatch = useDispatch();
-  const newsInfo = useSelector(newsSelector);
-
-  const companyInfo = useSelector(companySelector);
-  const quoteInfo = useSelector(quoteSelector);
-  const statInfo = useSelector(statsSelector);
+  const peersInfo = useSelector(peersSelector);
   return (
-    <DisplayWrapper width="25%" mr="auto" ml="auto">
-      <TitleHeader>Top Peers</TitleHeader>
+    <DisplayWrapper height={props.height}>
+      <TitleHeader>TOP PEERS</TitleHeader>
+      {peersInfo &&
+        peersInfo.map((peer) => (
+              <Text key={peer} className="topPeer" display="inline-block" variant="secondary" onClick={handleSearch}>
+                {peer}&nbsp;&nbsp;&nbsp;
+              </Text>
+        ))
+      }
+      <Text className="topPeer" display="inline-block" variant="secondary">
+      WORK&nbsp;&nbsp;&nbsp;
+    </Text>
     </DisplayWrapper>
   );
 };

@@ -9,6 +9,7 @@ const initialState = {
     companyInfo: null,
     statInfo: null,
     historyInfo: null,
+    peersInfo: null
   },
 };
 

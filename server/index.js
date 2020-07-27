@@ -66,6 +66,7 @@ async function getQuoteData(symbol) {
   };
 }
 
+
 //iex.marketSymbols().then((data) => console.log(data));
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -145,6 +146,17 @@ app.get("/api/history/:symbol", async (req, res) => {
       };
     });
     res.json(returnData);
+  } catch (e) {
+    res.sendStatus(e.response.status);
+  }
+});
+
+app.get("/api/peers/:symbol", async (req, res) => {
+  console.log("app.get peers");
+  const symbol = req.params.symbol;
+  try {
+    const peersData = await fetchWrapper(iex.peers, symbol, 5);
+    res.json(peersData);
   } catch (e) {
     res.sendStatus(e.response.status);
   }
