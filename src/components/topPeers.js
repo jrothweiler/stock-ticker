@@ -13,7 +13,7 @@ timeago.register("en", en);
 export const TopPeers = (props) => {
   let currentText = "WORK";
 
-const handleSearch = (peer="WORK") => {
+const handleSearch = (peer) => {
   console.log(`search ${peer}`)
   dispatch({ type: "searchSymbol", payload: peer });
 }
@@ -25,7 +25,7 @@ const handleSearch = (peer="WORK") => {
       <TitleHeader>TOP PEERS</TitleHeader>
       {peersInfo &&
         peersInfo.map((peer) => (
-              <Text key={peer} className="topPeer" display="inline-block" variant="secondary" onClick={handleSearch}>
+              <Text key={peer} className="topPeer" display="inline-block" variant="secondary" onClick={handleSearch(peer)}>
                 {peer}&nbsp;&nbsp;&nbsp;
               </Text>
         ))
