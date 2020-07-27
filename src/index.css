@@ -51,6 +51,10 @@ a {
   text-decoration: none;
 }
 
+.footer {
+  background-image: linear-gradient(to bottom, #00265d, #00204f);
+}
+
 .searchIcon {
   transform: translateY(-10%);
 }
