@@ -30,9 +30,14 @@ export const StockTrader = () => {
         <PriceDisplay />
       </DisplayWrapper>
       <DisplayWrapper variant="flexColumn">
-        <DisplayWrapper height="55%" variant="flexRow">
-          <VisualDisplay />
-          <LatestNews />
+        <DisplayWrapper height="50%" variant="flexRow">
+          <DisplayWrapper width={["100%", null, "55%"]}>
+            <VisualDisplay />
+          </DisplayWrapper>
+          <DisplayWrapper width={["100%", null, "40%"]}>
+            <LatestNews />
+          </DisplayWrapper>
+          
         </DisplayWrapper>
         <DisplayWrapper height="40%" variant="flexRow">
           <DisplayWrapper width={["100%", null, "55%"]}>
