@@ -81,7 +81,7 @@ export const SearchBar = () => {
           <Text variant="primary" fontWeight="lighter" size="large" display="inline-block">
             {companyName}
           </Text>{" "}
-          <Text variant="secondary" fontWeight="lighter" size="large" display="inline-block">
+          <Text display={["none", "none", "inline-block"]} variant="secondary" fontWeight="lighter" size="large" >
             {symbolText}
           </Text>
         </div>

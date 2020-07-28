@@ -27,7 +27,7 @@ export const StockTrader = () => {
         width="100%"
       >
         <SearchBar />
-        <PriceDisplay />
+        <PriceDisplay size={["mediumLarge", "large", "large"]} />
       </DisplayWrapper>
       <DisplayWrapper variant="flexColumn">
         <DisplayWrapper height="50%" variant="flexRow" >
