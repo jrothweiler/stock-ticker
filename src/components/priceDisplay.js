@@ -17,7 +17,7 @@ export const PriceDisplay = (props) => {
             <sup>
               <div className="dollarSign">$</div>
             </sup>
-            {quote.latestPrice.toLocaleString("en")} &nbsp;
+            {props.data ? props.data.latestPricePrice.toLocaleString("en") : quote.latestPrice.toLocaleString("en")} &nbsp;
           </Text>
           <sup>
             <Icon

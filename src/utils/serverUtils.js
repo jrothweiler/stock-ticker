@@ -49,7 +49,7 @@ export const peersFetch = (symbol) => {
 
 // Fetches search results for selected stock search
 export const searchFetch = (symbol) => {
-  return proxyFetch(symbol, "search");
+  return proxyFetch(symbol, "peers");
 };
 
 

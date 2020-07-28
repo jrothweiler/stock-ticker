@@ -162,11 +162,11 @@ app.get("/api/peers/:symbol", async (req, res) => {
   }
 });
 
-app.get("/api/search/:symbol", async (req, res) => {
+app.get("/api/quote/:symbol", async (req, res) => {
   console.log("app.get search");
   const symbol = req.params.symbol;
   try {
-    const searchData = await fetchWrapper(iex.search, symbol);
+    const searchData = await fetchWrapper(iex.peers, symbol);
     res.json(searchData);
     console.log(searchData);
   } catch (e) {
