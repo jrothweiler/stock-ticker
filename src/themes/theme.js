@@ -1,3 +1,3 @@
 export default {
-    breakpoints: ["588px", "750px"]
+    breakpoints: ["750px", "1099px"]
 }
