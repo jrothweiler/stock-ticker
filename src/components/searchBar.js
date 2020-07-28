@@ -7,7 +7,7 @@ import { DisplayWrapper } from '../components/generics/displayWrapper';
 import { Text } from "../components/generics/text";
 import { searchErrorsSelector } from "../selectors/errorsSelectors";
 
-export const SearchBar = () => {
+export const SearchBar = (props) => {
   let [currentText, setCurrentText] = useState("");
   let [showBadInputError, setShowBadInputError] = useState(false);
   let [showCompanyText, setShowCompanyText] = useState(true);
@@ -61,7 +61,8 @@ export const SearchBar = () => {
   }, [isInputFocused, currentText])
 
   return (
-    <form className="searchForm" onSubmit={handleSubmit}>
+    <DisplayWrapper {...props}>
+      <form className="searchForm" onSubmit={handleSubmit}>
       <Icon
         className="searchIcon"
         path={mdiMagnify}
@@ -98,5 +99,7 @@ export const SearchBar = () => {
 
       
     </form>
+    </DisplayWrapper>
+    
   );
 };

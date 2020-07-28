@@ -21,12 +21,12 @@ export const StockTrader = () => {
       </DisplayWrapper>
       <DisplayWrapper
         mb="3.0rem"
-        variant="flexRow"
+        variant={["flexColumn", "flexRow", "flexRow"]}
         paddingBottom="0.7rem"
         borderBottom="0.2rem solid #6491d3"
         width="100%"
       >
-        <SearchBar />
+        <SearchBar width={["100%", "30%", "50%"]} />
         <PriceDisplay size={["mediumLarge", "large", "large"]} />
       </DisplayWrapper>
       <DisplayWrapper variant="flexColumn">
