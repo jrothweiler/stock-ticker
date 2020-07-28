@@ -13,7 +13,7 @@ export const KeyStats = (props) => {
   const stats = useSelector(statsSelector);
   const quote = useSelector(quoteSelector);
   return (
-    <DisplayWrapper height={props.height}>
+    <DisplayWrapper {...props} >
       <TitleHeader>KEY STATS</TitleHeader>
       <DisplayWrapper variant="flexRow">
         <DisplayWrapper width={["100%", "46%"]}>

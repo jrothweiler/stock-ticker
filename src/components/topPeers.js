@@ -14,7 +14,7 @@ export const TopPeers = (props) => {
 }
 
   return (
-    <DisplayWrapper height={props.height}>
+    <DisplayWrapper {...props}>
       <TitleHeader>TOP PEERS</TitleHeader>
       {peersInfo &&
         peersInfo.map((peer) => (
