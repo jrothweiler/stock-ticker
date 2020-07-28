@@ -5,12 +5,10 @@ import { BannerButton } from "./generics/bannerButton";
 import { useDispatch } from "react-redux";
 
 export const Header = () => {
-  //Call necessary selectors for display data
-  const dispatch = useDispatch();
 
   return (
     <DisplayWrapper width="100%" variant="flexRow">
-      <DisplayWrapper>
+      <DisplayWrapper height="50px" width="155px">
         <img src={logo} height="65%"></img>
       </DisplayWrapper>
       <DisplayWrapper>
