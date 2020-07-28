@@ -54,6 +54,26 @@ const producerMiddleWare = (rawStore) => {
           });
         break;
       }
+      case "searchIndexes": {
+        let indexes = action.payload;
+        for (let i=0; i < indexes.length; i++){
+            quoteFetch(indexes[i])
+            .then((data) => {
+              rawStore.dispatch({
+                type: "newIndexData",
+                payload: {
+                  data
+                  },
+                });
+              socket.emit("newSymbol", indexes[i]);
+            })
+            .catch((e) => {
+              rawStore.dispatch({ type: "searchError", payload: e.message });
+            });
+        }
+        break;
+      }
+
       case "fetchHistory": {
         let { symbol, period } = action.payload;
         historyFetch(symbol, period).then((data) => {
@@ -88,6 +108,7 @@ const dataStore = producerMiddleWare(
 function App() {
   useEffect(() => {
     dataStore.dispatch({ type: "searchSymbol", payload: INITIAL_STOCK });
+    dataStore.dispatch({type: "searchIndexes", payload: ["NDAQ"] });
   }, []);
 
   return (

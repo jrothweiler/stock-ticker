@@ -11,6 +11,11 @@ const initialState = {
     historyInfo: null,
     peersInfo: null
   },
+  indexes: {
+    index1: null,
+    index2: null,
+    index3: null
+  }
 };
 
 export default (state = initialState, action) => {
@@ -30,6 +35,15 @@ export default (state = initialState, action) => {
         ticker: action.payload.symbol,
         tickerInfo: { 
           ...state.tickerInfo,
+          ...action.payload.data
+        },
+      };
+    }
+    case "newIndexData": {
+      return {
+        ...state,
+        indexes: { 
+          ...state.indexes.index1,
           ...action.payload.data
         },
       };

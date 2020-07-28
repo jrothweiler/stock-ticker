@@ -5,7 +5,7 @@ import { mdiArrowDown, mdiArrowUp } from "@mdi/js";
 import Icon from "@mdi/react";
 import { useDispatch, useSelector } from "react-redux";
 
-export const PriceDisplay = () => {
+export const PriceDisplay = (props) => {
   //Call necessary selectors for display data
   const dispatch = useDispatch();
   const quote = useSelector(quoteSelector);
@@ -13,7 +13,7 @@ export const PriceDisplay = () => {
     <div>
       {quote && (
         <div>
-          <Text variant="primary" fontWeight="lighter" size="large" display="inline-block">
+          <Text variant="primary" fontWeight="lighter" size={props.size} display="inline-block">
             <sup>
               <div className="dollarSign">$</div>
             </sup>
@@ -38,7 +38,7 @@ export const PriceDisplay = () => {
               quote.latestPrice - quote.open >= 0 ? "gain" : "loss"
             }
             fontWeight="lighter"
-            size="large"
+            size={props.size}
             display="inline-block"
           >
             {Math.abs(quote.latestPrice - quote.open).toFixed(2)}
@@ -47,7 +47,7 @@ export const PriceDisplay = () => {
             variant={
               quote.latestPrice - quote.open >= 0 ? "gain" : "loss"
             }
-            size="large"
+            size={props.size}
             display="inline-block"
             fontWeight="lighter"
             mr="0.5rem"
@@ -60,7 +60,7 @@ export const PriceDisplay = () => {
             variant={
               quote.latestPrice - quote.open >= 0 ? "gain" : "loss"
             }
-            size="large"
+            size={props.size}
             display="inline-block"
             fontWeight="lighter"
           >
