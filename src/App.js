@@ -9,7 +9,8 @@ import {
   newsFetch,
   statsFetch,
   historyFetch,
-  peersFetch
+  peersFetch,
+  searchFetch
 } from "./utils/serverUtils";
 import { INITIAL_STOCK } from "./utils/constants";
 import socketIOClient from "socket.io-client";
@@ -30,9 +31,10 @@ const producerMiddleWare = (rawStore) => {
           newsFetch(symbol),
           statsFetch(symbol),
           peersFetch(symbol),
+          searchFetch(symbol)
         ])
           .then((dataArray) => {
-            let [quoteInfo, companyInfo, newsInfo, statInfo, peersInfo] = dataArray;
+            let [quoteInfo, companyInfo, newsInfo, statInfo, peersInfo, searchInfo] = dataArray;
             rawStore.dispatch({
               type: "newTickerData",
               payload: {
@@ -42,7 +44,8 @@ const producerMiddleWare = (rawStore) => {
                   newsInfo,
                   companyInfo,
                   statInfo,
-                  peersInfo
+                  peersInfo,
+                  searchInfo
                 },
               },
             });

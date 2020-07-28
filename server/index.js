@@ -162,6 +162,18 @@ app.get("/api/peers/:symbol", async (req, res) => {
   }
 });
 
+app.get("/api/search/:symbol", async (req, res) => {
+  console.log("app.get search");
+  const symbol = req.params.symbol;
+  try {
+    const searchData = await fetchWrapper(iex.search, symbol);
+    res.json(searchData);
+    console.log(searchData);
+  } catch (e) {
+    res.sendStatus(e.response.status);
+  }
+});
+
 io.on("connection", (socket) => {
   console.log("A client has connected");
 
