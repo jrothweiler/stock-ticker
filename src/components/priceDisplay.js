@@ -13,6 +13,14 @@ export const PriceDisplay = (props) => {
         <div>
           <Text
             variant="primary"
+            fontWeight="bold"
+            size={props.size}
+            display="inline-block"
+          >
+            {props.ticker}
+          </Text>
+          <Text
+            variant="primary"
             fontWeight="lighter"
             size={props.size}
             display="inline-block"
@@ -30,7 +38,7 @@ export const PriceDisplay = (props) => {
                   ? mdiArrowUp
                   : mdiArrowDown
               }
-              size={props.size === "medium" ? 0.75 : 1.35}
+              size={props.size === "medium" ? 0.7 : 1.35}
               color={
                 props.data.latestPrice - props.data.open >= 0
                   ? "#91e4a5"

@@ -64,7 +64,6 @@ const producerMiddleWare = (rawStore) => {
         let indexes = action.payload;
         Promise.all(indexes.map((index) => quoteFetch(index)))
           .then((dataArray) => {
-            console.log(dataArray);
             rawStore.dispatch({
               type: "newIndexData",
               payload: dataArray,
@@ -115,9 +114,13 @@ const dataStore = producerMiddleWare(
 function App() {
   useEffect(() => {
     dataStore.dispatch({ type: "searchSymbol", payload: INITIAL_STOCK });
-    /*   dataStore.dispatch({
+    /* dataStore.dispatch({
       type: "searchIndexes",
-      payload: ["MSFT", "GOOGL", "AMZN"],
+      payload: [
+        "MSFT",
+        //"GOOGL",
+        //"AMZN"
+      ],
     }); */
   }, []);
 
