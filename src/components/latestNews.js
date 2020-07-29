@@ -15,7 +15,7 @@ export const LatestNews = (props) => {
     <DisplayWrapper height={props.height}>
       <TitleHeader>LATEST NEWS</TitleHeader>
       <DisplayWrapper overflow="auto" height="100%">
-        {newsInfo &&
+        {
           newsInfo.map((article) => (
             <div key={article.headline}>
               <a href={`${article.url}`} target="_blank">

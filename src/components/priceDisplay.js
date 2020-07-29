@@ -11,70 +11,68 @@ export const PriceDisplay = (props) => {
   const quote = useSelector(quoteSelector);
   return (
     <div display={props.display}>
-      {quote && (
-        <div>
-          <Text variant="primary" fontWeight="lighter" size="large" display="inline-block">
-            <sup>
-              <div className="dollarSign">$</div>
-            </sup>
-            {quote.latestPrice.toLocaleString("en")} &nbsp;
-          </Text>
+      <div>
+        <Text variant="primary" fontWeight="lighter" size="large" display="inline-block">
           <sup>
-            <Icon
-              className="arrow"
-              path={
-                quote.latestPrice - quote.open >= 0
-                  ? mdiArrowUp
-                  : mdiArrowDown
-              }
-              size={1.35}
-              color={
-                quote.latestPrice - quote.open >= 0 ? "#91e4a5" : "#E95656"
-              }
-            />
+            <div className="dollarSign">$</div>
           </sup>
-          <Text
-            variant={
-              quote.latestPrice - quote.open >= 0 ? "gain" : "loss"
+          {quote.latestPrice.toLocaleString("en")} &nbsp;
+        </Text>
+        <sup>
+          <Icon
+            className="arrow"
+            path={
+              quote.latestPrice - quote.open >= 0
+                ? mdiArrowUp
+                : mdiArrowDown
             }
-            fontWeight="lighter"
-            size="large"
-            display="inline-block"
-          >
-            {Math.abs(quote.latestPrice - quote.open).toFixed(2)}
-          </Text>
-          <Text
-            variant={
-              quote.latestPrice - quote.open >= 0 ? "gain" : "loss"
+            size={1.35}
+            color={
+              quote.latestPrice - quote.open >= 0 ? "#91e4a5" : "#E95656"
             }
-            size="large"
-            display="inline-block"
-            fontWeight="lighter"
-            mr="0.5rem"
-            ml="0.5rem"
-            className="separator"
-          >
-            |
-          </Text>
-          <Text
-            variant={
-              quote.latestPrice - quote.open >= 0 ? "gain" : "loss"
-            }
-            size="large"
-            display="inline-block"
-            fontWeight="lighter"
-          >
-            {(
-              Math.abs(
-                (quote.latestPrice - quote.open) / quote.open
-              ) * 100
-            ).toFixed(2)}
-            <sup>
-              <div className="percentSign">%</div>
-            </sup>
-          </Text>
-        </div>
-      )}
+          />
+        </sup>
+        <Text
+          variant={
+            quote.latestPrice - quote.open >= 0 ? "gain" : "loss"
+          }
+          fontWeight="lighter"
+          size="large"
+          display="inline-block"
+        >
+          {Math.abs(quote.latestPrice - quote.open).toFixed(2)}
+        </Text>
+        <Text
+          variant={
+            quote.latestPrice - quote.open >= 0 ? "gain" : "loss"
+          }
+          size="large"
+          display="inline-block"
+          fontWeight="lighter"
+          mr="0.5rem"
+          ml="0.5rem"
+          className="separator"
+        >
+          |
+        </Text>
+        <Text
+          variant={
+            quote.latestPrice - quote.open >= 0 ? "gain" : "loss"
+          }
+          size="large"
+          display="inline-block"
+          fontWeight="lighter"
+        >
+          {(
+            Math.abs(
+              (quote.latestPrice - quote.open) / quote.open
+            ) * 100
+          ).toFixed(2)}
+          <sup>
+            <div className="percentSign">%</div>
+          </sup>
+        </Text>
+      </div>
     </div>
   );
 };
