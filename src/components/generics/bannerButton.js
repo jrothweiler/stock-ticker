@@ -3,14 +3,13 @@ import { variant } from "styled-system";
 export const BannerButton = styled("button")(
   {
     fontFamily: 'Lato',
-    fontSize: "1.4rem",
+    fontSize: "18px",
+    width: '98px',
+    height: '31px',
     border: "none",
     borderRadius: "5px",
-    padding: "7px 10px",
     background: "inherit",
     color: "white",
-    paddingRight: "2rem",
-    paddingLeft: "2rem",
     display: "inlineBlock",
   },
   variant({

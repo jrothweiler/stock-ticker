@@ -27,23 +27,27 @@ export const StockTrader = () => {
           </DisplayWrapper>
           <DisplayWrapper
             mb="3.0rem"
-            variant="flexRow"
+            variant={["flexColumn", "flexRow", "flexRow"]}
             paddingBottom="0.7rem"
             borderBottom="0.2rem solid #6491d3"
             width="100%"
           >
-            <SearchBar />
-            <PriceDisplay />
+            <SearchBar width={["100%", "30%", "50%"]} mb={["8px", "0px", "0px"]} />
+            <PriceDisplay size={["mediumLarge", "large", "large"]} />
           </DisplayWrapper>
-          <DisplayWrapper variant="flexRow">
-            <DisplayWrapper width="70%" variant="flexColumn">
-              <VisualDisplay height="55%" />
-              <KeyStats height="35%" />
+          <DisplayWrapper variant="flexColumn">
+            <DisplayWrapper height="50%" variant="flexRow" >
+              <VisualDisplay width={["100%", null, "55%"]} mb="32px"/>
+              <LatestNews width={["100%", null, "40%"]} mb="32px" />
             </DisplayWrapper>
-            <DisplayWrapper width="25%" variant="flexColumn">
-              <LatestNews height="40%" />
-              <CompanyOverview height="30%" />
-              <TopPeers height="15%" />
+            <DisplayWrapper height="40%" variant="flexRow">
+              <KeyStats width={["100%", null, "55%"]} mb="32px" />
+              
+              <DisplayWrapper width={["100%", null, "40%"]} variant="flexColumn">
+                <CompanyOverview mb="32px"/>
+                <TopPeers />
+              </DisplayWrapper>
+              
             </DisplayWrapper>
           </DisplayWrapper>
         </>

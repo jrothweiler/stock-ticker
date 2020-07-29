@@ -161,7 +161,7 @@ export const VisualDisplay = (props) => {
   ];
 
   return (
-    <DisplayWrapper height={props.height}>
+    <DisplayWrapper {...props}>
       <DisplayWrapper display="flex" justifyContent="flex-end" mb="8px">
         {POSSIBLE_CHART_RANGES.map((period) => (
           <Button

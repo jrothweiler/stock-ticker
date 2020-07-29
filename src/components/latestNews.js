@@ -4,15 +4,14 @@ import { DisplayWrapper } from "./generics/displayWrapper";
 import { TitleHeader } from "./generics/titleHeader";
 import { Text } from "./generics/text";
 import * as timeago from "timeago.js";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export const LatestNews = (props) => {
   //Call necessary selectors for display data
-  const dispatch = useDispatch();
   const newsInfo = useSelector(newsSelector);
 
   return (
-    <DisplayWrapper height={props.height}>
+    <DisplayWrapper {...props} >
       <TitleHeader>LATEST NEWS</TitleHeader>
       <DisplayWrapper overflow="auto" height="100%">
         {

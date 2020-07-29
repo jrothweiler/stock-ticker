@@ -12,7 +12,7 @@ export const CompanyOverview = (props) => {
   const companyInfo = useSelector(companySelector);
   const ticker = useSelector(tickerSelector);
   return (
-    <DisplayWrapper height={props.height}>
+    <DisplayWrapper {...props}>
       <TitleHeader>COMPANY OVERVIEW</TitleHeader>
       <Text height="100%" overflow="auto">
         <Text variant="primary" fontSize="1.8rem">

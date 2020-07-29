@@ -13,6 +13,9 @@ export const Text = styled("div")(
       large: {
         fontSize: "40px",
       },
+      mediumLarge: {
+        fontSize: "30px",
+      },
       medium: {
         fontSize: "16px",
       },
