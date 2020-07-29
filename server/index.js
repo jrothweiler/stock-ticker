@@ -53,6 +53,7 @@ async function getQuoteData(symbol) {
     avgTotalVolume,
   } = quoteData;
   return {
+    symbol: quoteData.symbol,
     previousClose: previousClose.toFixed(2),
     week52High: week52High.toFixed(2),
     week52Low: week52Low.toFixed(2),
@@ -65,7 +66,6 @@ async function getQuoteData(symbol) {
     avgTotalVolume,
   };
 }
-
 
 //iex.marketSymbols().then((data) => console.log(data));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -90,7 +90,11 @@ app.get("/api/stats/:symbol", async (req, res) => {
   try {
     const statData = await fetchWrapper(iex.keyStats, symbol);
     const { dividendYield, ttmEPS, peRatio } = statData;
-    res.json({ dividendYield: dividendYield?.toFixed(4) || null, earningsPerShare: ttmEPS.toFixed(2), peRatio: peRatio.toFixed(2) });
+    res.json({
+      dividendYield: dividendYield?.toFixed(4) || null,
+      earningsPerShare: ttmEPS.toFixed(2),
+      peRatio: peRatio.toFixed(2),
+    });
   } catch (e) {
     res.sendStatus(e.response.status);
   }
@@ -133,7 +137,10 @@ app.get("/api/history/:symbol", async (req, res) => {
   }
 
   try {
-    const historyData = await fetchWrapper(iex.history, symbol, { period, chartCloseOnly: true });
+    const historyData = await fetchWrapper(iex.history, symbol, {
+      period,
+      chartCloseOnly: true,
+    });
     const returnData = historyData.map((day) => {
       let price = day.average?.toFixed(2) || day.close?.toFixed(2) || null;
       return {
@@ -172,12 +179,29 @@ io.on("connection", (socket) => {
     }, 5000);
   };
 
+  let subscribeToIndexes = (indexes) => {
+    return setInterval(async () => {
+      Promise.all(indexes.map((index) => getQuoteData(index))).then(
+        (dataArray) => {
+          socket.emit("realTimeIndexData", dataArray);
+        }
+      );
+    }, 5000);
+  };
+
   let intervalId = null;
+  let indexIntervalId = null;
 
   socket.on("newSymbol", (newSym) => {
     console.log("new symbol set:", newSym);
     clearInterval(intervalId);
     intervalId = subscribeToSymbol(newSym);
+  });
+
+  socket.on("newIndexes", (newIndexes) => {
+    console.log("new index set:", newIndexes);
+    clearInterval(indexIntervalId);
+    indexIntervalId = subscribeToIndexes(newIndexes);
   });
 
   socket.on("disconnect", () => {

@@ -7,12 +7,14 @@ import { SearchBar } from "./components/searchBar";
 import { Header } from "./components/header";
 import { VisualDisplay } from "./components/visualDisplay";
 import { PriceDisplay } from "./components/priceDisplay";
-import { TopPeers} from "./components/topPeers";
-import { Footer } from "./components/footer"
-import { useDispatch } from "react-redux";
+import { TopPeers } from "./components/topPeers";
+import { Footer } from "./components/footer";
+import { useDispatch, useSelector } from "react-redux";
+import { quoteSelector } from "./selectors/quoteSelector";
 
 export const StockTrader = () => {
   //Call necessary selectors for display data
+  const quote = useSelector(quoteSelector);
   const dispatch = useDispatch();
   return (
     <DisplayWrapper ml="5%" mr="5%" mt="2.5%" mb="5%" max-width="100%">
@@ -27,7 +29,7 @@ export const StockTrader = () => {
         width="100%"
       >
         <SearchBar />
-        <PriceDisplay size="large" />
+        <PriceDisplay data={quote} size="large" />
       </DisplayWrapper>
       <DisplayWrapper variant="flexRow">
         <DisplayWrapper width="70%" variant="flexColumn">
@@ -41,7 +43,7 @@ export const StockTrader = () => {
         </DisplayWrapper>
       </DisplayWrapper>
       <DisplayWrapper variant="flexRow">
-      <Footer />
+        <Footer />
       </DisplayWrapper>
     </DisplayWrapper>
   );

@@ -1,4 +1,4 @@
-import { INITIAL_CHART_RANGE } from '../utils/constants';
+import { INITIAL_CHART_RANGE } from "../utils/constants";
 
 const initialState = {
   ticker: null,
@@ -9,13 +9,9 @@ const initialState = {
     companyInfo: null,
     statInfo: null,
     historyInfo: null,
-    peersInfo: null
+    peersInfo: null,
   },
-  indexes: {
-    index1: null,
-    index2: null,
-    index3: null
-  }
+  indexes: [],
 };
 
 export default (state = initialState, action) => {
@@ -33,36 +29,32 @@ export default (state = initialState, action) => {
       return {
         ...state,
         ticker: action.payload.symbol,
-        tickerInfo: { 
+        tickerInfo: {
           ...state.tickerInfo,
-          ...action.payload.data
+          ...action.payload.data,
         },
       };
     }
     case "newIndexData": {
       return {
         ...state,
-        indexes: { 
-          ...state.indexes.index1,
-          ...action.payload.data
-        },
+        indexes: action.payload,
       };
     }
     case "newHistoryData": {
       return {
         ...state,
         tickerInfo: {
-          ...state.tickerInfo, 
-          historyInfo: action.payload
-          
-        }
-      }
+          ...state.tickerInfo,
+          historyInfo: action.payload,
+        },
+      };
     }
     case "newChartRange": {
       return {
-        ...state, 
-        chartRange: action.payload
-      }
+        ...state,
+        chartRange: action.payload,
+      };
     }
     default:
       return state;

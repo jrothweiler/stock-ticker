@@ -9,7 +9,7 @@ import {
   newsFetch,
   statsFetch,
   historyFetch,
-  peersFetch
+  peersFetch,
 } from "./utils/serverUtils";
 import { INITIAL_STOCK } from "./utils/constants";
 import socketIOClient from "socket.io-client";
@@ -32,7 +32,13 @@ const producerMiddleWare = (rawStore) => {
           peersFetch(symbol),
         ])
           .then((dataArray) => {
-            let [quoteInfo, companyInfo, newsInfo, statInfo, peersInfo] = dataArray;
+            let [
+              quoteInfo,
+              companyInfo,
+              newsInfo,
+              statInfo,
+              peersInfo,
+            ] = dataArray;
             rawStore.dispatch({
               type: "newTickerData",
               payload: {
@@ -42,7 +48,7 @@ const producerMiddleWare = (rawStore) => {
                   newsInfo,
                   companyInfo,
                   statInfo,
-                  peersInfo
+                  peersInfo,
                 },
               },
             });
@@ -56,21 +62,18 @@ const producerMiddleWare = (rawStore) => {
       }
       case "searchIndexes": {
         let indexes = action.payload;
-        for (let i=0; i < indexes.length; i++){
-            quoteFetch(indexes[i])
-            .then((data) => {
-              rawStore.dispatch({
-                type: "newIndexData",
-                payload: {
-                  data
-                  },
-                });
-              socket.emit("newSymbol", indexes[i]);
-            })
-            .catch((e) => {
-              rawStore.dispatch({ type: "searchError", payload: e.message });
+        Promise.all(indexes.map((index) => quoteFetch(index)))
+          .then((dataArray) => {
+            console.log(dataArray);
+            rawStore.dispatch({
+              type: "newIndexData",
+              payload: dataArray,
             });
-        }
+            socket.emit("newIndexes", indexes);
+          })
+          .catch((e) => {
+            rawStore.dispatch({ type: "searchError", payload: e.message });
+          });
         break;
       }
 
@@ -87,6 +90,10 @@ const producerMiddleWare = (rawStore) => {
 
   socket.on("realTimeQuoteData", (data) => {
     rawStore.dispatch({ type: "newQuoteData", payload: data });
+  });
+
+  socket.on("realTimeIndexData", (dataArray) => {
+    rawStore.dispatch({ type: "newIndexData", payload: dataArray });
   });
 
   return {
@@ -108,7 +115,10 @@ const dataStore = producerMiddleWare(
 function App() {
   useEffect(() => {
     dataStore.dispatch({ type: "searchSymbol", payload: INITIAL_STOCK });
-    dataStore.dispatch({type: "searchIndexes", payload: ["NDAQ"] });
+    /*   dataStore.dispatch({
+      type: "searchIndexes",
+      payload: ["MSFT", "GOOGL", "AMZN"],
+    }); */
   }, []);
 
   return (

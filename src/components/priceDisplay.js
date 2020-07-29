@@ -1,6 +1,5 @@
 import React from "react";
 import { Text } from "./generics/text";
-import { quoteSelector } from "../selectors/quoteSelector";
 import { mdiArrowDown, mdiArrowUp } from "@mdi/js";
 import Icon from "@mdi/react";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,44 +7,50 @@ import { useDispatch, useSelector } from "react-redux";
 export const PriceDisplay = (props) => {
   //Call necessary selectors for display data
   const dispatch = useDispatch();
-  const quote = useSelector(quoteSelector);
   return (
     <div>
-      {quote && (
+      {props.data && (
         <div>
-          <Text variant="primary" fontWeight="lighter" size={props.size} display="inline-block">
+          <Text
+            variant="primary"
+            fontWeight="lighter"
+            size={props.size}
+            display="inline-block"
+          >
             <sup>
               <div className="dollarSign">$</div>
             </sup>
-            {quote.latestPrice.toLocaleString("en")} &nbsp;
+            {props.data.latestPrice.toLocaleString("en")} &nbsp;
           </Text>
           <sup>
             <Icon
               className="arrow"
               path={
-                quote.latestPrice - quote.open >= 0
+                props.data.latestPrice - props.data.open >= 0
                   ? mdiArrowUp
                   : mdiArrowDown
               }
-              size={1.35}
+              size={props.size === "medium" ? 0.75 : 1.35}
               color={
-                quote.latestPrice - quote.open >= 0 ? "#91e4a5" : "#E95656"
+                props.data.latestPrice - props.data.open >= 0
+                  ? "#91e4a5"
+                  : "#E95656"
               }
             />
           </sup>
           <Text
             variant={
-              quote.latestPrice - quote.open >= 0 ? "gain" : "loss"
+              props.data.latestPrice - props.data.open >= 0 ? "gain" : "loss"
             }
             fontWeight="lighter"
             size={props.size}
             display="inline-block"
           >
-            {Math.abs(quote.latestPrice - quote.open).toFixed(2)}
+            {Math.abs(props.data.latestPrice - props.data.open).toFixed(2)}
           </Text>
           <Text
             variant={
-              quote.latestPrice - quote.open >= 0 ? "gain" : "loss"
+              props.data.latestPrice - props.data.open >= 0 ? "gain" : "loss"
             }
             size={props.size}
             display="inline-block"
@@ -58,7 +63,7 @@ export const PriceDisplay = (props) => {
           </Text>
           <Text
             variant={
-              quote.latestPrice - quote.open >= 0 ? "gain" : "loss"
+              props.data.latestPrice - props.data.open >= 0 ? "gain" : "loss"
             }
             size={props.size}
             display="inline-block"
@@ -66,7 +71,7 @@ export const PriceDisplay = (props) => {
           >
             {(
               Math.abs(
-                (quote.latestPrice - quote.open) / quote.open
+                (props.data.latestPrice - props.data.open) / props.data.open
               ) * 100
             ).toFixed(2)}
             <sup>
