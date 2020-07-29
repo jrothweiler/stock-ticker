@@ -83,10 +83,12 @@ let historyJson = [
       price: '386.15'
     }]
 
+// Mock an empty function from chartjs to get tests to run without breaking
 jest.mock('react-chartjs-2', () => ({
     Line: () => null
   }));
 
+// mock http server for integration testing
 const server = setupServer(
     rest.get('/api/quote/AAPL', (req, res, ctx) => {
         return res(ctx.json(quoteJson))
@@ -113,6 +115,6 @@ const server = setupServer(
     })
 )
 
-beforeAll(() => {
-    server.listen();
-})
+beforeAll(() => server.listen())
+afterEach(() => server.resetHandlers())
+afterAll(() => server.close())

@@ -17,8 +17,6 @@ import { layout } from "styled-system";
 export const VisualDisplay = (props) => {
   const dispatch = useDispatch();
 
-  const chartRef = useRef();
-
   const currentPrice = useSelector(currentPriceSelector);
 
   const chartRange = useSelector(chartRangeSelector);
@@ -176,7 +174,7 @@ export const VisualDisplay = (props) => {
           </Button>
         ))}
       </DisplayWrapper>
-      <Line ref={chartRef} data={data} options={options} plugins={plugins} />
+      <Line data={data} options={options} plugins={plugins} />
     </DisplayWrapper>
   );
 };
