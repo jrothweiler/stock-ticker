@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, prettyDOM, waitForElement } from '@testing-library/react'
+import { render, screen, prettyDOM, waitForElement, fireEvent } from '@testing-library/react'
 import App from '../App';
 
 
@@ -11,14 +11,35 @@ describe('Search bar component', () => {
     let app;
     let searchBar;
 
-    beforeAll(async () => {
+    beforeEach(async () => {
         let { container } = render(<App />);
         await waitForElement(() => 
             screen.getByText("Apple, Inc.")
         )
     })
 
-    test('Invalid symbol error handling', () => {
-        expect(3).toBe(3);
+    test('Clicking on the company text focuses the form', () => {
+        const companyText = screen.getByText('Apple, Inc.')
+        fireEvent.click(companyText);
+        const input = screen.getByRole('textbox');
+        expect(input === document.activeElement).toBeTruthy();
+    })
+
+    test('focusing on the form removes the company text', () => {
+        const companyText = screen.queryByText('Apple, Inc.');
+        const input = screen.queryByRole('textbox');
+        expect(companyText).toBeInTheDocument();
+        fireEvent.focus(input);
+        expect(companyText).not.toBeInTheDocument();
+    })
+
+    test('Badly formatted symbols are stopped client side', async () => {
+        const input = screen.getByRole('textbox');
+        fireEvent.change(input, { target: { value: "jklasjdf&^^^" }});
+        fireEvent.submit(input);
+        await waitForElement(() => screen.getByText('Not a valid input, searches should contain only letters'))
+        
+        // value is still in the box
+        expect(input.value).toBe('jklasjdf&^^^')
     })
 })
