@@ -18,6 +18,7 @@ export const Footer = (props) => {
       width={props.width}
       height={props.height}
     >
+      $
       <DisplayWrapper ml="1.0rem" mt="0.6rem" mb="0.5rem">
         <Text variant="primary" size="small" fontWeight="lighter">
           US MARKET
