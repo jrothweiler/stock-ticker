@@ -17,7 +17,6 @@ export const DisplayWrapper = styled("div")(
         display: "flex",
         flexDirection: "row",
         flexWrap: "wrap",
-        justifyContent: "space-between",
       },
       flexColumn: {
         display: "flex",

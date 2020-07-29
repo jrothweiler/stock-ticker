@@ -114,13 +114,9 @@ const dataStore = producerMiddleWare(
 function App() {
   useEffect(() => {
     dataStore.dispatch({ type: "searchSymbol", payload: INITIAL_STOCK });
-    /* dataStore.dispatch({
+    /*dataStore.dispatch({
       type: "searchIndexes",
-      payload: [
-        "MSFT",
-        //"GOOGL",
-        //"AMZN"
-      ],
+      payload: ["MSFT", "GOOGL", "AMZN"],
     }); */
   }, []);
 

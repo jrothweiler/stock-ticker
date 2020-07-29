@@ -18,12 +18,17 @@ export const StockTrader = () => {
   const dispatch = useDispatch();
   return (
     <DisplayWrapper ml="5%" mr="5%" mt="2.5%" mb="5%" max-width="100%">
-      <DisplayWrapper variant="flexRow" mb="2.0rem">
+      <DisplayWrapper
+        variant="flexRow"
+        justifyContent="space-between"
+        mb="2.0rem"
+      >
         <Header />
       </DisplayWrapper>
       <DisplayWrapper
         mb="3.0rem"
         variant="flexRow"
+        justifyContent="space-between"
         paddingBottom="0.7rem"
         borderBottom="0.2rem solid #6491d3"
         width="100%"
@@ -31,7 +36,7 @@ export const StockTrader = () => {
         <SearchBar />
         <PriceDisplay data={quote} size="large" />
       </DisplayWrapper>
-      <DisplayWrapper variant="flexRow">
+      <DisplayWrapper variant="flexRow" justifyContent="space-between">
         <DisplayWrapper width="70%" variant="flexColumn">
           <VisualDisplay height="55%" />
           <KeyStats height="35%" />
@@ -42,8 +47,8 @@ export const StockTrader = () => {
           <TopPeers height="15%" />
         </DisplayWrapper>
       </DisplayWrapper>
-      <DisplayWrapper variant="flexRow">
-        <Footer />
+      <DisplayWrapper mt="2.0rem" width="100%" variant="flexRow">
+        <Footer width="100%" height="5%" />
       </DisplayWrapper>
     </DisplayWrapper>
   );

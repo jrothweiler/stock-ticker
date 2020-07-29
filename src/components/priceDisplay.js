@@ -16,6 +16,7 @@ export const PriceDisplay = (props) => {
             fontWeight="bold"
             size={props.size}
             display="inline-block"
+            mr={props.size === "medium" ? "0.5rem" : "0.0rem"}
           >
             {props.ticker}
           </Text>
@@ -38,7 +39,7 @@ export const PriceDisplay = (props) => {
                   ? mdiArrowUp
                   : mdiArrowDown
               }
-              size={props.size === "medium" ? 0.7 : 1.35}
+              size={props.size === "medium" ? 0.58 : 1.35}
               color={
                 props.data.latestPrice - props.data.open >= 0
                   ? "#91e4a5"
@@ -63,8 +64,8 @@ export const PriceDisplay = (props) => {
             size={props.size}
             display="inline-block"
             fontWeight="lighter"
-            mr="0.5rem"
-            ml="0.5rem"
+            mr={props.size === "medium" ? "0.15rem" : "0.5rem"}
+            ml={props.size === "medium" ? "0.15rem" : "0.5rem"}
             className="separator"
           >
             |
@@ -76,6 +77,7 @@ export const PriceDisplay = (props) => {
             size={props.size}
             display="inline-block"
             fontWeight="lighter"
+            mr="1.5rem"
           >
             {(
               Math.abs(
