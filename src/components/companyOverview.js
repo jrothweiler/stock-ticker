@@ -15,23 +15,17 @@ export const CompanyOverview = (props) => {
     <DisplayWrapper {...props}>
       <TitleHeader>COMPANY OVERVIEW</TitleHeader>
       <Text height="100%" overflow="auto">
-        {companyInfo && (
-          <Text variant="primary" fontSize="1.8rem">
-            {companyInfo.companyName} ({ticker})
+        <Text variant="primary" fontSize="1.8rem">
+          {companyInfo.companyName} ({ticker})
+        </Text>
+        <a href={`${companyInfo.website}`} target="_blank">
+          <Text className="companyLink" mt="0.5rem" variant="secondary" fontStyle="italic">
+            {companyInfo.website}
           </Text>
-        )}
-        {companyInfo && (
-          <a href={`${companyInfo.website}`} target="_blank">
-            <Text className="companyLink" mt="0.5rem" variant="secondary" fontStyle="italic">
-              {companyInfo.website}
-            </Text>
-          </a>
-        )}
-        {companyInfo && (
-          <Text mt="0.5rem" variant="primary">
-            {companyInfo.description}
-          </Text>
-        )}
+        </a>
+        <Text mt="0.5rem" variant="primary">
+          {companyInfo.description}
+        </Text>
       </Text>
     </DisplayWrapper>
   );
