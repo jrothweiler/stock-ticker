@@ -38,7 +38,6 @@ async function getQuoteData(symbol) {
   ]);
   // some data has null entries, so filter it out before processing it
   const filteredDailyData = dailyData.filter((minute) => minute.high !== null);
-  const safeToFixed = (num, decimals) => num?.toFixed(decimals) || null;
 
   // some data has been deprecated from the quote api, so as a workaround, calculate these fields off of the current day's price data minute by minute.
   const high = Math.max(...filteredDailyData.map((minute) => minute.high));
@@ -95,9 +94,9 @@ app.get("/api/stats/:symbol", async (req, res) => {
     const statData = await fetchWrapper(iex.keyStats, symbol);
     const { dividendYield, ttmEPS, peRatio } = statData;
     res.json({
-      dividendYield: dividendYield?.toFixed(4) || null,
-      earningsPerShare: ttmEPS.toFixed(2),
-      peRatio: peRatio.toFixed(2),
+      dividendYield: safeToFixed(dividendYield, 4),
+      earningsPerShare: safeToFixed(ttmEPS, 2),
+      peRatio: safeToFixed(peRatio, 2),
     });
   } catch (e) {
     res.sendStatus(e.response.status);
@@ -146,7 +145,8 @@ app.get("/api/history/:symbol", async (req, res) => {
       chartCloseOnly: true,
     });
     const returnData = historyData.map((day) => {
-      let price = day.average?.toFixed(2) || day.close?.toFixed(2) || null;
+      let price =
+        safeToFixed(day.average, 2) || safeToFixed(day.close, 2),
       return {
         date: day.date,
         minute: day.minute,
