@@ -28,14 +28,13 @@ let statsJsonApple = {
 let companyJsonApple = {
   companyName: "Apple, Inc.",
   website: "./pal:.htc/twmoppwew",
-  description: "oVtt,i   AyA nnlc  se,ns Podoislpane",
+  description: "Apple description",
 };
 
 let newsJsonApple = [
   {
     datetime: 1663789885224,
-    headline:
-      "r rk tedyeihtkourtaeiwp gana  tnneetJg Jpg t ria oc'rhoua rsiaedsh  hm tL uut:ae! bmmt'nueosnm  wrmarrfPr",
+    headline: "Apple headline",
     source: "esenrsiBd iusnsI",
     url:
       "90:8f-7-1bpfeeof8fs2lc/41ut-c.a-0d3ori5e/te4ps.smecdx1//ncvah1c6ecdiatwi//lddc",
@@ -94,6 +93,96 @@ let historyJsonApple = [
   },
 ];
 
+// second set of data for search purposes
+
+let quoteJsonWork = {
+  symbol: "WORK",
+  previousClose: "29.30",
+  week52High: "41.98",
+  week52Low: "15.60",
+  high: "30.41",
+  low: "28.33",
+  latestPrice: "29.70",
+  marketCap: 16459214766,
+  latestVolume: 58449,
+  open: "29.10",
+  avgTotalVolume: 20338294,
+};
+
+let statsJsonWork = {
+  dividendYield: null,
+  earningsPerShare: "-1.44",
+  peRatio: "-20.23",
+};
+
+let companyJsonWork = {
+  companyName: "Slack Technologies, Inc.",
+  website: "c/thso/wlwptkwac.m.:",
+  description: "Slack description",
+};
+
+let newsJsonWork = [
+  {
+    datetime: 1613309222719,
+    headline: "Slack headline",
+    source: ".ncI",
+    url:
+      "ue799e.6accw1.os40/:x--c64/i2i7picdhld5asc/l/398b24f/7aeto2c/pt52ndm-v-r5tf8es",
+  },
+  {
+    datetime: 1605691116909,
+    headline:
+      "h   euee tUntc.o i ehaaealeabhtodh  tHiSscBeipSi T .srwettu ledngtkncr r",
+    source: "ympsoCnt aFa",
+    url:
+      "a1/sc8e3co2l31v24ne9se/1dc6p-.3--co95sd31mwri8tihlta4a7/.9uic/ce/a0x/526ap:-1t",
+  },
+  {
+    datetime: 1660809196633,
+    headline: " moCcooemL klsHr Ws  i WtnwRts lWanieeercnnoi odeeraroE",
+    source: "moekTNrsi weY ",
+    url:
+      "9ea/dbe/cbpb9oi7d04-tci5a.ceh8/804-abt-3a-2sxc.f/p:10ld/tw458eofcnvulc4rsi/sem",
+  },
+  {
+    datetime: 1615215214313,
+    headline:
+      "a osq',sa dgrbWpngaenetsy  oliii eesiusueTrtftgnssnewtoenihg t)emlcerslbiuW tk    rSi t p MvGeieabglTgecluiotm  flnc  nol t  iidonttmrre naanune(a liTe stuo,enhS V/Gardoih,baoihati  e",
+    source: "cmheeemT",
+    url:
+      "e/l3-p3an1:c4ctisd7x7b//8a5ct2ocd/.t.fd7f-8e--usce4e1emoli1icpheawc47fbr9/s/vd",
+  },
+  {
+    datetime: 1624993797105,
+    headline:
+      "yP vuu M rtmaIS) w0onrtotoe6csthrrlg oe asDurm ,r,etipnng yraf/roo rsn faaIeiDso e purinpeti0o,apOsa l eotignpni   beGamG(epise in ritesqco opUsoTgafsBai rOolc Cmele$",
+    source: "emmchTee",
+    url:
+      "l616i//fte1-dic4-sf4c3v77sh6ob1/t:9p/cdfxur-e-1b/smceao78e2tbe1l.4p5a/.dw4n1bi",
+  },
+];
+
+let peersJsonWork = ["PSOM", "HOVPCI", "YLZP", "CLPG"];
+
+let historyJsonWork = [
+  {
+    date: "2020-07-30",
+    minute: "09:30",
+    price: "28.63",
+  },
+  {
+    date: "2020-07-30",
+    minute: "09:31",
+    price: "29.37",
+  },
+  {
+    date: "2020-07-30",
+    minute: "09:32",
+    price: "29.22",
+  },
+  ,
+];
+
 // Mock an empty function from chartjs to get tests to run without breaking
 jest.mock("react-chartjs-2", () => ({
   Line: () => null,
@@ -123,6 +212,30 @@ const server = setupServer(
 
   rest.get("/api/history/AAPL", (req, res, ctx) => {
     return res(ctx.json(historyJsonApple));
+  }),
+
+  rest.get("/api/quote/WORK", (req, res, ctx) => {
+    return res(ctx.json(quoteJsonWork));
+  }),
+
+  rest.get("/api/stats/WORK", (req, res, ctx) => {
+    return res(ctx.json(statsJsonWork));
+  }),
+
+  rest.get("/api/peers/WORK", (req, res, ctx) => {
+    return res(ctx.json(peersJsonWork));
+  }),
+
+  rest.get("/api/company/WORK", (req, res, ctx) => {
+    return res(ctx.json(companyJsonWork));
+  }),
+
+  rest.get("/api/news/WORK", (req, res, ctx) => {
+    return res(ctx.json(newsJsonWork));
+  }),
+
+  rest.get("/api/history/WORK", (req, res, ctx) => {
+    return res(ctx.json(historyJsonWork));
   }),
 
   rest.get("/api/quote/BADSYMBOL", (req, res, ctx) => {

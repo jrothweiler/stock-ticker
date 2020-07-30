@@ -95,5 +95,41 @@ describe("Search bar component", () => {
     expect(input.value).toBe("hi");
   });
 
-  test("Searching for a new symbol updates the experience", () => {});
+  test("Searching for a new symbol updates the experience", async () => {
+    const input = screen.getByRole("textbox");
+
+    expect(screen.getByText("Apple, Inc.")).toBeInTheDocument();
+    // initially shows apple's price
+    expect(screen.getByText("387.46")).toBeInTheDocument();
+    // Originally has apple news
+    expect(screen.getByText("Apple headline")).toBeInTheDocument();
+    // originally has apple's description
+    expect(screen.getByText("Apple description")).toBeInTheDocument();
+    // originally has apple's peers
+    expect(screen.getByText("PHQ")).toBeInTheDocument();
+    // originally has apple's stats (dividend yield in this case)
+    expect(screen.getByText("0.85%")).toBeInTheDocument();
+
+    fireEvent.change(input, { target: { value: "WORK" } });
+    fireEvent.submit(input);
+
+    // submitting causes error text to show
+    await waitForElement(() => screen.getByText("Slack Technologies, Inc."));
+
+    // value is removed from the box, since the search did go through
+    expect(input.value).toBe("");
+
+    // Apple header is no longer there
+    expect(screen.queryByText("Apple, Inc.")).not.toBeInTheDocument();
+    // new price is shown
+    expect(screen.getByText("29.70")).toBeInTheDocument();
+    // Now has slack news
+    expect(screen.getByText("Slack headline")).toBeInTheDocument();
+    // Now has slack's description
+    expect(screen.getByText("Slack description")).toBeInTheDocument();
+    // now has slack's peers
+    expect(screen.getByText("HOVPCI")).toBeInTheDocument();
+    // Now has slack's stats (dividend yield in this case)
+    expect(screen.getByText("N/A")).toBeInTheDocument();
+  });
 });
