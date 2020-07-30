@@ -13,7 +13,7 @@ import { Text } from "../components/generics/text";
 import { Button } from "../components/generics/button";
 import "chartjs-plugin-annotation";
 import { layout } from "styled-system";
-
+import { useCurrentPriceSelector } from "./componentHooks/useCurrentPriceSelector";
 export const VisualDisplay = (props) => {
   const dispatch = useDispatch();
 
@@ -110,7 +110,7 @@ export const VisualDisplay = (props) => {
           },
           ticks: {
             fontWeight: "lighter",
-            fontFamily: "Lato", 
+            fontFamily: "Lato",
             autoSkip: true,
             maxTicksLimit: 10,
           },
@@ -125,10 +125,10 @@ export const VisualDisplay = (props) => {
           position: "right",
           ticks: {
             fontWeight: "lighter",
-            fontFamily: "Lato", 
-            callback: function(label) {
+            fontFamily: "Lato",
+            callback: function (label) {
               return label.toFixed(2);
-          }
+            },
           },
           gridLines: {
             display: true,

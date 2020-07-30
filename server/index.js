@@ -145,8 +145,7 @@ app.get("/api/history/:symbol", async (req, res) => {
       chartCloseOnly: true,
     });
     const returnData = historyData.map((day) => {
-      let price =
-        safeToFixed(day.average, 2) || safeToFixed(day.close, 2),
+      let price = safeToFixed(day.average, 2) || safeToFixed(day.close, 2);
       return {
         date: day.date,
         minute: day.minute,

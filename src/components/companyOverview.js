@@ -5,12 +5,12 @@ import { DisplayWrapper } from "./generics/displayWrapper";
 import { TitleHeader } from "./generics/titleHeader";
 import { Text } from "./generics/text";
 import { useDispatch, useSelector } from "react-redux";
-
+import { useCompanySelector } from "./componentHooks/useCompanySelector";
+import { useTickerSelector } from "./componentHooks/useTickerSelector";
 export const CompanyOverview = (props) => {
   //Call necessary selectors for display data
-  const dispatch = useDispatch();
-  const companyInfo = useSelector(companySelector);
-  const ticker = useSelector(tickerSelector);
+  const companyInfo = useCompanySelector();
+  const ticker = useTickerSelector();
   return (
     <DisplayWrapper {...props}>
       <TitleHeader>COMPANY OVERVIEW</TitleHeader>
@@ -19,7 +19,12 @@ export const CompanyOverview = (props) => {
           {companyInfo.companyName} ({ticker})
         </Text>
         <a href={`${companyInfo.website}`} target="_blank">
-          <Text className="companyLink" mt="0.5rem" variant="secondary" fontStyle="italic">
+          <Text
+            className="companyLink"
+            mt="0.5rem"
+            variant="secondary"
+            fontStyle="italic"
+          >
             {companyInfo.website}
           </Text>
         </a>
