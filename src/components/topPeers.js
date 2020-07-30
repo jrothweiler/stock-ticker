@@ -14,13 +14,13 @@ export const TopPeers = (props) => {
 }
 
   return (
-    <DisplayWrapper height={props.height}>
+    <DisplayWrapper {...props}>
       <TitleHeader>TOP PEERS</TitleHeader>
-      {peersInfo &&
+      {
         peersInfo.map((peer) => (
-              <Text key={peer} className="topPeer" mr="1.0rem" display="inline-block" variant="secondary" onClick={() => handleSearch(peer)}>
-                {peer}
-              </Text>
+          <Text key={peer} className="topPeer" mr="1.0rem" display="inline-block" variant="secondary" onClick={() => handleSearch(peer)}>
+            {peer}
+          </Text>
         ))
       }
       {/* WORK is added here as a valid default stock for demonstration purposes */}

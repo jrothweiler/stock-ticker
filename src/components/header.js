@@ -5,9 +5,6 @@ import { BannerButton } from "./generics/bannerButton";
 import { useDispatch } from "react-redux";
 
 export const Header = () => {
-  //Call necessary selectors for display data
-  const dispatch = useDispatch();
-
   return (
     <DisplayWrapper
       justifyContent="space-between"
