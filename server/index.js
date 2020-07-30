@@ -38,6 +38,7 @@ async function getQuoteData(symbol) {
   ]);
   // some data has null entries, so filter it out before processing it
   const filteredDailyData = dailyData.filter((minute) => minute.high !== null);
+  const safeToFixed = (num, decimals) => num?.toFixed(decimals) || null;
 
   // some data has been deprecated from the quote api, so as a workaround, calculate these fields off of the current day's price data minute by minute.
   const high = Math.max(...filteredDailyData.map((minute) => minute.high));
@@ -57,12 +58,12 @@ async function getQuoteData(symbol) {
   } = quoteData;
   return {
     symbol: quoteData.symbol,
-    previousClose: previousClose.toFixed(2),
-    week52High: week52High.toFixed(2),
-    week52Low: week52Low.toFixed(2),
-    high: high.toFixed(2),
-    low: low.toFixed(2),
-    latestPrice: latestPrice.toFixed(2),
+    previousClose: safeToFixed(previousClose, 2),
+    week52High: safeToFixed(week52High, 2),
+    week52Low: safeToFixed(week52Low, 2),
+    high: safeToFixed(high, 2),
+    low: safeToFixed(low, 2),
+    latestPrice: safeToFixed(latestPrice, 2),
     marketCap,
     latestVolume,
     open: safeToFixed(open, 2),
