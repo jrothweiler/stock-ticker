@@ -112,6 +112,30 @@ const server = setupServer(
 
     rest.get('/api/history/AAPL', (req, res, ctx) => {
         return res(ctx.json(historyJson))
+    }),
+
+    rest.get('/api/quote/BADSYMBOL', (req, res, ctx) => {
+        return res(ctx.status(404));
+    }),
+
+    rest.get('/api/stats/BADSYMBOL', (req, res, ctx) => {
+        return res(ctx.status(404));
+    }),
+
+    rest.get('/api/news/BADSYMBOL', (req, res, ctx) => {
+        return res(ctx.status(404));
+    }),
+
+    rest.get('/api/company/BADSYMBOL', (req, res, ctx) => {
+        return res(ctx.status(404));
+    }),
+
+    rest.get('/api/peers/BADSYMBOL', (req, res, ctx) => {
+        return res(ctx.status(404));
+    }),
+
+    rest.get('/api/history/BADSYMBOL', (req, res, ctx) => {
+        return res(ctx.status(404));
     })
 )
 
