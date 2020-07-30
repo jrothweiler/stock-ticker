@@ -61,7 +61,7 @@ describe('Search bar component', () => {
         expect(screen.queryByText('Apple, Inc.')).toBeInTheDocument();
     })
 
-    /*test('Unfocusing when there is no text shows the company name again', async () => {
+    test('Unfocusing when there is no text shows the company name again', async () => {
         const companyText = screen.queryByText('Apple, Inc.');
         const input = screen.queryByRole('textbox');
         expect(companyText).toBeInTheDocument();
@@ -69,7 +69,8 @@ describe('Search bar component', () => {
         expect(input === document.activeElement).toBe(true);
         expect(companyText).not.toBeInTheDocument();
         input.blur();
-        //console.log(prettyDOM(app))
-        
-    })*/
+
+        await waitForElement(() => companyText);
+        expect(screen.queryByText('Apple, Inc.')).toBeInTheDocument()
+    })
 })
