@@ -56,6 +56,7 @@ async function getQuoteData(symbol) {
     avgTotalVolume,
   } = quoteData;
   return {
+    symbol: quoteData.symbol,
     previousClose: safeToFixed(previousClose, 2),
     week52High: safeToFixed(week52High, 2),
     week52Low: safeToFixed(week52Low, 2),
@@ -68,7 +69,6 @@ async function getQuoteData(symbol) {
     avgTotalVolume,
   };
 }
-
 
 //iex.marketSymbols().then((data) => console.log(data));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -93,7 +93,11 @@ app.get("/api/stats/:symbol", async (req, res) => {
   try {
     const statData = await fetchWrapper(iex.keyStats, symbol);
     const { dividendYield, ttmEPS, peRatio } = statData;
-    res.json({ dividendYield: safeToFixed(dividendYield, 4), earningsPerShare: safeToFixed(ttmEPS, 2), peRatio: safeToFixed(peRatio, 2) });
+    res.json({
+      dividendYield: safeToFixed(dividendYield, 4),
+      earningsPerShare: safeToFixed(ttmEPS, 2),
+      peRatio: safeToFixed(peRatio, 2),
+    });
   } catch (e) {
     res.sendStatus(e.response.status);
   }
@@ -136,9 +140,13 @@ app.get("/api/history/:symbol", async (req, res) => {
   }
 
   try {
-    const historyData = await fetchWrapper(iex.history, symbol, { period, chartCloseOnly: true });
+    const historyData = await fetchWrapper(iex.history, symbol, {
+      period,
+      chartCloseOnly: true,
+    });
     const returnData = historyData.map((day) => {
-      let price = day.average?.toFixed(2) || day.close?.toFixed(2) || null;
+      let price =
+        safeToFixed(day.average, 2) || safeToFixed(day.close, 2),
       return {
         date: day.date,
         minute: day.minute,
@@ -175,12 +183,29 @@ io.on("connection", (socket) => {
     }, 5000);
   };
 
+  let subscribeToIndexes = (indexes) => {
+    return setInterval(async () => {
+      Promise.all(indexes.map((index) => getQuoteData(index))).then(
+        (dataArray) => {
+          socket.emit("realTimeIndexData", dataArray);
+        }
+      );
+    }, 5000);
+  };
+
   let intervalId = null;
+  let indexIntervalId = null;
 
   socket.on("newSymbol", (newSym) => {
     console.log("new symbol set:", newSym);
     clearInterval(intervalId);
     intervalId = subscribeToSymbol(newSym);
+  });
+
+  socket.on("newIndexes", (newIndexes) => {
+    console.log("new index set:", newIndexes);
+    clearInterval(indexIntervalId);
+    indexIntervalId = subscribeToIndexes(newIndexes);
   });
 
   socket.on("disconnect", () => {
