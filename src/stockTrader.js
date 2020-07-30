@@ -38,7 +38,10 @@ export const StockTrader = () => {
               width={["100%", "30%", "50%"]}
               mb={["8px", "0px", "0px"]}
             />
-            <PriceDisplay size={["mediumLarge", "large", "large"]} />
+            <PriceDisplay
+              data={quote}
+              size={["mediumLarge", "large", "large"]}
+            />
           </DisplayWrapper>
           <DisplayWrapper variant="flexColumn">
             <DisplayWrapper height="50%" variant="flexRow">
