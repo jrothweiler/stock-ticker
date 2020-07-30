@@ -9,7 +9,11 @@ export const Header = () => {
   const dispatch = useDispatch();
 
   return (
-    <DisplayWrapper width="100%" variant="flexRow">
+    <DisplayWrapper
+      justifyContent="space-between"
+      width="100%"
+      variant="flexRow"
+    >
       <DisplayWrapper>
         <img src={logo} height="65%"></img>
       </DisplayWrapper>
