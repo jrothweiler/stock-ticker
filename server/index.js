@@ -8,6 +8,9 @@ const app = express();
 
 const delay = (t) => new Promise((resolve) => setTimeout(resolve, t));
 
+// does a "safe" toFixed operation on a number that won't break, returning null if the operation fails
+const safeToFixed = (num, decimals) => num?.toFixed(decimals) || null;
+
 // Given an IEX fetch function (i.e. quote, keyStats, etc.), provides a wrapper that
 // handles 429 rate limiting errors.
 async function fetchWrapper(...args) {
@@ -62,7 +65,7 @@ async function getQuoteData(symbol) {
     latestPrice: latestPrice.toFixed(2),
     marketCap,
     latestVolume,
-    open: open.toFixed(2),
+    open: safeToFixed(open, 2),
     avgTotalVolume,
   };
 }
@@ -162,7 +165,7 @@ app.get("/api/peers/:symbol", async (req, res) => {
   console.log("app.get peers");
   const symbol = req.params.symbol;
   try {
-    const peersData = await fetchWrapper(iex.peers, symbol, 5);
+    const peersData = await fetchWrapper(iex.peers, symbol);
     res.json(peersData);
   } catch (e) {
     res.sendStatus(e.response.status);

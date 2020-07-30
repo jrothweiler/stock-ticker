@@ -18,7 +18,7 @@ export const LatestNews = (props) => {
         {newsInfo &&
           newsInfo.map((article) => (
             <div key={article.headline}>
-              <a href={`http://${article.url}`} target="_blank">
+              <a href={`${article.url}`} target="_blank">
                 <Text className="headline" variant="primary">
                   {article.headline}
                 </Text>
