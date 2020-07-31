@@ -2,10 +2,8 @@ import React from "react";
 import {
   render,
   screen,
-  prettyDOM,
   waitForElement,
   fireEvent,
-  within,
 } from "@testing-library/react";
 import App from "./App";
 
@@ -20,6 +18,16 @@ describe("Application", () => {
   });
 
   test("Renders all the expected sections of the experience", () => {
-    expect(screen.getByText("LATEST NEWS")).toBeInTheDocument();
+    // test that the major sections all appear as headers (banner role)
+    let headers = screen.getAllByRole("banner");
+    let headersText = headers.map((header) => header.textContent);
+    [
+      "LATEST NEWS",
+      "COMPANY OVERVIEW",
+      "KEY STATS",
+      "TOP PEERS",
+    ].forEach((title) => expect(headersText).toContain(title));
+
+    expect(screen.getByText("US MARKET")).toBeInTheDocument(); // footer
   });
 });
