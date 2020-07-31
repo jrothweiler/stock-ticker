@@ -1,11 +1,10 @@
 import React from "react";
-import { companyBadgeInfoSelector } from "../selectors/companySelector";
+import { useCompanyBadgeInfo } from "./componentHooks/useCompanyBadgeInfo";
 import { DisplayWrapper } from "./generics/displayWrapper";
 import { DisplayBadge } from "./generics/displayBadge";
-import { useDispatch, useSelector } from "react-redux";
 
 export const CompanyBadges = (props) => {
-  const badgeInfo = useSelector(companyBadgeInfoSelector);
+  const badgeInfo = useCompanyBadgeInfo();
 
   return (
     <DisplayWrapper {...props} variant="flexRow" justifyContent="flex-start">
