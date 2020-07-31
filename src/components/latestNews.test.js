@@ -61,12 +61,32 @@ describe("Latest News component", () => {
   afterEach(cleanup);
 
   test("Company data is rendered", () => {
-    console.log(prettyDOM(app));
     const latestNewsHeader = screen.getByText("LATEST NEWS");
     expect(latestNewsHeader).toBeInTheDocument();
     const newsArticleHeadline = screen.getByText("News Article 1");
     expect(newsArticleHeadline).toBeInTheDocument();
-    const articleUrl = screen.getByText("50 years ago - Article1Source");
-    expect(articleUrl).toBeInTheDocument();
+    const articleSourceAndTime = screen.getByText("50 years ago - Article1Source");
+    expect(articleSourceAndTime).toBeInTheDocument();
+  });
+
+  test("Headline links redirect properly ", () => {
+    const articleLinks = screen.getAllByRole("link");
+    const validArticleLinks = ["https://www.article1.com",
+    "https://www.article2.com",
+    "https://www.article3.com",
+    "https://www.article4.com",
+    "https://www.article5.com"
+  ];
+  const validArticleHeadlines = [
+    "News Article 1",
+    "News Article 2",
+    "News Article 3",
+    "News Article 4",
+    "News Article 5",
+  ];
+  for (let i=0; i < validArticleLinks.length; i++){
+    //expect(articleLinks.includes(validArticleLinks[i]))
+    expect(articleLinks[i].textContent).toBe(validArticleHeadlines[i]);
+  }
   });
 });

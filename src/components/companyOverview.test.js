@@ -48,4 +48,10 @@ describe("Company Overview component", () => {
     const companyDescription = screen.getByText("Apple Description");
     expect(companyDescription).toBeInTheDocument();
   });
+
+  test("Website link redirects properly", () => {
+    const websiteLink = screen.getByRole("link");
+    console.log(`log ${websiteLink.textContent}`);
+    expect(websiteLink.textContent).toBe("https://www.apple.com");
+  });
 });
