@@ -16,24 +16,24 @@ import { useStatSelector } from "./componentHooks/useTickerSelector";
 jest.mock("./componentHooks/useQuoteSelector", () => ({
   useQuoteSelector: () => {
     return {
-     previousClose: 0,
-     low: 0,
-     high: 0,
-     latestVolume: 0,
-     marketCap: 0,
-     open: 0,
-     week52Low: 0,
-     week52High: 0,
-     avgTotalVolume: 0
+     previousClose: 100,
+     low: 50,
+     high: 200,
+     latestVolume: 100,
+     marketCap: 1000,
+     open: 75,
+     week52Low: 30,
+     week52High: 250,
+     avgTotalVolume: 150
         }
     },
 }));
 jest.mock("./componentHooks/useStatsSelector", () => ({
   useStatsSelector: () => {
     return {
-        peRatio: 0,
-        earningsPerShare: 0,
-        dividendYield: 0
+        peRatio: 10,
+        earningsPerShare: 1,
+        dividendYield: 0.5
     }
   },
 }));
