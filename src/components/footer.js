@@ -31,7 +31,7 @@ export const Footer = (props) => {
       >
         {indexes &&
           indexes.map((index) => (
-            <PriceDisplay data={index} ticker={index.symbol} size="medium" />
+            <PriceDisplay key={index.symbol} data={index} ticker={index.symbol} size="medium" />
           ))}
       </DisplayWrapper>
     </DisplayWrapper>
