@@ -55,6 +55,15 @@ describe("Application", () => {
 
     expect(screen.getByText("US MARKET")).toBeInTheDocument(); // footer
 
+    // basic tests that each section's data appears in the layout,
+    // verifying that data is passed into the child components correctly.
+    // Where the data is specifically rendered is covered by unit tests
+    expect(screen.getByText("Apple headline")).toBeInTheDocument(); // news
+    expect(screen.getByText("1,686,473,219,033")).toBeInTheDocument(); // key stats
+    expect(screen.getByText("Apple description")).toBeInTheDocument(); // company overview
+    expect(screen.getByText("PHQ")).toBeInTheDocument(); // company overview
+    expect(screen.getByText("387.46")).toBeInTheDocument(); // big price
+
   });
 
   test('a socket connection is made', () => {
@@ -79,6 +88,7 @@ describe("Application", () => {
       avgTotalVolume: 35008228,
     })
 
+    // after the event, the UI reflects the new data
     expect(screen.queryByText("387.46")).not.toBeInTheDocument();
     expect(screen.getByText('400.46')).toBeInTheDocument();
     
