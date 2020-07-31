@@ -108,7 +108,7 @@ export const VisualDisplay = (props) => {
           },
           ticks: {
             fontWeight: "lighter",
-            fontFamily: "Lato", 
+            fontFamily: "Lato",
             autoSkip: true,
             maxTicksLimit: 10,
           },
@@ -123,10 +123,10 @@ export const VisualDisplay = (props) => {
           position: "right",
           ticks: {
             fontWeight: "lighter",
-            fontFamily: "Lato", 
-            callback: function(label) {
+            fontFamily: "Lato",
+            callback: function (label) {
               return label.toFixed(2);
-          }
+            },
           },
           gridLines: {
             display: true,
