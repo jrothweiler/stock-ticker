@@ -2,6 +2,7 @@ import React from "react";
 import { DisplayWrapper } from "./components/generics/displayWrapper";
 import { KeyStats } from "./components/keyStats";
 import { CompanyOverview } from "./components/companyOverview";
+import { CompanyBadges } from "./components/companyBadges";
 import { LatestNews } from "./components/latestNews";
 import { SearchBar } from "./components/searchBar";
 import { Header } from "./components/header";
@@ -28,9 +29,8 @@ export const StockTrader = () => {
             <Header />
           </DisplayWrapper>
           <DisplayWrapper
-            mb="3.0rem"
             variant={["flexColumn", "flexRow", "flexRow"]}
-            paddingBottom="0.7rem"
+            paddingBottom="16px"
             borderBottom="0.2rem solid #6491d3"
             width="100%"
           >
@@ -42,6 +42,9 @@ export const StockTrader = () => {
               data={quote}
               size={["mediumLarge", "large", "large"]}
             />
+          </DisplayWrapper>
+          <DisplayWrapper variant="flexRow" mt="16px" mb="24px">
+            <CompanyBadges />
           </DisplayWrapper>
           <DisplayWrapper variant="flexColumn">
             <DisplayWrapper height="50%" variant="flexRow">
