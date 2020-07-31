@@ -84,13 +84,12 @@ const producerMiddleWare = (rawStore) => {
         historyFetch(symbol, period).then((data) => {
           rawStore.dispatch({ type: "newHistoryData", payload: data });
         });
+        break;
       }
       default:
         rawStore.dispatch(action);
     }
   };
-
-  console.log(process.env.NODE_ENV);
 
   socket.on("realTimeQuoteData", (data) => {
     rawStore.dispatch({ type: "newQuoteData", payload: data });
