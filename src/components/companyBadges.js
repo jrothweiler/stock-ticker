@@ -8,8 +8,8 @@ export const CompanyBadges = (props) => {
 
   return (
     <DisplayWrapper {...props} variant="flexRow" justifyContent="flex-start">
-      {badgeInfo.map((badgeText) => (
-        <DisplayBadge mb="8px" mr="16px">
+      {badgeInfo.map((badgeText, indx) => (
+        <DisplayBadge key={indx} mb="8px" mr="16px">
           {badgeText}
         </DisplayBadge>
       ))}
