@@ -1,14 +1,5 @@
 import React from "react";
-import * as redux from "react-redux";
-import {
-  render,
-  cleanup,
-  screen,
-  prettyDOM,
-  waitForElement,
-  fireEvent,
-} from "@testing-library/react";
-import App from "../App";
+import { render, screen } from "@testing-library/react";
 import { MarketInfo } from "./marketInfo";
 import { useQuoteSelector } from "./componentHooks/useQuoteSelector";
 
