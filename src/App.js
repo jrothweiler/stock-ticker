@@ -14,8 +14,8 @@ import {
 import { INITIAL_STOCK } from "./utils/constants";
 import socketIOClient from "socket.io-client";
 import { StockTrader } from "./stockTrader";
-import { ThemeProvider } from 'styled-components'
-import theme from './themes/theme';
+import { ThemeProvider } from "styled-components";
+import theme from "./themes/theme";
 
 //Triggers dispatches (May need to be broken down into multiple Middlewares chained together)
 const producerMiddleWare = (rawStore) => {
@@ -117,10 +117,10 @@ const dataStore = producerMiddleWare(
 function App() {
   useEffect(() => {
     dataStore.dispatch({ type: "searchSymbol", payload: INITIAL_STOCK });
-    /*dataStore.dispatch({
+    dataStore.dispatch({
       type: "searchIndexes",
       payload: ["MSFT", "GOOGL", "AMZN"],
-    }); */
+    });
   }, []);
 
   return (

@@ -21,7 +21,8 @@ async function fetchWrapper(...args) {
     return data;
   } catch (e) {
     if (e.response.status === 429) {
-      // in the case of Too Many Requests, wait 100ms and try again
+      console.log("retrying");
+      // in the case of Too Many Requests, wait 1s and try again
       await delay(1000);
       return fetchWrapper(...args);
     } else {
@@ -191,7 +192,7 @@ io.on("connection", (socket) => {
           socket.emit("realTimeIndexData", dataArray);
         }
       );
-    }, 5000);
+    }, 6000);
   };
 
   let intervalId = null;
