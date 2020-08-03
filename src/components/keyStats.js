@@ -1,19 +1,17 @@
 import React from "react";
-import { statsSelector } from "../selectors/statsSelector";
-import { quoteSelector } from "../selectors/quoteSelector";
 import { DisplayWrapper } from "./generics/displayWrapper";
 import { TitleHeader } from "./generics/titleHeader";
 import { Text } from "./generics/text";
 import { StatWrapper } from "./generics/statWrapper";
 import { useDispatch, useSelector } from "react-redux";
-
+import { useStatsSelector } from "./componentHooks/useStatsSelector";
+import { useQuoteSelector } from "./componentHooks/useQuoteSelector";
 export const KeyStats = (props) => {
   //Call necessary selectors for display data
-  const dispatch = useDispatch();
-  const stats = useSelector(statsSelector);
-  const quote = useSelector(quoteSelector);
+  const stats = useStatsSelector();
+  const quote = useQuoteSelector();
   return (
-    <DisplayWrapper {...props} >
+    <DisplayWrapper {...props}>
       <TitleHeader>KEY STATS</TitleHeader>
       <DisplayWrapper variant="flexRow">
         <DisplayWrapper width={["100%", "46%"]}>
@@ -26,12 +24,15 @@ export const KeyStats = (props) => {
           <StatWrapper>
             <Text variant="statLabel">Day Range</Text>
             <Text variant="statValue">
-              {quote.low.toLocaleString("en")} - {quote.high.toLocaleString("en")}
+              {quote.low.toLocaleString("en")} -{" "}
+              {quote.high.toLocaleString("en")}
             </Text>
           </StatWrapper>
           <StatWrapper>
             <Text variant="statLabel">Volume</Text>
-            <Text variant="statValue">{quote.latestVolume.toLocaleString("en")}</Text>
+            <Text variant="statValue">
+              {quote.latestVolume.toLocaleString("en")}
+            </Text>
           </StatWrapper>
           <StatWrapper>
             <Text variant="statLabel">Market Cap</Text>
@@ -74,7 +75,9 @@ export const KeyStats = (props) => {
           <StatWrapper>
             <Text variant="statLabel">Dividend & Yield</Text>
             <Text variant="statValue">
-              {stats.dividendYield ? `${(stats.dividendYield * 100).toLocaleString("en")}%` : "N/A"}
+              {stats.dividendYield
+                ? `${(stats.dividendYield * 100).toLocaleString("en")}%`
+                : "N/A"}
             </Text>
           </StatWrapper>
         </DisplayWrapper>
