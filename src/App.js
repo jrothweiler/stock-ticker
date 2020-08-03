@@ -14,8 +14,8 @@ import {
 import { INITIAL_STOCK } from "./utils/constants";
 import socketIOClient from "socket.io-client";
 import { StockTrader } from "./stockTrader";
-import { ThemeProvider } from 'styled-components'
-import theme from './themes/theme';
+import { ThemeProvider } from "styled-components";
+import theme from "./themes/theme";
 
 //Triggers dispatches (May need to be broken down into multiple Middlewares chained together)
 const producerMiddleWare = (rawStore) => {
@@ -84,6 +84,7 @@ const producerMiddleWare = (rawStore) => {
         historyFetch(symbol, period).then((data) => {
           rawStore.dispatch({ type: "newHistoryData", payload: data });
         });
+        break;
       }
       default:
         rawStore.dispatch(action);
