@@ -4,7 +4,7 @@ import { TitleHeader } from "./generics/titleHeader";
 import { Text } from "./generics/text";
 
 import { usePeersSelector } from "./componentHooks/usePeersSelector";
-import { useSearchSymbol } from "./componentHooks/useSearchSymbol";
+import { searchSymbol } from "./componentHooks/searchSymbol";
 export const TopPeers = (props) => {
   const peersInfo = usePeersSelector();
 
@@ -18,7 +18,7 @@ export const TopPeers = (props) => {
           mr="1.0rem"
           display="inline-block"
           variant="secondary"
-          onClick={() => useSearchSymbol(peer)}
+          onClick={searchSymbol(peer)}
         >
           {peer}
         </Text>
@@ -28,7 +28,7 @@ export const TopPeers = (props) => {
         className="topPeer"
         display="inline-block"
         variant="secondary"
-        onClick={() => useSearchSymbol("WORK")}
+        onClick={searchSymbol("WORK")}
       >
         WORK
       </Text>
