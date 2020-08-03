@@ -1,8 +1,7 @@
 import React from "react";
-import { quoteSelector } from "../../selectors/quoteSelector";
-import { createSelector } from "reselect";
 
-export const useCurrentPriceSelector = createSelector(
-  [quoteSelector],
-  (quoteData) => quoteData?.latestPrice
-);
+import { useSelector } from "react-redux";
+import { currentPriceSelector } from "../../selectors/quoteSelector";
+export const useCurrentPriceSelector = () => {
+  return useSelector(currentPriceSelector);
+};
