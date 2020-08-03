@@ -84,6 +84,7 @@ const producerMiddleWare = (rawStore) => {
         historyFetch(symbol, period).then((data) => {
           rawStore.dispatch({ type: "newHistoryData", payload: data });
         });
+        break;
       }
       default:
         rawStore.dispatch(action);
