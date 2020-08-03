@@ -58,5 +58,8 @@
     "body-parser": "^1.19.0",
     "express": "^4.17.1"
   },
-  "proxy": "http://localhost:3001"
+  "proxy": "http://localhost:3001",
+  "jest": {
+    "globalSetup": "./src/globalTestSetup.js"
+  }
 }
