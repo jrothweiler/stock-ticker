@@ -29,6 +29,9 @@ let companyJsonApple = {
   companyName: "Apple, Inc.",
   website: "./pal:.htc/twmoppwew",
   description: "Apple description",
+  exchange: "NASDAQ",
+  sector: "Technology",
+  currency: "USD",
 };
 
 let newsJsonApple = [
@@ -119,6 +122,9 @@ let companyJsonWork = {
   companyName: "Slack Technologies, Inc.",
   website: "c/thso/wlwptkwac.m.:",
   description: "Slack description",
+  exchange: "Other",
+  sector: "Technology",
+  currency: "USD",
 };
 
 let newsJsonWork = [

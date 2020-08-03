@@ -21,8 +21,8 @@ async function fetchWrapper(...args) {
     return data;
   } catch (e) {
     if (e.response.status === 429) {
-      // in the case of Too Many Requests, wait 100ms and try again
-      await delay(100);
+      // in the case of Too Many Requests, wait 1s and try again
+      await delay(1000);
       return fetchWrapper(...args);
     } else {
       // Propogate all other errors
@@ -108,8 +108,10 @@ app.get("/api/company/:symbol", async (req, res) => {
   const symbol = req.params.symbol;
   try {
     const companyData = await fetchWrapper(iex.company, symbol);
-    const { companyName, website, description } = companyData;
-    res.json({ companyName, website, description });
+    const financialData = await fetchWrapper(iex.financials, symbol);
+    const { companyName, website, description, exchange, sector } = companyData;
+    const { currency } = financialData[0];
+    res.json({ companyName, website, description, exchange, sector, currency });
   } catch (e) {
     res.sendStatus(e.response.status);
   }
@@ -189,7 +191,7 @@ io.on("connection", (socket) => {
           socket.emit("realTimeIndexData", dataArray);
         }
       );
-    }, 5000);
+    }, 6000);
   };
 
   let intervalId = null;

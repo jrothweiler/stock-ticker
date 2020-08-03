@@ -121,7 +121,7 @@ function App() {
     /*dataStore.dispatch({
       type: "searchIndexes",
       payload: ["MSFT", "GOOGL", "AMZN"],
-    }); */
+    });*/
   }, []);
 
   return (
