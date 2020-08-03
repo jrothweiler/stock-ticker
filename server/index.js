@@ -21,7 +21,6 @@ async function fetchWrapper(...args) {
     return data;
   } catch (e) {
     if (e.response.status === 429) {
-      console.log("retrying");
       // in the case of Too Many Requests, wait 1s and try again
       await delay(1000);
       return fetchWrapper(...args);
