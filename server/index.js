@@ -55,6 +55,7 @@ async function getQuoteData(symbol) {
     marketCap,
     avgTotalVolume,
     isUSMarketOpen,
+    latestUpdate,
   } = quoteData;
   return {
     symbol: quoteData.symbol,
@@ -69,6 +70,7 @@ async function getQuoteData(symbol) {
     open: safeToFixed(open, 2),
     avgTotalVolume,
     isUSMarketOpen,
+    latestUpdate,
   };
 }
 

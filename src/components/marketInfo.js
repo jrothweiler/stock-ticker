@@ -5,12 +5,24 @@ import { DisplayWrapper } from "./generics/displayWrapper";
 import { mdiWeatherSunny } from "@mdi/js";
 import { mdiWeatherNight } from "@mdi/js";
 import Icon from "@mdi/react";
+import { formatDate } from "../utils/dateUtils";
 
 export const MarketInfo = () => {
-  let marketOpen = useQuoteSelector().isUSMarketOpen;
+  const quoteData = useQuoteSelector();
+  const marketOpen = quoteData.isUSMarketOpen;
+  const latestTime = quoteData.latestUpdate;
+  const latestTimeString = formatDate(latestTime);
 
   return (
     <DisplayWrapper variant="flexRow">
+      <Text
+        variant="secondary"
+        size="small"
+        mr="16px"
+        display={["none", "none", "inline-block"]}
+      >
+        Real-Time Price as of {latestTimeString}
+      </Text>
       <Icon
         className="searchIcon"
         path={marketOpen ? mdiWeatherSunny : mdiWeatherNight}
