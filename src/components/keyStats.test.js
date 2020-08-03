@@ -46,7 +46,6 @@ describe("Key Stats component", () => {
     app = container;
 
     await waitForElement(() => screen.getByText("Previous Close"));
-    console.log(prettyDOM(app));
   });
 
   afterEach(cleanup);

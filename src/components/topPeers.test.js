@@ -16,8 +16,8 @@ jest.mock("./componentHooks/usePeersSelector", () => ({
   },
 }));
 
-jest.mock("./componentHooks/useSearchSymbol", () => ({
-  useSearchSymbol: () => {
+jest.mock("./componentHooks/searchSymbol", () => ({
+  searchSymbol: () => {
     return ["MSFT", "AMZN", "AAPL", "GOOGL"];
   },
 }));
@@ -29,7 +29,6 @@ describe("Top Peers component", () => {
     app = container;
 
     await waitForElement(() => screen.getByText("TOP PEERS"));
-    console.log(prettyDOM(app));
   });
 
   afterEach(cleanup);

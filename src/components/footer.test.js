@@ -10,7 +10,6 @@ import {
 } from "@testing-library/react";
 import App from "../App";
 import { Footer } from "./footer";
-import { useIndexSelector } from "./componentHooks/useIndexSelector";
 
 jest.mock("./componentHooks/useIndexSelector", () => ({
   useIndexSelector: () => {
@@ -26,9 +25,10 @@ describe("Footer component", () => {
   let app;
 
   beforeEach(async () => {
-    const { container } = render(<LatestNews />);
+    const { container } = render(<Footer />);
     app = container;
     await waitForElement(() => screen.getByText("US MARKET"));
+    console.log(`dom ${prettyDOM(app)}`);
   });
 
   afterEach(cleanup);
@@ -36,5 +36,11 @@ describe("Footer component", () => {
   test("Correct Footer data is rendered", () => {
     const footerHeader = screen.getByText("US MARKET");
     expect(footerHeader).toBeInTheDocument();
+    const symbol1 = screen.getByText("MSFT");
+    expect(symbol1).toBeInTheDocument();
+    const symbol2 = screen.getByText("AMZN");
+    expect(symbol2).toBeInTheDocument();
+    const symbol3 = screen.getByText("GOOGL");
+    expect(symbol3).toBeInTheDocument();
   });
 });
