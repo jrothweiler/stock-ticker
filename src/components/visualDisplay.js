@@ -13,7 +13,7 @@ import { Text } from "../components/generics/text";
 import { Button } from "../components/generics/button";
 import "chartjs-plugin-annotation";
 import { layout } from "styled-system";
-
+import { useCurrentPriceSelector } from "./componentHooks/useCurrentPriceSelector";
 export const VisualDisplay = (props) => {
   const dispatch = useDispatch();
 
