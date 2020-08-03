@@ -4,6 +4,9 @@ const bodyParser = require("body-parser");
 const iex = require("iexcloud_api_wrapper");
 const socketIo = require("socket.io");
 
+const { IEXCloudClient } = require("node-iex-cloud");
+const axios = require("axios");
+
 const app = express();
 
 const delay = (t) => new Promise((resolve) => setTimeout(resolve, t));
