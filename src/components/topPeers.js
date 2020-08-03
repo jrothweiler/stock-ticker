@@ -18,7 +18,7 @@ export const TopPeers = (props) => {
           mr="1.0rem"
           display="inline-block"
           variant="secondary"
-          onClick={searchSymbol(peer)}
+          onClick={() => searchSymbol(peer)}
         >
           {peer}
         </Text>
@@ -28,7 +28,7 @@ export const TopPeers = (props) => {
         className="topPeer"
         display="inline-block"
         variant="secondary"
-        onClick={searchSymbol("WORK")}
+        onClick={() => searchSymbol("WORK")}
       >
         WORK
       </Text>
