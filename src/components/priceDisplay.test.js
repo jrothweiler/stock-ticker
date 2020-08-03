@@ -16,21 +16,25 @@ describe("Price Display component", () => {
     const { container } = render(
       <PriceDisplay
         data={{
-          latestPrice: 100.0,
-          open: 50.0,
+          latestPrice: 300.0,
+          open: 200.0,
         }}
         ticker={"MSFT"}
       />
     );
     app = container;
-    await waitForElement(() => screen.getByText("MSFT"));
+    waitForElement(() => screen.getByText("MSFT"));
     console.log(prettyDOM(app));
   });
 
   afterEach(cleanup);
 
   test("Correct price and percent difference is displayed properly ", () => {
-    const priceDisplay = screen.getByText("100.00");
+    const priceDisplay = screen.getByText("300");
     expect(priceDisplay).toBeInTheDocument();
+    const valueChangeDisplay = screen.getByText("100.00");
+    expect(valueChangeDisplay).toBeInTheDocument();
+    const percentChangeDisplay = screen.getByText("50.00");
+    expect(percentChangeDisplay).toBeInTheDocument();
   });
 });
