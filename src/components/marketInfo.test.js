@@ -28,7 +28,7 @@ describe("Market Info component", () => {
 
       it("shows Market Open", async () => {
         render(<MarketInfo />);
-        await waitForElement(() => screen.getByText("Market Open"));
+        expect(screen.getByText("Market Open")).toBeInTheDocument();
       });
     });
 
@@ -42,8 +42,25 @@ describe("Market Info component", () => {
 
       it("shows Market Closed", async () => {
         render(<MarketInfo />);
-        await waitForElement(() => screen.getByText("Market Closed"));
+        expect(screen.getByText("Market Closed")).toBeInTheDocument();
       });
+    });
+  });
+
+  describe("Latest Update Text", () => {
+    beforeEach(async () => {
+      useQuoteSelector.mockReturnValueOnce({
+        isUSMarketOpen: true,
+        latestUpdate: 1596480448000,
+      });
+
+      render(<MarketInfo />);
+    });
+
+    it("Shows the latest update disclaimer", () => {
+      expect(
+        screen.getByText("Real-Time Price as of Aug 3, 2020 6:47 PM UTC")
+      ).toBeInTheDocument();
     });
   });
 });
