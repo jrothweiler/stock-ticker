@@ -103,15 +103,12 @@ export const SearchBar = (props) => {
             onChange: handleType,
             onFocus: onInputFocus,
             onBlur: onLeaveInputFocus,
+            ref: inputRef,
           }}
-        />
-        <input
-          ref={inputRef}
-          className="searchBar"
-          onBlur={onLeaveInputFocus}
-          onFocus={onInputFocus}
-          value={currentText}
-          onChange={handleType}
+          theme={{
+            input: "searchBar",
+            container: "searchContainer",
+          }}
         />
         {showCompanyText && (
           <div className="companyText" onClick={onCompanyTextClick}>

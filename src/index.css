@@ -1,5 +1,10 @@
 body {
-  background-image: linear-gradient(127deg, #012861 -23%, #021738 71%, #021025 113%);
+  background-image: linear-gradient(
+    127deg,
+    #012861 -23%,
+    #021738 71%,
+    #021025 113%
+  );
   margin: 0;
   font-family: "Lato", "Helvetica Neue";
   -webkit-font-smoothing: antialiased;
@@ -10,12 +15,16 @@ body {
   vertical-align: middle;
 }
 
+.searchContainer {
+  display: inline-block;
+  max-width: 75%;
+}
+
 .searchBar {
   background: inherit;
   border: none;
   color: white;
   font-size: 2rem;
-  max-width: 75%;
 }
 
 .searchBar:focus {
@@ -38,7 +47,8 @@ body {
   color: white;
 }
 
-.headline:hover, .companyLink:hover {
+.headline:hover,
+.companyLink:hover {
   color: #e0be86;
 }
 
