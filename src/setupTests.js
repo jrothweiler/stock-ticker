@@ -270,6 +270,10 @@ const server = setupServer(
 
   rest.get("/api/history/BADSYMBOL", (req, res, ctx) => {
     return res(ctx.status(404));
+  }),
+
+  rest.get("/api/search/:searchText", (req, res, ctx) => {
+    return res(ctx.json([]));
   })
 );
 
