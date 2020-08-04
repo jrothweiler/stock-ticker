@@ -1,14 +1,13 @@
-import { formatErrorMessage } from './errorUtils';
-
+import { formatErrorMessage } from "./errorUtils";
 
 // Helper functions for fetching financial data from the proxy server
 // See server/index.js for server code.
 
 // Generalized fetch function over any endpoint
 export const proxyFetch = async (symbol, endpoint, queryParams) => {
-  // unfortunately, fetch does not support a query object, so we need 
+  // unfortunately, fetch does not support a query object, so we need
   // to build the query string ourselves.
-  let queryString = queryParams ? '?' : '';
+  let queryString = queryParams ? "?" : "";
   for (let field in queryParams) {
     queryString += `${field}=${queryParams[field]}`;
   }
@@ -50,4 +49,8 @@ export const peersFetch = (symbol) => {
 // collect historical data over the given period, either "1D", "5D", "1M", "1Y", "5Y", or "MAX"
 export const historyFetch = (symbol, period) => {
   return proxyFetch(symbol, `history`, { period });
+};
+
+export const searchFetch = (searchText) => {
+  return proxyFetch(searchText, "search");
 };

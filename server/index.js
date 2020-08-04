@@ -7,6 +7,12 @@ const socketIo = require("socket.io");
 const { IEXCloudClient } = require("node-iex-cloud");
 const axios = require("axios");
 
+const iexSearchClient = new IEXCloudClient(axios, {
+  sandbox: true,
+  publishable: "Tpk_1c2eb47739464a5791970f33a9af812c",
+  version: "stable",
+});
+
 const app = express();
 
 const delay = (t) => new Promise((resolve) => setTimeout(resolve, t));
@@ -177,6 +183,29 @@ app.get("/api/peers/:symbol", async (req, res) => {
     const peersData = await fetchWrapper(iex.peers, symbol);
     res.json(peersData);
   } catch (e) {
+    res.sendStatus(e.response.status);
+  }
+});
+
+app.get("/api/peers/:symbol", async (req, res) => {
+  console.log("app.get peers");
+  const symbol = req.params.symbol;
+  try {
+    const peersData = await fetchWrapper(iex.peers, symbol);
+    res.json(peersData);
+  } catch (e) {
+    res.sendStatus(e.response.status);
+  }
+});
+
+app.get("/api/search/:text", async (req, res) => {
+  console.log("app.get search");
+  const searchText = req.params.text;
+  try {
+    const searchData = await iexSearchClient.search(searchText);
+    res.json(searchData);
+  } catch (e) {
+    console.log(e);
     res.sendStatus(e.response.status);
   }
 });
