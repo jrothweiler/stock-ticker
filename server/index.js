@@ -4,14 +4,7 @@ const bodyParser = require("body-parser");
 const iex = require("iexcloud_api_wrapper");
 const socketIo = require("socket.io");
 
-const { IEXCloudClient } = require("node-iex-cloud");
 const axios = require("axios");
-
-const iexSearchClient = new IEXCloudClient(axios, {
-  sandbox: true,
-  publishable: "Tpk_1c2eb47739464a5791970f33a9af812c",
-  version: "stable",
-});
 
 const app = express();
 
@@ -39,6 +32,19 @@ async function fetchWrapper(...args) {
     }
   }
 }
+
+// since our wrapper doesn't support search, we
+// implement this one ourselves.
+// It is safe to hardcode the sandbox api because
+// this feature is only pay tier except on the sandbox.
+async function symbolSearch(searchText) {
+  let fetchResult = await axios.get(
+    `https://sandbox.iexapis.com/stable/search/${searchText}?token=Tpk_1c2eb47739464a5791970f33a9af812c`
+  );
+  return fetchResult.data;
+}
+
+symbolSearch("a");
 
 async function getQuoteData(symbol) {
   const [quoteData, dailyData] = await Promise.all([
@@ -187,22 +193,11 @@ app.get("/api/peers/:symbol", async (req, res) => {
   }
 });
 
-app.get("/api/peers/:symbol", async (req, res) => {
-  console.log("app.get peers");
-  const symbol = req.params.symbol;
-  try {
-    const peersData = await fetchWrapper(iex.peers, symbol);
-    res.json(peersData);
-  } catch (e) {
-    res.sendStatus(e.response.status);
-  }
-});
-
 app.get("/api/search/:text", async (req, res) => {
   console.log("app.get search");
   const searchText = req.params.text;
   try {
-    const searchData = await iexSearchClient.search(searchText);
+    const searchData = await fetchWrapper(symbolSearch, searchText);
     res.json(searchData);
   } catch (e) {
     console.log(e);

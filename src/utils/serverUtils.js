@@ -4,21 +4,24 @@ import { formatErrorMessage } from "./errorUtils";
 // See server/index.js for server code.
 
 // Generalized fetch function over any endpoint
-export const proxyFetch = async (symbol, endpoint, queryParams) => {
+export const proxyFetch = async (symbol, endpoint, queryParams, options) => {
   // unfortunately, fetch does not support a query object, so we need
   // to build the query string ourselves.
   let queryString = queryParams ? "?" : "";
+  const fetchOptions = options || {};
   for (let field in queryParams) {
     queryString += `${field}=${queryParams[field]}`;
   }
 
-  return fetch(`/api/${endpoint}/${symbol}${queryString}`).then((data) => {
-    if (data.ok) {
-      return data.json();
-    } else {
-      throw Error(formatErrorMessage(symbol, data));
+  return fetch(`/api/${endpoint}/${symbol}${queryString}`, fetchOptions).then(
+    (data) => {
+      if (data.ok) {
+        return data.json();
+      } else {
+        throw Error(formatErrorMessage(symbol, data));
+      }
     }
-  });
+  );
 };
 
 // Fetches real time information (price, volume, high, low, etc) for the symbol
@@ -51,6 +54,13 @@ export const historyFetch = (symbol, period) => {
   return proxyFetch(symbol, `history`, { period });
 };
 
+let searchController = null;
 export const searchFetch = (searchText) => {
-  return proxyFetch(searchText, "search");
+  if (searchController) {
+    searchController.abort();
+  }
+  searchController = new AbortController();
+  return proxyFetch(searchText, "search", "", {
+    signal: searchController.signal,
+  }).catch((e) => null);
 };
