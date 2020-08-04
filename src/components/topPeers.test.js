@@ -18,7 +18,7 @@ jest.mock("./componentHooks/usePeersSelector", () => ({
 
 jest.mock("./componentHooks/searchSymbol", () => ({
   searchSymbol: () => {
-    return ["MSFT", "AMZN", "AAPL", "GOOGL"];
+    return {};
   },
 }));
 describe("Top Peers component", () => {
