@@ -28,7 +28,6 @@ describe("Footer component", () => {
     const { container } = render(<Footer />);
     app = container;
     await waitForElement(() => screen.getByText("US MARKET"));
-    console.log(`dom ${prettyDOM(app)}`);
   });
 
   afterEach(cleanup);

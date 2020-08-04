@@ -9,18 +9,19 @@ import {
 } from "@testing-library/react";
 import App from "../App";
 import { TopPeers } from "./topPeers";
+import { useSearchSymbol } from "./componentHooks/useSearchSymbol";
 
+const mockFn = jest.fn();
 jest.mock("./componentHooks/usePeersSelector", () => ({
   usePeersSelector: () => {
     return ["MSFT", "AMZN", "AAPL", "GOOGL"];
   },
 }));
 
-jest.mock("./componentHooks/searchSymbol", () => ({
-  searchSymbol: () => {
-    return {};
-  },
+jest.mock("./componentHooks/useSearchSymbol", () => ({
+  useSearchSymbol: () => mockFn,
 }));
+
 describe("Top Peers component", () => {
   let app;
 
@@ -44,5 +45,12 @@ describe("Top Peers component", () => {
     expect(ticker3).toBeInTheDocument();
     const ticker4 = screen.getByText("GOOGL");
     expect(ticker4).toBeInTheDocument();
+  });
+
+  test("Clicking on Top Peers tickers redirects properly", () => {
+    const stockTicker = screen.getByText("MSFT");
+    fireEvent.click(stockTicker);
+
+    expect(mockFn).toHaveBeenCalled();
   });
 });

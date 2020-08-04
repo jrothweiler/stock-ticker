@@ -4,10 +4,10 @@ import { TitleHeader } from "./generics/titleHeader";
 import { Text } from "./generics/text";
 
 import { usePeersSelector } from "./componentHooks/usePeersSelector";
-import { searchSymbol } from "./componentHooks/searchSymbol";
+import { useSearchSymbol } from "./componentHooks/useSearchSymbol";
 export const TopPeers = (props) => {
   const peersInfo = usePeersSelector();
-
+  const searchSymbol = useSearchSymbol();
   return (
     <DisplayWrapper {...props}>
       <TitleHeader>TOP PEERS</TitleHeader>
