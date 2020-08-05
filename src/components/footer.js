@@ -2,16 +2,10 @@ import React from "react";
 import { DisplayWrapper } from "./generics/displayWrapper";
 import { PriceDisplay } from "./priceDisplay";
 import { Text } from "./generics/text";
-import { indexSelector } from "../selectors/indexSelector";
-import { useSelector } from "react-redux";
+import {useIndexSelector} from "./componentHooks/useIndexSelector"
 
 export const Footer = (props) => {
-  //const indexes = useSelector(indexSelector);
-  const indexes = [
-    { symbol: "MSFT", latestPrice: 200, open: 250 },
-    { symbol: "AMZN", latestPrice: 3000, open: 2900 },
-    { symbol: "GOOGL", latestPrice: 1500, open: 1450 },
-  ];
+  const indexes = useIndexSelector();
   return (
     <DisplayWrapper
       className="footer"
