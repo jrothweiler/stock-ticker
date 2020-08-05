@@ -70,13 +70,9 @@ export const SearchBar = (props) => {
     inputRef.current.focus();
   }
 
-  function handleRowClick(item) {
-    handleSearch(item.symbol);
-  }
-
   function handleRenderSuggestion(item) {
     return (
-      <TableRow key={item.symbol} onClick={() => handleRowClick(item)}>
+      <TableRow key={item.symbol} onClick={() => handleSearch(item.symbol)}>
         <TableColumn>
           <Text color="darkblue" size="medium" mr="10px">
             {item.symbol}

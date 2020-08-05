@@ -198,7 +198,6 @@ app.get("/api/search/:text", async (req, res) => {
     const searchData = await fetchWrapper(symbolSearch, searchText);
     res.json(searchData);
   } catch (e) {
-    console.log(e);
     res.sendStatus(e.response.status);
   }
 });
