@@ -1,10 +1,7 @@
 import React from "react";
-import { companySelector } from "../selectors/companySelector";
-import { tickerSelector } from "../selectors/tickerSelector";
 import { DisplayWrapper } from "./generics/displayWrapper";
 import { TitleHeader } from "./generics/titleHeader";
 import { Text } from "./generics/text";
-import { useDispatch, useSelector } from "react-redux";
 import { useCompanySelector } from "./componentHooks/useCompanySelector";
 import { useTickerSelector } from "./componentHooks/useTickerSelector";
 export const CompanyOverview = (props) => {
