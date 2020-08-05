@@ -13,6 +13,7 @@ import { Footer } from "./components/footer";
 import { useDispatch, useSelector } from "react-redux";
 import { quoteSelector } from "./selectors/quoteSelector";
 import { tickerSelector } from "./selectors/tickerSelector";
+import { MarketInfo } from "./components/marketInfo";
 
 export const StockTrader = () => {
   //Call necessary selectors for display data
@@ -45,6 +46,7 @@ export const StockTrader = () => {
           </DisplayWrapper>
           <DisplayWrapper variant="flexRow" mt="16px" mb="24px">
             <CompanyBadges />
+            <MarketInfo />
           </DisplayWrapper>
           <DisplayWrapper variant="flexColumn">
             <DisplayWrapper height="50%" variant="flexRow">

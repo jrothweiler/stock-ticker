@@ -60,6 +60,10 @@ describe("Application", () => {
     expect(screen.getByText("PHQ")).toBeInTheDocument(); // company overview
     expect(screen.getByText("387.46")).toBeInTheDocument(); // big price
     expect(screen.getByText("NASDAQ")).toBeInTheDocument(); // company badges
+    expect(screen.getByText("Market Open")).toBeInTheDocument(); // Market Info
+    expect(
+      screen.getByText("Real-Time Price as of Aug 3, 2020 6:47 PM UTC")
+    ).toBeInTheDocument(); // market info
   });
 
   test("a socket connection is made", () => {

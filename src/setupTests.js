@@ -17,6 +17,8 @@ let quoteJsonApple = {
   latestVolume: 115518,
   open: "392.56",
   avgTotalVolume: 35008229,
+  isUSMarketOpen: true,
+  latestUpdate: 1596480448000,
 };
 
 let statsJsonApple = {
@@ -110,6 +112,8 @@ let quoteJsonWork = {
   latestVolume: 58449,
   open: "29.10",
   avgTotalVolume: 20338294,
+  isUSMarketOpen: true,
+  latestUpdate: 1596480448000,
 };
 
 let statsJsonWork = {
