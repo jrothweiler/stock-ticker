@@ -24,7 +24,6 @@ export const MarketInfo = () => {
         Real-Time Price as of {latestTimeString}
       </Text>
       <Icon
-        className="searchIcon"
         path={marketOpen ? mdiWeatherSunny : mdiWeatherNight}
         size={1.0}
         color="#ffbb5e"

@@ -190,7 +190,6 @@ let historyJsonWork = [
     minute: "09:32",
     price: "29.22",
   },
-  ,
 ];
 
 // Mock an empty function from chartjs to get tests to run without breaking
@@ -270,6 +269,18 @@ const server = setupServer(
 
   rest.get("/api/history/BADSYMBOL", (req, res, ctx) => {
     return res(ctx.status(404));
+  }),
+
+  rest.get("/api/search/:searchText", (req, res, ctx) => {
+    return res(
+      ctx.json([
+        {
+          exchange: "Suggestion Exchange",
+          symbol: "WORK",
+          securityName: "Suggestion Inc",
+        },
+      ])
+    );
   })
 );
 
