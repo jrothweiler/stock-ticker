@@ -75,7 +75,6 @@ export const PriceDisplay = (props) => {
             size={props.size}
             display="inline-block"
             fontWeight="lighter"
-            mr="1.5rem"
           >
             {(
               Math.abs(
