@@ -190,7 +190,6 @@ let historyJsonWork = [
     minute: "09:32",
     price: "29.22",
   },
-  ,
 ];
 
 // Mock an empty function from chartjs to get tests to run without breaking
@@ -273,7 +272,15 @@ const server = setupServer(
   }),
 
   rest.get("/api/search/:searchText", (req, res, ctx) => {
-    return res(ctx.json([]));
+    return res(
+      ctx.json([
+        {
+          exchange: "Suggestion Exchange",
+          symbol: "WORK",
+          securityName: "Suggestion Inc",
+        },
+      ])
+    );
   })
 );
 

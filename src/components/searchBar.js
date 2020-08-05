@@ -45,7 +45,7 @@ export const SearchBar = (props) => {
     }
   }
 
-  function handleSubmit(text) {
+  function handleSearch(text) {
     if (currentText.match(VALID_SEARCH_REGEXP)) {
       dispatch({ type: "searchSymbol", payload: text.toUpperCase() });
       setCurrentText("");
@@ -71,7 +71,7 @@ export const SearchBar = (props) => {
   }
 
   function handleRowClick(item) {
-    handleSubmit(item.symbol);
+    handleSearch(item.symbol);
   }
 
   function handleRenderSuggestion(item) {
@@ -118,7 +118,7 @@ export const SearchBar = (props) => {
         className="searchForm"
         onSubmit={(e) => {
           e.preventDefault();
-          handleSubmit(currentText);
+          handleSearch(currentText);
         }}
       >
         <Icon

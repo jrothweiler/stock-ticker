@@ -132,4 +132,19 @@ describe("Search bar component", () => {
     // Now has slack's stats (dividend yield in this case)
     expect(screen.getByText("N/A")).toBeInTheDocument();
   });
+
+  test("autocomplete works and can initiate a search", async () => {
+    expect(screen.getByText("Apple, Inc.")).toBeInTheDocument();
+    expect(screen.queryByText("Suggestion Inc")).not.toBeInTheDocument();
+
+    const input = screen.getByRole("textbox");
+    fireEvent.change(input, { target: { value: "WORK" } });
+
+    await waitForElement(() => screen.getByText("Suggestion Inc"));
+
+    fireEvent.click(screen.getByText("Suggestion Inc"));
+
+    // the above click should launch a search that updates the UI
+    await waitForElement(() => screen.getByText("Slack Technologies, Inc."));
+  });
 });
