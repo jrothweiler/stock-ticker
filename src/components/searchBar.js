@@ -6,9 +6,9 @@ import { VALID_SEARCH_REGEXP } from "../utils/constants";
 import { DisplayWrapper } from "../components/generics/displayWrapper";
 import { Text } from "../components/generics/text";
 import { searchErrorsSelector } from "../selectors/errorsSelectors";
-import Autosuggest from "react-autosuggest";
 import { searchFetch } from "../utils/serverUtils";
-import { DisplayBadge } from "../components/generics/displayBadge";
+import { TableRow } from "../components/generics/tableRow";
+import { TableColumn } from "../components/generics/tableColumn";
 
 export const SearchBar = (props) => {
   let [currentText, setCurrentText] = useState("");
@@ -27,8 +27,22 @@ export const SearchBar = (props) => {
 
   let dispatch = useDispatch();
 
-  function handleType(e, { newValue }) {
-    setCurrentText(newValue);
+  function handleSuggestionFetch(value) {
+    searchFetch(value).then((data) => {
+      if (data) {
+        setSymbolSuggestions(data);
+      }
+    });
+  }
+
+  function handleType(e) {
+    let newText = e.target.value;
+    setCurrentText(newText);
+    if (newText !== "") {
+      handleSuggestionFetch(newText);
+    } else {
+      setSymbolSuggestions([]);
+    }
   }
 
   function handleSubmit(e) {
@@ -56,31 +70,20 @@ export const SearchBar = (props) => {
     inputRef.current.focus();
   }
 
-  function handleSuggestionFetch({ value }) {
-    searchFetch(value).then((data) => {
-      if (data) {
-        setSymbolSuggestions(data);
-      }
-    });
-  }
-
-  function handleSuggestionClear() {
+  function handleRowClick(item) {
     setSymbolSuggestions([]);
-  }
-
-  function getSuggestionValue(item) {
-    return item.symbol;
+    setCurrentText(item.symbol);
   }
 
   function handleRenderSuggestion(item) {
     return (
-      <tr>
-        <td>
+      <TableRow key={item.symbol} onClick={() => handleRowClick(item)}>
+        <TableColumn>
           <Text color="darkblue" size="medium" mr="10px">
             {item.symbol}
           </Text>
-        </td>
-        <td>
+        </TableColumn>
+        <TableColumn>
           <Text
             variant="primary"
             size="medium"
@@ -89,24 +92,16 @@ export const SearchBar = (props) => {
           >
             {item.securityName}
           </Text>
-          <Text variant="primary" display="inline-block">
+          <Text
+            className="suggestionExchange"
+            variant="primary"
+            display="inline-block"
+            padding="2px 8px"
+          >
             {item.exchange}
           </Text>
-        </td>
-      </tr>
-    );
-  }
-
-  // Bad approach, mapping handleRenderSuggestion
-  // instead of using the children argument that already has
-  // handleRenderSuggestion applied, but this library
-  // always makes the children a ul list, so we cannot
-  // do a table with this library without this workaround.
-  function handleRenderSuggestionContainer({ containerProps }) {
-    return (
-      <table {...containerProps}>
-        {symbolSuggestions.map(handleRenderSuggestion)}
-      </table>
+        </TableColumn>
+      </TableRow>
     );
   }
 
@@ -127,27 +122,25 @@ export const SearchBar = (props) => {
           size={1.5}
           color="#5496ff"
         />
-        <Autosuggest
-          suggestions={symbolSuggestions}
-          onSuggestionsFetchRequested={handleSuggestionFetch}
-          onSuggestionsClearRequested={handleSuggestionClear}
-          getSuggestionValue={getSuggestionValue}
-          renderSuggestion={handleRenderSuggestion}
-          renderSuggestionsContainer={handleRenderSuggestionContainer}
-          inputProps={{
-            value: currentText,
-            onChange: handleType,
-            onFocus: onInputFocus,
-            onBlur: onLeaveInputFocus,
-            ref: inputRef,
-          }}
-          theme={{
-            input: "searchBar",
-            container: "searchContainer",
-            suggestionsContainer: "searchSuggestionsContainer",
-            suggestionsList: "searchSuggestionsList",
-          }}
+        <input
+          ref={inputRef}
+          className="searchBar"
+          onBlur={onLeaveInputFocus}
+          onFocus={onInputFocus}
+          value={currentText}
+          onChange={handleType}
         />
+        {symbolSuggestions.length > 0 && (
+          <DisplayWrapper
+            padding="10px 15px"
+            position="absolute"
+            className="searchSuggestionsContainer"
+          >
+            <table>
+              <tbody>{symbolSuggestions.map(handleRenderSuggestion)}</tbody>
+            </table>
+          </DisplayWrapper>
+        )}
         {showCompanyText && (
           <div className="companyText" onClick={onCompanyTextClick}>
             <Text

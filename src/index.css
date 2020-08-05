@@ -30,6 +30,13 @@ body {
   position: absolute;
 }
 
+.suggestionExchange {
+  border-radius: 2px;
+  background-color: rgba(128, 180, 255, 0.13);
+  opacity: 0.5;
+  padding: 2px 8px;
+}
+
 .searchSuggestionsList {
   list-style: none;
 }
