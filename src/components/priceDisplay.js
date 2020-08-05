@@ -24,27 +24,25 @@ export const PriceDisplay = (props) => {
             size={props.size}
             display="inline-block"
           >
-            <sup>
-              <div className="dollarSign">$</div>
-            </sup>
+            <Text fontSize="20px" verticalAlign="top" display="inline-block">
+              $
+            </Text>
             {props.data.latestPrice.toLocaleString("en")} &nbsp;
           </Text>
-          <sup>
-            <Icon
-              className="arrow"
-              path={
-                props.data.latestPrice - props.data.open >= 0
-                  ? mdiArrowUp
-                  : mdiArrowDown
-              }
-              size={props.size === "medium" ? 0.58 : 1.35}
-              color={
-                props.data.latestPrice - props.data.open >= 0
-                  ? "#91e4a5"
-                  : "#E95656"
-              }
-            />
-          </sup>
+          <Icon
+            className="arrow"
+            path={
+              props.data.latestPrice - props.data.open >= 0
+                ? mdiArrowUp
+                : mdiArrowDown
+            }
+            size={props.size === "medium" ? 0.58 : 1.35}
+            color={
+              props.data.latestPrice - props.data.open >= 0
+                ? "#91e4a5"
+                : "#E95656"
+            }
+          />
           <Text
             variant={
               props.data.latestPrice - props.data.open >= 0 ? "gain" : "loss"
@@ -81,9 +79,9 @@ export const PriceDisplay = (props) => {
                 (props.data.latestPrice - props.data.open) / props.data.open
               ) * 100
             ).toFixed(2)}
-            <sup>
-              <div className="percentSign">%</div>
-            </sup>
+            <Text fontSize="20px" verticalAlign="top" display="inline-block">
+              %
+            </Text>
           </Text>
         </div>
       )}

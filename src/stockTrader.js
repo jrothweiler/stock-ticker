@@ -23,9 +23,10 @@ export const StockTrader = () => {
   const ticker = useSelector(tickerSelector);
 
   return (
-    <DisplayWrapper ml="5%" mr="5%" mt="2.5%" mb="5%" max-width="100%">
+    <DisplayWrapper mt="2.5%" mb="5%" max-width="100%">
       {ticker && (
         <>
+        <DisplayWrapper ml="5%" mr="5%" max-width="100%">
           <DisplayWrapper variant="flexRow" mb="2.0rem">
             <Header />
           </DisplayWrapper>
@@ -50,14 +51,14 @@ export const StockTrader = () => {
           </DisplayWrapper>
           <DisplayWrapper variant="flexColumn">
             <DisplayWrapper height="50%" variant="flexRow">
-              <VisualDisplay width={["100%", null, "55%"]} mb="32px" />
-              <LatestNews width={["100%", null, "40%"]} mb="32px" />
+              <VisualDisplay width={["100%", null, "64%"]} mb="32px" />
+              <LatestNews width={["100%", null, "33%"]} mb="32px" />
             </DisplayWrapper>
-            <DisplayWrapper height="40%" variant="flexRow">
-              <KeyStats width={["100%", null, "55%"]} mb="32px" />
+            <DisplayWrapper height="35%" variant="flexRow">
+              <KeyStats width={["100%", null, "64%"]} mb="32px" />
 
               <DisplayWrapper
-                width={["100%", null, "40%"]}
+                width={["100%", null, "33%"]}
                 variant="flexColumn"
               >
                 <CompanyOverview mb="32px" />
@@ -65,9 +66,10 @@ export const StockTrader = () => {
               </DisplayWrapper>
             </DisplayWrapper>
           </DisplayWrapper>
-          <DisplayWrapper mt="2.0rem" width="100%">
-            <Footer width="100%" height="5%" />
-          </DisplayWrapper>
+        </DisplayWrapper>
+        <DisplayWrapper mt="2.0rem" width="100%">
+        <Footer width="100%" height="5%" />
+      </DisplayWrapper>
         </>
       )}
     </DisplayWrapper>

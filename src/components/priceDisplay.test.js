@@ -24,7 +24,6 @@ describe("Price Display component", () => {
     );
     app = container;
     waitForElement(() => screen.getByText("MSFT"));
-    console.log(prettyDOM(app));
   });
 
   afterEach(cleanup);
