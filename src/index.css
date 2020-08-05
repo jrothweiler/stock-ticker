@@ -15,11 +15,6 @@ body {
   vertical-align: middle;
 }
 
-.searchContainer {
-  display: inline-block;
-  max-width: 75%;
-}
-
 .searchSuggestionsContainer {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
   background-image: linear-gradient(
@@ -35,10 +30,6 @@ body {
   background-color: rgba(128, 180, 255, 0.13);
   opacity: 0.5;
   padding: 2px 8px;
-}
-
-.searchSuggestionsList {
-  list-style: none;
 }
 
 .searchBar {
@@ -86,18 +77,7 @@ a {
   background-image: linear-gradient(to bottom, #00265d, #00204f);
 }
 
-.searchIcon {
-}
-
-.dollarSign {
-  display: inline-block;
-}
-
 .arrow {
   margin-right: -6px;
   vertical-align: top;
-}
-
-.percentSign {
-  display: inline-block;
 }
