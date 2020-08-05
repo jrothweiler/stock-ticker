@@ -270,6 +270,33 @@ const server = setupServer(
 
   rest.get("/api/history/BADSYMBOL", (req, res, ctx) => {
     return res(ctx.status(404));
+  }),
+
+  rest.get("/api/quote/MSFT", (req, res, ctx) => {
+    return res(
+      ctx.json({
+        symbol: "MSFT",
+        latestPrice: 10.09,
+      })
+    );
+  }),
+
+  rest.get("/api/quote/AMZN", (req, res, ctx) => {
+    return res(
+      ctx.json({
+        symbol: "AMZN",
+        latestPrice: 310.09,
+      })
+    );
+  }),
+
+  rest.get("/api/quote/GOOGL", (req, res, ctx) => {
+    return res(
+      ctx.json({
+        symbol: "GOOGL",
+        latestPrice: 210.09,
+      })
+    );
   })
 );
 
