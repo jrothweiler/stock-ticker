@@ -20,6 +20,20 @@ body {
   max-width: 75%;
 }
 
+.searchSuggestionsContainer {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  background-image: linear-gradient(
+    to bottom,
+    #001330 2%,
+    rgba(0, 8, 19, 0.8) 177%
+  );
+  position: absolute;
+}
+
+.searchSuggestionsList {
+  list-style: none;
+}
+
 .searchBar {
   background: inherit;
   border: none;
@@ -66,24 +80,16 @@ a {
 }
 
 .searchIcon {
-  transform: translateY(-10%);
 }
 
 .dollarSign {
-  transform: translateY(22%);
   display: inline-block;
 }
 
 .arrow {
-  transform: translateY(11%);
   margin-right: -6px;
 }
 
-.separator {
-  transform: translateY(-7%);
-}
-
 .percentSign {
-  transform: translateY(20%);
   display: inline-block;
 }

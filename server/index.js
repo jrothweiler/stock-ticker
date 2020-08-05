@@ -44,8 +44,6 @@ async function symbolSearch(searchText) {
   return fetchResult.data;
 }
 
-symbolSearch("a");
-
 async function getQuoteData(symbol) {
   const [quoteData, dailyData] = await Promise.all([
     fetchWrapper(iex.quote, symbol),

@@ -72,7 +72,16 @@ export const SearchBar = (props) => {
   }
 
   function handleRenderSuggestion(item) {
-    return <div>{item.symbol}</div>;
+    return (
+      <DisplayWrapper variant="flexRow" justifyContent="flex-start">
+        <Text color="darkblue" size="medium" mr="10px">
+          {item.symbol}
+        </Text>
+        <Text variant="primary" size="medium" mr="10px">
+          {item.securityName}
+        </Text>
+      </DisplayWrapper>
+    );
   }
 
   useEffect(() => {
@@ -108,6 +117,8 @@ export const SearchBar = (props) => {
           theme={{
             input: "searchBar",
             container: "searchContainer",
+            suggestionsContainer: "searchSuggestionsContainer",
+            suggestionsList: "searchSuggestionsList",
           }}
         />
         {showCompanyText && (
