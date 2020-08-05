@@ -8,6 +8,7 @@ import { Text } from "../components/generics/text";
 import { searchErrorsSelector } from "../selectors/errorsSelectors";
 import Autosuggest from "react-autosuggest";
 import { searchFetch } from "../utils/serverUtils";
+import { DisplayBadge } from "../components/generics/displayBadge";
 
 export const SearchBar = (props) => {
   let [currentText, setCurrentText] = useState("");
@@ -73,14 +74,39 @@ export const SearchBar = (props) => {
 
   function handleRenderSuggestion(item) {
     return (
-      <DisplayWrapper variant="flexRow" justifyContent="flex-start">
-        <Text color="darkblue" size="medium" mr="10px">
-          {item.symbol}
-        </Text>
-        <Text variant="primary" size="medium" mr="10px">
-          {item.securityName}
-        </Text>
-      </DisplayWrapper>
+      <tr>
+        <td>
+          <Text color="darkblue" size="medium" mr="10px">
+            {item.symbol}
+          </Text>
+        </td>
+        <td>
+          <Text
+            variant="primary"
+            size="medium"
+            mr="16px"
+            display="inline-block"
+          >
+            {item.securityName}
+          </Text>
+          <Text variant="primary" display="inline-block">
+            {item.exchange}
+          </Text>
+        </td>
+      </tr>
+    );
+  }
+
+  // Bad approach, mapping handleRenderSuggestion
+  // instead of using the children argument that already has
+  // handleRenderSuggestion applied, but this library
+  // always makes the children a ul list, so we cannot
+  // do a table with this library without this workaround.
+  function handleRenderSuggestionContainer({ containerProps }) {
+    return (
+      <table {...containerProps}>
+        {symbolSuggestions.map(handleRenderSuggestion)}
+      </table>
     );
   }
 
@@ -107,6 +133,7 @@ export const SearchBar = (props) => {
           onSuggestionsClearRequested={handleSuggestionClear}
           getSuggestionValue={getSuggestionValue}
           renderSuggestion={handleRenderSuggestion}
+          renderSuggestionsContainer={handleRenderSuggestionContainer}
           inputProps={{
             value: currentText,
             onChange: handleType,

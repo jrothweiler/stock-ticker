@@ -33,7 +33,6 @@ export const PriceDisplay = (props) => {
           </Text>
           <Icon
             className="arrow"
-            verticalAlign="top"
             path={
               props.data.latestPrice - props.data.open >= 0
                 ? mdiArrowUp

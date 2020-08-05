@@ -88,6 +88,7 @@ a {
 
 .arrow {
   margin-right: -6px;
+  vertical-align: top;
 }
 
 .percentSign {
