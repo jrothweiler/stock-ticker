@@ -5,8 +5,6 @@ import Icon from "@mdi/react";
 import { useDispatch, useSelector } from "react-redux";
 
 export const PriceDisplay = (props) => {
-  //Call necessary selectors for display data
-  const dispatch = useDispatch();
   return (
     <div>
       {props.data && (

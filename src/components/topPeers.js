@@ -2,17 +2,12 @@ import React from "react";
 import { DisplayWrapper } from "./generics/displayWrapper";
 import { TitleHeader } from "./generics/titleHeader";
 import { Text } from "./generics/text";
-import { useDispatch, useSelector } from "react-redux";
+
 import { usePeersSelector } from "./componentHooks/usePeersSelector";
-
+import { useSearchSymbol } from "./componentHooks/useSearchSymbol";
 export const TopPeers = (props) => {
-  const dispatch = useDispatch();
   const peersInfo = usePeersSelector();
-
-  const handleSearch = (peer) => {
-    dispatch({ type: "searchSymbol", payload: peer });
-  };
-
+  const searchSymbol = useSearchSymbol();
   return (
     <DisplayWrapper {...props}>
       <TitleHeader>TOP PEERS</TitleHeader>
@@ -23,7 +18,7 @@ export const TopPeers = (props) => {
           mr="1.0rem"
           display="inline-block"
           variant="secondary"
-          onClick={() => handleSearch(peer)}
+          onClick={() => searchSymbol(peer)}
         >
           {peer}
         </Text>
@@ -33,7 +28,7 @@ export const TopPeers = (props) => {
         className="topPeer"
         display="inline-block"
         variant="secondary"
-        onClick={() => handleSearch("WORK")}
+        onClick={() => searchSymbol("WORK")}
       >
         WORK
       </Text>
