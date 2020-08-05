@@ -3,8 +3,8 @@ import { quoteSelector } from "../../selectors/quoteSelector";
 import { useDispatch, createDispatchHook } from "react-redux";
 
 
-export const useSearchSymbol = (peer) => { 
+export const useSearchSymbol = () => { 
     const dispatch = useDispatch();
-    return (() =>
+    return ((peer) =>
     dispatch({ type: "searchSymbol", payload: peer })
 )};
