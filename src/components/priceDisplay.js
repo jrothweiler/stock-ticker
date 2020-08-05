@@ -43,6 +43,7 @@ export const PriceDisplay = (props) => {
                   ? "#91e4a5"
                   : "#E95656"
               }
+              marginRight={props.size === "medium" ? "1.0rem" : "2.0rem"}
             />
           </sup>
           <Text
