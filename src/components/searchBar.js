@@ -45,14 +45,14 @@ export const SearchBar = (props) => {
     }
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit(text) {
     if (currentText.match(VALID_SEARCH_REGEXP)) {
-      dispatch({ type: "searchSymbol", payload: currentText.toUpperCase() });
+      dispatch({ type: "searchSymbol", payload: text.toUpperCase() });
       setCurrentText("");
       setShowBadInputError(false);
       dispatch({ type: "clearSearchErrors" });
       inputRef.current.blur();
+      setSymbolSuggestions([]);
     } else {
       setShowBadInputError(true);
     }
@@ -71,8 +71,7 @@ export const SearchBar = (props) => {
   }
 
   function handleRowClick(item) {
-    setSymbolSuggestions([]);
-    setCurrentText(item.symbol);
+    handleSubmit(item.symbol);
   }
 
   function handleRenderSuggestion(item) {
@@ -115,7 +114,13 @@ export const SearchBar = (props) => {
 
   return (
     <DisplayWrapper {...props}>
-      <form className="searchForm" onSubmit={handleSubmit}>
+      <form
+        className="searchForm"
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit(currentText);
+        }}
+      >
         <Icon
           className="searchIcon"
           path={mdiMagnify}
