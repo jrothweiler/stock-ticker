@@ -2,7 +2,7 @@ import React from "react";
 import { DisplayWrapper } from "./generics/displayWrapper";
 import { PriceDisplay } from "./priceDisplay";
 import { Text } from "./generics/text";
-import {useIndexSelector} from "./componentHooks/useIndexSelector"
+import { useIndexSelector } from "./componentHooks/useIndexSelector";
 
 export const Footer = (props) => {
   const indexes = useIndexSelector();
@@ -25,7 +25,13 @@ export const Footer = (props) => {
       >
         {indexes &&
           indexes.map((index) => (
-            <PriceDisplay key={index.symbol} data={index} ticker={index.symbol} size="medium" />
+            <PriceDisplay
+              key={index.symbol}
+              data={index}
+              ticker={index.symbol}
+              size="medium"
+              mr="24px"
+            />
           ))}
       </DisplayWrapper>
     </DisplayWrapper>

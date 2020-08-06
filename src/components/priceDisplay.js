@@ -2,11 +2,11 @@ import React from "react";
 import { Text } from "./generics/text";
 import { mdiArrowDown, mdiArrowUp } from "@mdi/js";
 import Icon from "@mdi/react";
-import { useDispatch, useSelector } from "react-redux";
+import { DisplayWrapper } from "./generics/displayWrapper";
 
 export const PriceDisplay = (props) => {
   return (
-    <div>
+    <DisplayWrapper {...props}>
       {props.data && (
         <div>
           <Text
@@ -24,7 +24,11 @@ export const PriceDisplay = (props) => {
             size={props.size}
             display="inline-block"
           >
-            <Text fontSize="20px" verticalAlign="top" display="inline-block">
+            <Text
+              fontSize={props.size === "medium" ? "8px" : "20px"}
+              verticalAlign="top"
+              display="inline-block"
+            >
               $
             </Text>
             {props.data.latestPrice.toLocaleString("en")} &nbsp;
@@ -73,19 +77,22 @@ export const PriceDisplay = (props) => {
             size={props.size}
             display="inline-block"
             fontWeight="lighter"
-            mr="1.5rem"
           >
             {(
               Math.abs(
                 (props.data.latestPrice - props.data.open) / props.data.open
               ) * 100
             ).toFixed(2)}
-            <Text fontSize="20px" verticalAlign="top" display="inline-block">
+            <Text
+              fontSize={props.size === "medium" ? "8px" : "20px"}
+              verticalAlign="top"
+              display="inline-block"
+            >
               %
             </Text>
           </Text>
         </div>
       )}
-    </div>
+    </DisplayWrapper>
   );
 };

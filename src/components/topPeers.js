@@ -15,9 +15,10 @@ export const TopPeers = (props) => {
         <Text
           key={peer}
           className="topPeer"
-          mr="1.0rem"
+          mr="18px"
           display="inline-block"
           variant="secondary"
+          opacity={1}
           onClick={() => searchSymbol(peer)}
         >
           {peer}
@@ -28,6 +29,7 @@ export const TopPeers = (props) => {
         className="topPeer"
         display="inline-block"
         variant="secondary"
+        opacity={1}
         onClick={() => searchSymbol("WORK")}
       >
         WORK
