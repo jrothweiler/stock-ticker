@@ -30,7 +30,8 @@ export const SearchBar = (props) => {
   function handleSuggestionFetch(value) {
     searchFetch(value).then((data) => {
       if (data) {
-        setSymbolSuggestions(data);
+        // only take up to 5 suggestions
+        setSymbolSuggestions(data.slice(0, 5));
       }
     });
   }
