@@ -9,9 +9,9 @@ export const CompanyOverview = (props) => {
   const companyInfo = useCompanySelector();
   const ticker = useTickerSelector();
   return (
-    <DisplayWrapper {...props}>
+    <DisplayWrapper mb = {props.mb}>
       <TitleHeader>COMPANY OVERVIEW</TitleHeader>
-      <Text height="100%" overflow="auto">
+      <Text  height={props.height} overflow="auto">
         <Text variant="primary" fontSize="1.8rem">
           {companyInfo.companyName} ({ticker})
         </Text>

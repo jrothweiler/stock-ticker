@@ -40,7 +40,7 @@ export const PriceDisplay = (props) => {
                 ? mdiArrowUp
                 : mdiArrowDown
             }
-            size={props.size === "medium" ? 0.58 : 1.35}
+            size={props.size === "medium" ? 0.50 : 1.0}
             color={
               props.data.latestPrice - props.data.open >= 0
                 ? "#91e4a5"

@@ -58,10 +58,11 @@ export const StockTrader = () => {
               <KeyStats width={["100%", null, "64%"]} mb="32px" />
 
               <DisplayWrapper
+                
                 width={["100%", null, "33%"]}
                 variant="flexColumn"
               >
-                <CompanyOverview mb="32px" />
+                <CompanyOverview height="200px" mb="32px" />
                 <TopPeers />
               </DisplayWrapper>
             </DisplayWrapper>

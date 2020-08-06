@@ -11,6 +11,7 @@ export const BannerButton = styled("button")(
     backgroundColor: "inherit",
     color: "white",
     display: "inlineBlock",
+    marginRight: "2.1rem",
   },
   variant({
     variants: {
