@@ -8,7 +8,7 @@ export const PriceDisplay = (props) => {
   return (
     <DisplayWrapper {...props}>
       {props.data && (
-        <div>
+        <DisplayWrapper lineHeight={0.9}>
           <Text
             variant="primary"
             fontWeight="bold"
@@ -40,7 +40,7 @@ export const PriceDisplay = (props) => {
                 ? mdiArrowUp
                 : mdiArrowDown
             }
-            size={props.size === "medium" ? 0.50 : 1.0}
+            size={props.size === "medium" ? 0.5 : 1.0}
             color={
               props.data.latestPrice - props.data.open >= 0
                 ? "#91e4a5"
@@ -91,7 +91,7 @@ export const PriceDisplay = (props) => {
               %
             </Text>
           </Text>
-        </div>
+        </DisplayWrapper>
       )}
     </DisplayWrapper>
   );
