@@ -78,6 +78,7 @@ describe("Application", () => {
     expect(screen.queryByText("400.46")).not.toBeInTheDocument();
 
     socketIOClient().receiveEvent("realTimeQuoteData", {
+      symbol: "AAPL",
       previousClose: "479.47",
       week52High: "517.16",
       week52Low: "297.51",
