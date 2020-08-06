@@ -6,6 +6,7 @@ import { useIndexSelector } from "./componentHooks/useIndexSelector";
 
 export const Footer = (props) => {
   const indexes = useIndexSelector();
+  //const indexes = [];
   return (
     <DisplayWrapper
       className="footer"
