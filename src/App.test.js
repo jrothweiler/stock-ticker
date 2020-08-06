@@ -64,6 +64,8 @@ describe("Application", () => {
     expect(
       screen.getByText("Real-Time Price as of Aug 3, 2020 6:47 PM UTC")
     ).toBeInTheDocument(); // market info
+    expect(screen.getByText("MSFT")).toBeInTheDocument(); //Footer info
+    expect(screen.getByText("10.09")).toBeInTheDocument(); //Footer info
   });
 
   test("a socket connection is made", () => {
