@@ -17,6 +17,11 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case "newQuoteData": {
+      // if the symbol fetched for does not match the current symbol,
+      // this action might be leftover from the previous symbol, so disregard it
+      if (state.ticker !== action.payload.symbol) {
+        return state;
+      }
       return {
         ...state,
         tickerInfo: {

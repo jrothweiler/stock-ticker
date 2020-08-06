@@ -6,6 +6,7 @@ import {
   variant,
   layout,
   space,
+  typography,
 } from "styled-system";
 export const DisplayWrapper = styled("div")(
   {
@@ -34,5 +35,6 @@ export const DisplayWrapper = styled("div")(
   space,
   border,
   flexbox,
-  position
+  position,
+  typography
 );
