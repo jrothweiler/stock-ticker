@@ -3,7 +3,6 @@ const http = require("http");
 const bodyParser = require("body-parser");
 const iex = require("iexcloud_api_wrapper");
 const socketIo = require("socket.io");
-
 const axios = require("axios");
 
 const app = express();
@@ -164,13 +163,12 @@ app.get("/api/history/:symbol", async (req, res) => {
       chartCloseOnly: true,
     });
     const returnData = historyData.map((day) => {
+      // if the data is minute to minute, go by average price for that period
+      // on a day by day frequency, go by the closing price
       let price = safeToFixed(day.average, 2) || safeToFixed(day.close, 2);
       return {
         date: day.date,
         minute: day.minute,
-
-        // if the data is minute to minute, go by average price for that period
-        // on a day by day frequency, go by the closing price
         price: price,
       };
     });
