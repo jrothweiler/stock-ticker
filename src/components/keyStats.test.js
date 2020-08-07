@@ -33,16 +33,10 @@ jest.mock("./componentHooks/useStatsSelector", () => ({
 }));
 
 describe("Key Stats component", () => {
-  let app;
-
   beforeEach(async () => {
-    const { container } = render(<KeyStats />);
-    app = container;
-
+    render(<KeyStats />);
     await waitForElement(() => screen.getByText("Previous Close"));
   });
-
-  afterEach(cleanup);
 
   test("Key stats labels are rendered", () => {
     const keyStatsHeader = screen.getByText("KEY STATS");

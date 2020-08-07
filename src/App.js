@@ -21,6 +21,7 @@ import {
   SEARCH_INDEXES,
   FETCH_HISTORY,
   SEARCH_SYMBOL,
+  WEBSOCKET_URL,
 } from "./utils/constants";
 import socketIOClient from "socket.io-client";
 import { StockTrader } from "./stockTrader";
@@ -29,10 +30,9 @@ import theme from "./themes/theme";
 
 //Triggers dispatches (May need to be broken down into multiple Middlewares chained together)
 const producerMiddleWare = (rawStore) => {
-  const socket = socketIOClient("http://localhost:3001");
+  const socket = socketIOClient(WEBSOCKET_URL);
 
   const dispatch = (action) => {
-    //Trigger dispatches here
     switch (action.type) {
       case SEARCH_SYMBOL: {
         let symbol = action.payload;

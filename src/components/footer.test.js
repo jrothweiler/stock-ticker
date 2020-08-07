@@ -18,15 +18,10 @@ jest.mock("./componentHooks/useIndexSelector", () => ({
 }));
 
 describe("Footer component", () => {
-  let app;
-
   beforeEach(async () => {
-    const { container } = render(<Footer />);
-    app = container;
+    render(<Footer />);
     await waitForElement(() => screen.getByText("US MARKET"));
   });
-
-  afterEach(cleanup);
 
   test("Correct Footer data is rendered", () => {
     const footerHeader = screen.getByText("US MARKET");

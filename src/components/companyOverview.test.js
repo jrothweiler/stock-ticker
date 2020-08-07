@@ -23,11 +23,8 @@ jest.mock("./componentHooks/useTickerSelector", () => ({
 }));
 
 describe("Company Overview component", () => {
-  let app;
-
   beforeEach(async () => {
-    const { container } = render(<CompanyOverview />);
-    app = container;
+    render(<CompanyOverview />);
     await waitForElement(() => screen.getByText("Apple, Inc. (AAPL)"));
   });
 

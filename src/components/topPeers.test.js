@@ -20,12 +20,8 @@ jest.mock("./componentHooks/useSearchSymbol", () => ({
 }));
 
 describe("Top Peers component", () => {
-  let app;
-
   beforeEach(async () => {
-    const { container } = render(<TopPeers />);
-    app = container;
-
+    render(<TopPeers />);
     await waitForElement(() => screen.getByText("TOP PEERS"));
   });
 
