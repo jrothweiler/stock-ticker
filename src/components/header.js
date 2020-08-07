@@ -2,7 +2,6 @@ import React from "react";
 import { DisplayWrapper } from "./generics/displayWrapper";
 import logo from "./assets/AdaptiveLogo.png";
 import { BannerButton } from "./generics/bannerButton";
-import { useDispatch } from "react-redux";
 
 export const Header = () => {
   return (

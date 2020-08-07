@@ -1,4 +1,3 @@
-import React from "react";
 import { newsSelector } from "../../selectors/newsSelector";
 import { useSelector } from "react-redux";
 

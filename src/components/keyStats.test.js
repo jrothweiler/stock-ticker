@@ -1,17 +1,11 @@
 import React from "react";
-import * as redux from "react-redux";
 import {
   render,
   cleanup,
   screen,
-  prettyDOM,
   waitForElement,
-  fireEvent,
 } from "@testing-library/react";
-import App from "../App";
 import { KeyStats } from "./keyStats";
-import { useQuoteSelector } from "./componentHooks/useCompanySelector";
-import { useStatSelector } from "./componentHooks/useTickerSelector";
 
 jest.mock("./componentHooks/useQuoteSelector", () => ({
   useQuoteSelector: () => {

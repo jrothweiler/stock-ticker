@@ -1,15 +1,12 @@
-import React from "react";
 import {
-  render,
   cleanup,
-  screen,
-  prettyDOM,
-  waitForElement,
   fireEvent,
+  render,
+  screen,
+  waitForElement,
 } from "@testing-library/react";
-import App from "../App";
+import React from "react";
 import { TopPeers } from "./topPeers";
-import { useSearchSymbol } from "./componentHooks/useSearchSymbol";
 
 const mockFn = jest.fn();
 jest.mock("./componentHooks/usePeersSelector", () => ({

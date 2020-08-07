@@ -1,19 +1,17 @@
-import React, { useRef, useState, useEffect } from "react";
-import { DisplayWrapper } from "./generics/displayWrapper";
+import "chartjs-plugin-annotation";
+import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Button } from "../components/generics/button";
+import { Text } from "../components/generics/text";
 import {
-  historySelector,
   chartRangeSelector,
+  historySelector,
 } from "../selectors/historySelector";
 import { currentPriceSelector } from "../selectors/quoteSelector";
 import { tickerSelector } from "../selectors/tickerSelector";
 import { POSSIBLE_CHART_RANGES } from "../utils/constants";
-import { Text } from "../components/generics/text";
-import { Button } from "../components/generics/button";
-import "chartjs-plugin-annotation";
-import { layout } from "styled-system";
-import { useCurrentPriceSelector } from "./componentHooks/useCurrentPriceSelector";
+import { DisplayWrapper } from "./generics/displayWrapper";
 export const VisualDisplay = (props) => {
   const dispatch = useDispatch();
 

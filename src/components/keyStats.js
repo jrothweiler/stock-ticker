@@ -3,9 +3,9 @@ import { DisplayWrapper } from "./generics/displayWrapper";
 import { TitleHeader } from "./generics/titleHeader";
 import { Text } from "./generics/text";
 import { StatWrapper } from "./generics/statWrapper";
-import { useDispatch, useSelector } from "react-redux";
 import { useStatsSelector } from "./componentHooks/useStatsSelector";
 import { useQuoteSelector } from "./componentHooks/useQuoteSelector";
+
 export const KeyStats = (props) => {
   //Call necessary selectors for display data
   const stats = useStatsSelector();

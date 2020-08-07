@@ -1,4 +1,3 @@
-import React from "react";
 import { statsSelector } from "../../selectors/statsSelector";
 import { useSelector } from "react-redux";
 
