@@ -31,6 +31,7 @@ export const KeyStats = (props) => {
     "Market Cap",
     "P/E Ratio",
   ];
+
   const rowValuesFirstColumn = [
     quote.previousClose.toLocaleString("en"),
     `${quote.low.toLocaleString("en")} - ${quote.high.toLocaleString("en")}`,
@@ -38,6 +39,7 @@ export const KeyStats = (props) => {
     quote.marketCap.toLocaleString("en"),
     stats.peRatio.toLocaleString("en"),
   ];
+
   const rowLabelsSecondColumn = [
     "Open",
     "52 Week Range",
@@ -45,6 +47,7 @@ export const KeyStats = (props) => {
     "Earnings Per Share",
     "Dividend & Yield",
   ];
+
   const rowValuesSecondColumn = [
     quote.open.toLocaleString("en"),
     `${quote.week52Low.toLocaleString(

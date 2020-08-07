@@ -45,7 +45,7 @@ export const VisualDisplay = (props) => {
         payload: { symbol: currentSymbol, period: chartRange },
       });
     }
-  }, [currentSymbol, chartRange]);
+  }, [currentSymbol, chartRange, dispatch]);
 
   // if we have a previous range, format according to that, otherwise format according to redux one
   const xAxisRange = prevRange || chartRange;
