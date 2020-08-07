@@ -1,16 +1,11 @@
-import React from "react";
-import * as redux from "react-redux";
 import {
-  render,
   cleanup,
+  render,
   screen,
-  prettyDOM,
   waitForElement,
-  fireEvent,
 } from "@testing-library/react";
-import App from "../App";
+import React from "react";
 import { LatestNews } from "./latestNews";
-import { useNewsSelector } from "./componentHooks/useNewsSelector";
 
 jest.mock("./componentHooks/useNewsSelector", () => ({
   useNewsSelector: () => {

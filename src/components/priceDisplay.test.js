@@ -1,12 +1,10 @@
-import React from "react";
 import {
-  render,
   cleanup,
+  render,
   screen,
-  prettyDOM,
   waitForElement,
-  fireEvent,
 } from "@testing-library/react";
+import React from "react";
 import { PriceDisplay } from "./priceDisplay";
 
 describe("Price Display component", () => {

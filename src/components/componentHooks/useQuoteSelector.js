@@ -1,4 +1,3 @@
-import React from "react";
 import { quoteSelector } from "../../selectors/quoteSelector";
 import { useSelector } from "react-redux";
 

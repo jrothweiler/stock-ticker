@@ -1,12 +1,6 @@
 import React from "react";
-import {
-  render,
-  screen,
-  waitForElement,
-  fireEvent,
-} from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { CompanyBadges } from "./companyBadges";
-import { useCompanyBadgeInfo } from "../components/componentHooks/useCompanyBadgeInfo";
 
 jest.mock("./componentHooks/useCompanyBadgeInfo", () => ({
   useCompanyBadgeInfo: () => {

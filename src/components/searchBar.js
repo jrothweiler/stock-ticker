@@ -2,7 +2,11 @@ import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { mdiMagnify } from "@mdi/js";
 import Icon from "@mdi/react";
-import { VALID_SEARCH_REGEXP } from "../utils/constants";
+import {
+  VALID_SEARCH_REGEXP,
+  CLEAR_SEARCH_ERRORS,
+  SEARCH_SYMBOL,
+} from "../utils/constants";
 import { DisplayWrapper } from "../components/generics/displayWrapper";
 import { Text } from "../components/generics/text";
 import { searchErrorsSelector } from "../selectors/errorsSelectors";
@@ -48,10 +52,10 @@ export const SearchBar = (props) => {
 
   function handleSearch(text) {
     if (currentText.match(VALID_SEARCH_REGEXP)) {
-      dispatch({ type: "searchSymbol", payload: text.toUpperCase() });
+      dispatch({ type: SEARCH_SYMBOL, payload: text.toUpperCase() });
       setCurrentText("");
       setShowBadInputError(false);
-      dispatch({ type: "clearSearchErrors" });
+      dispatch({ type: CLEAR_SEARCH_ERRORS });
       inputRef.current.blur();
       setSymbolSuggestions([]);
     } else {

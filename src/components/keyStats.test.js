@@ -1,17 +1,11 @@
 import React from "react";
-import * as redux from "react-redux";
 import {
   render,
   cleanup,
   screen,
-  prettyDOM,
   waitForElement,
-  fireEvent,
 } from "@testing-library/react";
-import App from "../App";
 import { KeyStats } from "./keyStats";
-import { useQuoteSelector } from "./componentHooks/useCompanySelector";
-import { useStatSelector } from "./componentHooks/useTickerSelector";
 
 jest.mock("./componentHooks/useQuoteSelector", () => ({
   useQuoteSelector: () => {
@@ -67,7 +61,7 @@ describe("Key Stats component", () => {
     expect(openText).toBeInTheDocument();
     const week52RangeText = screen.getByText("52 Week Range");
     expect(week52RangeText).toBeInTheDocument();
-    const totalAvgVolumeText = screen.getByText("Total Avg Volume");
+    const totalAvgVolumeText = screen.getByText("Total Avg. Volume");
     expect(totalAvgVolumeText).toBeInTheDocument();
     const earningsPerShareText = screen.getByText("Earnings Per Share");
     expect(earningsPerShareText).toBeInTheDocument();

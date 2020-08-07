@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { variant } from "styled-system";
 
 export const TitleHeader = styled("header")({
   marginUp: "1.0rem",
