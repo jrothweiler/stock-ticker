@@ -11,7 +11,17 @@ import {
   historyFetch,
   peersFetch,
 } from "./utils/serverUtils";
-import { INITIAL_STOCK } from "./utils/constants";
+import {
+  INITIAL_STOCK,
+  SEARCH_ERROR,
+  NEW_TICKER_DATA,
+  NEW_INDEX_DATA,
+  NEW_HISTORY_DATA,
+  NEW_QUOTE_DATA,
+  SEARCH_INDEXES,
+  FETCH_HISTORY,
+  SEARCH_SYMBOL,
+} from "./utils/constants";
 import socketIOClient from "socket.io-client";
 import { StockTrader } from "./stockTrader";
 import { ThemeProvider } from "styled-components";
@@ -24,7 +34,7 @@ const producerMiddleWare = (rawStore) => {
   const dispatch = (action) => {
     //Trigger dispatches here
     switch (action.type) {
-      case "searchSymbol": {
+      case SEARCH_SYMBOL: {
         let symbol = action.payload;
 
         Promise.all([
@@ -43,7 +53,7 @@ const producerMiddleWare = (rawStore) => {
               peersInfo,
             ] = dataArray;
             rawStore.dispatch({
-              type: "newTickerData",
+              type: NEW_TICKER_DATA,
               payload: {
                 symbol,
                 data: {
@@ -59,30 +69,30 @@ const producerMiddleWare = (rawStore) => {
             socket.emit("newSymbol", symbol);
           })
           .catch((e) => {
-            rawStore.dispatch({ type: "searchError", payload: e.message });
+            rawStore.dispatch({ type: SEARCH_ERROR, payload: e.message });
           });
         break;
       }
-      case "searchIndexes": {
+      case SEARCH_INDEXES: {
         let indexes = action.payload;
         Promise.all(indexes.map((index) => quoteFetch(index)))
           .then((dataArray) => {
             rawStore.dispatch({
-              type: "newIndexData",
+              type: NEW_INDEX_DATA,
               payload: dataArray,
             });
             socket.emit("newIndexes", indexes);
           })
           .catch((e) => {
-            rawStore.dispatch({ type: "searchError", payload: e.message });
+            rawStore.dispatch({ type: SEARCH_ERROR, payload: e.message });
           });
         break;
       }
 
-      case "fetchHistory": {
+      case FETCH_HISTORY: {
         let { symbol, period } = action.payload;
         historyFetch(symbol, period).then((data) => {
-          rawStore.dispatch({ type: "newHistoryData", payload: data });
+          rawStore.dispatch({ type: NEW_HISTORY_DATA, payload: data });
         });
         break;
       }
@@ -92,11 +102,11 @@ const producerMiddleWare = (rawStore) => {
   };
 
   socket.on("realTimeQuoteData", (data) => {
-    rawStore.dispatch({ type: "newQuoteData", payload: data });
+    rawStore.dispatch({ type: NEW_QUOTE_DATA, payload: data });
   });
 
   socket.on("realTimeIndexData", (dataArray) => {
-    rawStore.dispatch({ type: "newIndexData", payload: dataArray });
+    rawStore.dispatch({ type: NEW_INDEX_DATA, payload: dataArray });
   });
 
   return {
@@ -117,9 +127,9 @@ const dataStore = producerMiddleWare(
 
 function App() {
   useEffect(() => {
-    dataStore.dispatch({ type: "searchSymbol", payload: INITIAL_STOCK });
+    dataStore.dispatch({ type: SEARCH_SYMBOL, payload: INITIAL_STOCK });
     dataStore.dispatch({
-      type: "searchIndexes",
+      type: SEARCH_INDEXES,
       payload: ["MSFT", "GOOGL", "AMZN"],
     });
   }, []);

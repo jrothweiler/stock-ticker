@@ -67,7 +67,7 @@ describe("Key Stats component", () => {
     expect(openText).toBeInTheDocument();
     const week52RangeText = screen.getByText("52 Week Range");
     expect(week52RangeText).toBeInTheDocument();
-    const totalAvgVolumeText = screen.getByText("Total Avg Volume");
+    const totalAvgVolumeText = screen.getByText("Total Avg. Volume");
     expect(totalAvgVolumeText).toBeInTheDocument();
     const earningsPerShareText = screen.getByText("Earnings Per Share");
     expect(earningsPerShareText).toBeInTheDocument();
