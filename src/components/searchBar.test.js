@@ -11,11 +11,8 @@ import App from "../App";
 // Done as integration tests due to the dependencies across the
 // whole experience
 describe("Search bar component", () => {
-  let app;
-
   beforeEach(async () => {
-    const { container } = render(<App />);
-    app = container;
+    render(<App />);
     await waitForElement(() => screen.getByText("Apple, Inc."));
   });
 

@@ -45,15 +45,10 @@ jest.mock("./componentHooks/useNewsSelector", () => ({
 }));
 
 describe("Latest News component", () => {
-  let app;
-
   beforeEach(async () => {
-    const { container } = render(<LatestNews />);
-    app = container;
+    render(<LatestNews />);
     await waitForElement(() => screen.getByText("News Article 1"));
   });
-
-  afterEach(cleanup);
 
   test("Company data is rendered", () => {
     const latestNewsHeader = screen.getByText("LATEST NEWS");

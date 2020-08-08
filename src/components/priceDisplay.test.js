@@ -8,10 +8,8 @@ import React from "react";
 import { PriceDisplay } from "./priceDisplay";
 
 describe("Price Display component", () => {
-  let app;
-
   beforeEach(async () => {
-    const { container } = render(
+    render(
       <PriceDisplay
         data={{
           latestPrice: 300.0,
@@ -20,7 +18,6 @@ describe("Price Display component", () => {
         ticker={"MSFT"}
       />
     );
-    app = container;
     waitForElement(() => screen.getByText("MSFT"));
   });
 

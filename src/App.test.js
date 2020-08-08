@@ -28,14 +28,9 @@ jest.mock("socket.io-client", () => {
 
 // Integration tests for the general application experience
 describe("Application", () => {
-  let appData;
   beforeEach(async () => {
-    appData = render(<App />);
+    render(<App />);
     await waitForElement(() => screen.getByText("Apple, Inc."));
-  });
-
-  afterEach(() => {
-    appData.unmount();
   });
 
   test("Renders all the expected sections of the experience", () => {

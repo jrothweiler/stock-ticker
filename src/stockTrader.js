@@ -16,9 +16,7 @@ import { tickerSelector } from "./selectors/tickerSelector";
 import { MarketInfo } from "./components/marketInfo";
 
 export const StockTrader = () => {
-  //Call necessary selectors for display data
   const quote = useSelector(quoteSelector);
-
   const ticker = useSelector(tickerSelector);
 
   return (

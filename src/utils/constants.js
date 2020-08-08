@@ -16,3 +16,5 @@ export const NEW_INDEX_DATA = "newIndexData";
 export const SEARCH_INDEXES = "searchIndexes";
 export const FETCH_HISTORY = "fetchHistory";
 export const SEARCH_SYMBOL = "searchSymbol";
+
+export const WEBSOCKET_URL = "http://localhost:3001";
