@@ -4,7 +4,12 @@ import { formatErrorMessage } from "./errorUtils";
 // See server/index.js for server code.
 
 // Generalized fetch function over any endpoint
-export const proxyFetch = async (symbol, endpoint, queryParams, options) => {
+export const proxyFetch = async (
+  symbol: string,
+  endpoint: string,
+  queryParams?: any,
+  options?: any
+) => {
   // unfortunately, fetch does not support a query object, so we need
   // to build the query string ourselves.
   let queryString = queryParams ? "?" : "";
@@ -25,37 +30,37 @@ export const proxyFetch = async (symbol, endpoint, queryParams, options) => {
 };
 
 // Fetches real time information (price, volume, high, low, etc) for the symbol
-export const quoteFetch = async (symbol) => {
+export const quoteFetch = async (symbol: string) => {
   return proxyFetch(symbol, "quote");
 };
 
 // Fetches company information
-export const companyFetch = (symbol) => {
+export const companyFetch = (symbol: string) => {
   return proxyFetch(symbol, "company");
 };
 
 // Fetches symbol statistics (PE ratio, dividend yield, etc.), data points which are generally not real-time.
-export const statsFetch = (symbol) => {
+export const statsFetch = (symbol: string) => {
   return proxyFetch(symbol, "stats");
 };
 
 // Fetches news articles for the company, 5 for each call.
-export const newsFetch = (symbol) => {
+export const newsFetch = (symbol: string) => {
   return proxyFetch(symbol, "news");
 };
 
 // Fetches top peers for the selected stock
-export const peersFetch = (symbol) => {
+export const peersFetch = (symbol: string) => {
   return proxyFetch(symbol, "peers");
 };
 
 // collect historical data over the given period, either "1D", "5D", "1M", "1Y", "5Y", or "MAX"
-export const historyFetch = (symbol, period) => {
+export const historyFetch = (symbol: string, period: string) => {
   return proxyFetch(symbol, `history`, { period });
 };
 
-let searchController = null;
-export const searchFetch = (searchText) => {
+let searchController: AbortController | null = null;
+export const searchFetch = (searchText: string) => {
   if (searchController) {
     searchController.abort();
   }
