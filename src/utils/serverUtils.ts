@@ -2,7 +2,11 @@ import { formatErrorMessage } from "./errorUtils";
 
 // Helper functions for fetching financial data from the proxy server
 // See server/index.js for server code.
-
+const indexes = [
+  { symbol: "MSFT", latestPrice: 200, open: 250 },
+  { symbol: "AMZN", latestPrice: 3000, open: 2900 },
+  { symbol: "GOOGL", latestPrice: 1500, open: 1450 },
+];
 // Generalized fetch function over any endpoint
 export const proxyFetch = async (
   symbol: string,
