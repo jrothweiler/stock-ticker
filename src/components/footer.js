@@ -5,8 +5,12 @@ import { Text } from "./generics/text";
 import { useIndexSelector } from "./componentHooks/useIndexSelector";
 
 export const Footer = (props) => {
-  const indexes = useIndexSelector();
-  //const indexes = [];
+  //const indexes = useIndexSelector();
+  const indexes = [
+    { symbol: "MSFT", latestPrice: 10.09, open: 250 },
+    { symbol: "AMZN", latestPrice: 3000, open: 2900 },
+    { symbol: "GOOGL", latestPrice: 1500, open: 1450 },
+  ];
   return (
     <DisplayWrapper
       className="footer"
