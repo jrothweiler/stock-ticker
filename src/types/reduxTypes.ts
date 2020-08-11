@@ -1,6 +1,6 @@
 import type { Period } from "../utils/serverUtils";
 
-interface QuoteInfo {
+interface QuoteData {
   symbol: string;
   previousClose: number;
   week52High: number;
@@ -12,9 +12,11 @@ interface QuoteInfo {
   latestVolume: number;
   open: number;
   avgTotalVolume: number;
-  isUSMarketOpen: Number;
+  isUSMarketOpen: number;
   latestUpdate: number;
 }
+
+export type QuoteInfo = QuoteData | null;
 
 interface NewsArticle {
   datetime: number;
@@ -23,9 +25,9 @@ interface NewsArticle {
   url: string;
 }
 
-type NewsInfo = NewsArticle[];
+export type NewsInfo = NewsArticle[] | null;
 
-interface CompanyInfo {
+interface CompanyData {
   companyName: string;
   website: string;
   description: string;
@@ -34,11 +36,15 @@ interface CompanyInfo {
   currency: string;
 }
 
-interface StatInfo {
+export type CompanyInfo = CompanyData | null;
+
+interface StatData {
   dividendYield: number;
   ttmEPS: number;
   peRatio: number;
 }
+
+export type StatInfo = StatData | null;
 
 interface HistoryPoint {
   date: string;
@@ -46,9 +52,9 @@ interface HistoryPoint {
   price: number;
 }
 
-type HistoryInfo = HistoryPoint[];
+export type HistoryInfo = HistoryPoint[] | null;
 
-type PeersInfo = string[];
+export type PeersInfo = string[] | null;
 
 interface Index {
   symbol: string;
@@ -56,16 +62,27 @@ interface Index {
   open: number;
 }
 
+export type Indexes = Index[] | null;
+
 export interface StockState {
   ticker: string | null;
   chartRange: Period;
   tickerInfo: {
-    quoteInfo: QuoteInfo | null;
-    newsInfo: NewsInfo | null;
-    companyInfo: CompanyInfo | null;
-    statInfo: StatInfo | null;
-    historyInfo: HistoryInfo | null;
-    peersInfo: PeersInfo | null;
+    quoteInfo: QuoteInfo;
+    newsInfo: NewsInfo;
+    companyInfo: CompanyInfo;
+    statInfo: StatInfo;
+    historyInfo: HistoryInfo;
+    peersInfo: PeersInfo;
   };
-  indexes: Index[] | null;
+  indexes: Indexes;
+}
+
+export interface ErrorState {
+  search: string;
+}
+
+export interface ReduxState {
+  stocks: StockState;
+  errors: ErrorState;
 }
