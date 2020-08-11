@@ -1,10 +1,11 @@
 import { SEARCH_ERROR, CLEAR_SEARCH_ERRORS } from "../utils/constants";
+import type { ErrorState, StockAction } from "../types/reduxTypes";
 
-const initialState = {
+const initialState: ErrorState = {
   search: null,
 };
 
-export default (state = initialState, action) => {
+export default (state = initialState, action: StockAction): ErrorState => {
   switch (action.type) {
     case SEARCH_ERROR:
       return {

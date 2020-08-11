@@ -1,6 +1,7 @@
 import { INITIAL_CHART_RANGE } from "../utils/constants";
+import type { StockState, StockAction } from "../types/reduxTypes";
 
-const initialState = {
+const initialState: StockState = {
   ticker: null,
   chartRange: INITIAL_CHART_RANGE,
   tickerInfo: {
@@ -14,7 +15,7 @@ const initialState = {
   indexes: [],
 };
 
-export default (state = initialState, action) => {
+export default (state = initialState, action: StockAction): StockState => {
   switch (action.type) {
     case "newQuoteData": {
       // if the symbol fetched for does not match the current symbol,

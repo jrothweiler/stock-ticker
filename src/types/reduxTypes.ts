@@ -79,10 +79,15 @@ export interface StockState {
 }
 
 export interface ErrorState {
-  search: string;
+  search: string | null;
 }
 
 export interface ReduxState {
   stocks: StockState;
   errors: ErrorState;
+}
+
+export interface StockAction {
+  type: string;
+  payload: any;
 }
