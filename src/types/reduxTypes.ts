@@ -1,4 +1,16 @@
 import type { Period } from "../utils/serverUtils";
+import {
+  SEARCH_ERROR,
+  CLEAR_SEARCH_ERRORS,
+  NEW_QUOTE_DATA,
+  NEW_TICKER_DATA,
+  NEW_CHART_RANGE,
+  NEW_HISTORY_DATA,
+  NEW_INDEX_DATA,
+  SEARCH_INDEXES,
+  FETCH_HISTORY,
+  SEARCH_SYMBOL,
+} from "../utils/constants";
 
 interface QuoteData {
   symbol: string;
@@ -52,7 +64,9 @@ interface HistoryPoint {
   price: number;
 }
 
-export type HistoryInfo = HistoryPoint[] | null;
+type HistoryData = HistoryPoint[];
+
+export type HistoryInfo = HistoryData | null;
 
 export type PeersInfo = string[] | null;
 
@@ -62,19 +76,23 @@ interface Index {
   open: number;
 }
 
-export type Indexes = Index[] | null;
+type IndexData = Index[];
+
+export type Indexes = IndexData | null;
+
+interface TickerInfo {
+  quoteInfo: QuoteInfo;
+  newsInfo: NewsInfo;
+  companyInfo: CompanyInfo;
+  statInfo: StatInfo;
+  historyInfo: HistoryInfo;
+  peersInfo: PeersInfo;
+}
 
 export interface StockState {
   ticker: string | null;
   chartRange: Period;
-  tickerInfo: {
-    quoteInfo: QuoteInfo;
-    newsInfo: NewsInfo;
-    companyInfo: CompanyInfo;
-    statInfo: StatInfo;
-    historyInfo: HistoryInfo;
-    peersInfo: PeersInfo;
-  };
+  tickerInfo: TickerInfo;
   indexes: Indexes;
 }
 
@@ -87,7 +105,31 @@ export interface ReduxState {
   errors: ErrorState;
 }
 
-export interface StockAction {
-  type: string;
-  payload: any;
+type ActionTypes =
+  | typeof SEARCH_ERROR
+  | typeof CLEAR_SEARCH_ERRORS
+  | typeof NEW_QUOTE_DATA
+  | typeof NEW_TICKER_DATA
+  | typeof NEW_CHART_RANGE
+  | typeof NEW_HISTORY_DATA
+  | typeof NEW_INDEX_DATA
+  | typeof SEARCH_INDEXES
+  | typeof FETCH_HISTORY
+  | typeof SEARCH_SYMBOL;
+
+export interface GenericAction<T extends ActionTypes, P> {
+  type: T;
+  payload: P;
 }
+
+export type StockAction =
+  | GenericAction<typeof SEARCH_ERROR, string>
+  | GenericAction<typeof CLEAR_SEARCH_ERRORS, undefined>
+  | GenericAction<typeof NEW_QUOTE_DATA, QuoteData>
+  | GenericAction<typeof NEW_TICKER_DATA, { symbol: string; data: TickerInfo }>
+  | GenericAction<typeof NEW_CHART_RANGE, Period>
+  | GenericAction<typeof NEW_HISTORY_DATA, HistoryData>
+  | GenericAction<typeof NEW_INDEX_DATA, IndexData>
+  | GenericAction<typeof SEARCH_INDEXES, string[]>
+  | GenericAction<typeof FETCH_HISTORY, { symbol: string; period: Period }>
+  | GenericAction<typeof SEARCH_SYMBOL, string>;

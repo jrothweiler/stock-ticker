@@ -9,7 +9,7 @@ export const CLEAR_SEARCH_ERRORS = "clearSearchErrors";
 
 export const NEW_QUOTE_DATA = "newQuoteData";
 export const NEW_TICKER_DATA = "newTickerData";
-export const NEW_CHART_DATA = "newChartData";
+export const NEW_CHART_RANGE = "newChartRange";
 export const NEW_HISTORY_DATA = "newHistoryData";
 export const NEW_INDEX_DATA = "newIndexData";
 
