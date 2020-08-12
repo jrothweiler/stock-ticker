@@ -6,13 +6,14 @@ import type {
   ColorProps,
   SpaceProps,
 } from "styled-system";
+import type { VariantProp } from "../../types/styleTypes";
 
 type TextProps =
   | LayoutProps
   | TypographyProps
   | ColorProps
   | SpaceProps
-  | { variant: string };
+  | VariantProp;
 
 export const Text = styled("div")<TextProps>(
   {

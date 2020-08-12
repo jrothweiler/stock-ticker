@@ -16,6 +16,7 @@ import type {
   PositionProps,
   TypographyProps,
 } from "styled-system";
+import type { VariantProp } from "../../types/styleTypes";
 
 type DisplayWrapperTypes =
   | SpaceProps
@@ -24,7 +25,7 @@ type DisplayWrapperTypes =
   | FlexboxProps
   | PositionProps
   | TypographyProps
-  | { variant: string };
+  | VariantProp;
 
 export const DisplayWrapper = styled("div")<DisplayWrapperTypes>(
   {
