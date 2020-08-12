@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { variant } from "styled-system";
-export const BannerButton = styled("button")(
+export const BannerButton = styled("button")<{ variant: string }>(
   {
     fontFamily: "Lato",
     fontSize: "18px",

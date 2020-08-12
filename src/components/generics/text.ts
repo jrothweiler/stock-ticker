@@ -1,7 +1,20 @@
 import styled from "styled-components";
 import { layout, typography, variant, space, color } from "styled-system";
+import type {
+  LayoutProps,
+  TypographyProps,
+  ColorProps,
+  SpaceProps,
+} from "styled-system";
 
-export const Text = styled("div")(
+type TextProps =
+  | LayoutProps
+  | TypographyProps
+  | ColorProps
+  | SpaceProps
+  | { variant: string };
+
+export const Text = styled("div")<TextProps>(
   {
     fontFamily: "Lato",
     display: "block",

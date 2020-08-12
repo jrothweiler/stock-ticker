@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { space } from "styled-system";
+import { space, SpaceProps } from "styled-system";
 
-export const DisplayBadge = styled.div`
+export const DisplayBadge = styled.div<SpaceProps>`
   font-family: Arial;
   font-size: 1rem;
   border: none;

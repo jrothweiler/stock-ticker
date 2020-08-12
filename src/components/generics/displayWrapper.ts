@@ -8,7 +8,25 @@ import {
   space,
   typography,
 } from "styled-system";
-export const DisplayWrapper = styled("div")(
+import type {
+  SpaceProps,
+  LayoutProps,
+  BorderProps,
+  FlexboxProps,
+  PositionProps,
+  TypographyProps,
+} from "styled-system";
+
+type DisplayWrapperTypes =
+  | SpaceProps
+  | LayoutProps
+  | BorderProps
+  | FlexboxProps
+  | PositionProps
+  | TypographyProps
+  | { variant: string };
+
+export const DisplayWrapper = styled("div")<DisplayWrapperTypes>(
   {
     maxWidth: "100%",
   },
