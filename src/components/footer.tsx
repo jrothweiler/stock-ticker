@@ -3,8 +3,9 @@ import { DisplayWrapper } from "./generics/displayWrapper";
 import { PriceDisplay } from "./priceDisplay";
 import { Text } from "./generics/text";
 import { useIndexSelector } from "./componentHooks/useIndexSelector";
+import { StyleProps } from "../types/styleTypes";
 
-export const Footer = (props) => {
+export const Footer = (props: StyleProps) => {
   //const indexes = useIndexSelector();
   const indexes = [
     { symbol: "MSFT", latestPrice: 10.09, open: 250 },
@@ -12,11 +13,7 @@ export const Footer = (props) => {
     { symbol: "GOOGL", latestPrice: 1500, open: 1450 },
   ];
   return (
-    <DisplayWrapper
-      className="footer"
-      width={props.width}
-      height={props.height}
-    >
+    <DisplayWrapper className="footer" {...props}>
       <DisplayWrapper ml="1.0rem" paddingTop="0.6rem" mb="0.5rem">
         <Text variant="primary" size="small" fontWeight="lighter">
           US MARKET
