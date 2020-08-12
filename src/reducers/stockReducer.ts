@@ -32,27 +32,62 @@ interface QuoteData {
   latestUpdate: boolean
 }
 
-interface newsData {
+interface NewsData {
   datetime: number,
   headline: string,
   source: string,
   url: string
 }
 
+interface CompanyData {
+  companyName: string,
+  website: string,
+  description: string,
+  exchange: string,
+  sector: string,
+  currency: string
+}
+
+interface StatsData {
+  dividendYield: number,
+  earningsPerShare: number,
+  peRatio: number
+}
+
+interface HistoryData {
+  date: number,
+  minute: number,
+  price: number
+}
+
+interface PeersData {
+  peers: string[]
+}
+
+interface TickerInfo {
+  quoteInfo: QuoteData | null,
+  newsInfo: NewsData | null,
+  companyInfo: CompanyData | null,
+  statInfo: StatsData | null,
+  historyInfo: HistoryData | null,
+  peersInfo: PeersData | null
+}
+
 interface State {
   ticker: string | null,
   chartRange: string,
-  tickerInfo: {
-    quoteInfo: QuoteData | null,
-    newsInfo: object | null,
-    companyInfo: object | null,
-    statInfo: object | null,
-    historyInfo: object | null,
-    peersInfo: object | null
-  },
+  tickerInfo: TickerInfo,
   indexes: string[]
 };
 
+interface Payload {
+  symbol: string,
+  data: TickerInfo
+}
+interface Action {
+  type: string,
+  payload: Payload
+}
 const initialState: State = {
   ticker: null,
   chartRange: INITIAL_CHART_RANGE,
@@ -67,10 +102,6 @@ const initialState: State = {
   indexes: [],
 };
 
-interface Action {
-  type: string,
-  payload: object
-}
 export default (state: State = initialState, action: Action) => {
   switch (action.type) {
     case "newQuoteData": {
