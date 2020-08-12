@@ -32,7 +32,7 @@ export const Text = styled("div")(
       secondary: {
         color: "#beccdc",
         opacity: 0.8,
-        fontWeight: 'lighter'
+        fontWeight: "lighter",
       },
       gain: {
         color: "#91e4a5",
@@ -50,7 +50,7 @@ export const Text = styled("div")(
         color: "#beccdc",
         opacity: 0.8,
         fontSize: "1.0rem",
-        fontWeight: 'lighter',
+        fontWeight: "lighter",
         display: "inline-block",
         paddingBottom: "1.0rem",
       },
