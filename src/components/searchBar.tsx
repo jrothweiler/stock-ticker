@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import type { ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { mdiMagnify } from "@mdi/js";
 import Icon from "@mdi/react";
@@ -7,31 +8,33 @@ import {
   CLEAR_SEARCH_ERRORS,
   SEARCH_SYMBOL,
 } from "../utils/constants";
-import { DisplayWrapper } from "../components/generics/displayWrapper";
-import { Text } from "../components/generics/text";
+import { DisplayWrapper } from "./generics/displayWrapper";
+import { Text } from "./generics/text";
 import { searchErrorsSelector } from "../selectors/errorsSelectors";
 import { searchFetch } from "../utils/serverUtils";
-import { TableRow } from "../components/generics/tableRow";
-import { TableColumn } from "../components/generics/tableColumn";
+import { TableRow } from "./generics/tableRow";
+import { TableColumn } from "./generics/tableColumn";
+import type { StyleProps } from "../types/styleTypes";
+import { tickerSelector } from "../selectors/tickerSelector";
+import { companySelector } from "../selectors/companySelector";
+import type { SuggestionData, SearchSuggestion } from "../types/reduxTypes";
 
-export const SearchBar = (props) => {
+export const SearchBar = (props: StyleProps) => {
   let [currentText, setCurrentText] = useState("");
-  let [symbolSuggestions, setSymbolSuggestions] = useState([]);
+  let [symbolSuggestions, setSymbolSuggestions] = useState<SuggestionData>([]);
   let [showBadInputError, setShowBadInputError] = useState(false);
   let [showCompanyText, setShowCompanyText] = useState(true);
   let [isInputFocused, setIsInputFocused] = useState(false);
   let searchError = useSelector(searchErrorsSelector);
-  let companyName =
-    useSelector(
-      (state) => state?.stocks?.tickerInfo?.companyInfo?.companyName
-    ) || "";
-  let symbol = useSelector((state) => state?.stocks?.ticker) || "";
+  let companyData = useSelector(companySelector);
+  let companyName = companyData?.companyName || "";
+  let symbol = useSelector(tickerSelector) || "";
   let symbolText = symbol ? `(${symbol})` : "";
-  let inputRef = useRef(null);
+  let inputRef = useRef<HTMLInputElement>(null);
 
   let dispatch = useDispatch();
 
-  function handleSuggestionFetch(value) {
+  function handleSuggestionFetch(value: string) {
     searchFetch(value).then((data) => {
       if (data) {
         // only take up to 5 suggestions
@@ -40,7 +43,7 @@ export const SearchBar = (props) => {
     });
   }
 
-  function handleType(e) {
+  function handleType(e: ChangeEvent<HTMLInputElement>) {
     let newText = e.target.value;
     setCurrentText(newText);
     if (newText !== "") {
@@ -50,13 +53,13 @@ export const SearchBar = (props) => {
     }
   }
 
-  function handleSearch(text) {
+  function handleSearch(text: string) {
     if (currentText.match(VALID_SEARCH_REGEXP)) {
       dispatch({ type: SEARCH_SYMBOL, payload: text.toUpperCase() });
       setCurrentText("");
       setShowBadInputError(false);
       dispatch({ type: CLEAR_SEARCH_ERRORS });
-      inputRef.current.blur();
+      inputRef.current?.blur();
       setSymbolSuggestions([]);
     } else {
       setShowBadInputError(true);
@@ -72,10 +75,10 @@ export const SearchBar = (props) => {
   }
 
   function onCompanyTextClick() {
-    inputRef.current.focus();
+    inputRef.current?.focus();
   }
 
-  function handleRenderSuggestion(item) {
+  function handleRenderSuggestion(item: SearchSuggestion) {
     return (
       <TableRow key={item.symbol} onClick={() => handleSearch(item.symbol)}>
         <TableColumn>

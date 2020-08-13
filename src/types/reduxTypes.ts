@@ -12,7 +12,7 @@ import {
   SEARCH_SYMBOL,
 } from "../utils/constants";
 
-interface QuoteData {
+export interface QuoteData {
   symbol: string;
   previousClose: number;
   week52High: number;
@@ -37,9 +37,11 @@ interface NewsArticle {
   url: string;
 }
 
-export type NewsInfo = NewsArticle[] | null;
+export type NewsData = NewsArticle[];
 
-interface CompanyData {
+export type NewsInfo = NewsData | null;
+
+export interface CompanyData {
   companyName: string;
   website: string;
   description: string;
@@ -50,7 +52,7 @@ interface CompanyData {
 
 export type CompanyInfo = CompanyData | null;
 
-interface StatData {
+export interface StatData {
   dividendYield: number;
   earningsPerShare: number;
   peRatio: number;
@@ -64,11 +66,13 @@ interface HistoryPoint {
   price: number;
 }
 
-type HistoryData = HistoryPoint[];
+export type HistoryData = HistoryPoint[];
 
 export type HistoryInfo = HistoryData | null;
 
-export type PeersInfo = string[] | null;
+export type PeersData = string[];
+
+export type PeersInfo = PeersData | null;
 
 interface Index {
   symbol: string;
@@ -104,6 +108,16 @@ export interface ReduxState {
   stocks: StockState;
   errors: ErrorState;
 }
+
+export interface SearchSuggestion {
+  exchange: string;
+  region: string;
+  securityName: string;
+  securityType: string;
+  symbol: string;
+}
+
+export type SuggestionData = SearchSuggestion[];
 
 type ActionTypes =
   | typeof SEARCH_ERROR

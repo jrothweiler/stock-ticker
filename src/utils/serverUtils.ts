@@ -1,4 +1,13 @@
 import { formatErrorMessage } from "./errorUtils";
+import type {
+  QuoteData,
+  StatData,
+  CompanyData,
+  PeersData,
+  NewsData,
+  HistoryData,
+  SuggestionData,
+} from "../types/reduxTypes";
 
 // Helper functions for fetching financial data from the proxy server
 // See server/index.js for server code.
@@ -38,37 +47,40 @@ export const proxyFetch = async (
 };
 
 // Fetches real time information (price, volume, high, low, etc) for the symbol
-export const quoteFetch = async (symbol: string) => {
+export const quoteFetch = async (symbol: string): Promise<QuoteData> => {
   return proxyFetch(symbol, "quote");
 };
 
 // Fetches company information
-export const companyFetch = (symbol: string) => {
+export const companyFetch = (symbol: string): Promise<CompanyData> => {
   return proxyFetch(symbol, "company");
 };
 
 // Fetches symbol statistics (PE ratio, dividend yield, etc.), data points which are generally not real-time.
-export const statsFetch = (symbol: string) => {
+export const statsFetch = (symbol: string): Promise<StatData> => {
   return proxyFetch(symbol, "stats");
 };
 
 // Fetches news articles for the company, 5 for each call.
-export const newsFetch = (symbol: string) => {
+export const newsFetch = (symbol: string): Promise<NewsData> => {
   return proxyFetch(symbol, "news");
 };
 
 // Fetches top peers for the selected stock
-export const peersFetch = (symbol: string) => {
+export const peersFetch = (symbol: string): Promise<PeersData> => {
   return proxyFetch(symbol, "peers");
 };
 
 // collect historical data over the given period, either "1D", "5D", "1M", "1Y", "5Y", or "MAX"
-export const historyFetch = (symbol: string, period: Period) => {
+export const historyFetch = (
+  symbol: string,
+  period: Period
+): Promise<HistoryData> => {
   return proxyFetch(symbol, `history`, { period });
 };
 
 let searchController: AbortController;
-export const searchFetch = (searchText: string) => {
+export const searchFetch = (searchText: string): Promise<SuggestionData> => {
   if (searchController) {
     searchController.abort();
   }
