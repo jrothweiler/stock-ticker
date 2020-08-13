@@ -3,8 +3,15 @@ import { Text } from "./generics/text";
 import { mdiArrowDown, mdiArrowUp } from "@mdi/js";
 import Icon from "@mdi/react";
 import { DisplayWrapper } from "./generics/displayWrapper";
+import { StyleProps } from "../types/styleTypes";
+import { QuoteInfo } from "../types/reduxTypes";
 
-export const PriceDisplay = (props) => {
+type PriceDisplayProps = StyleProps & {
+  data: QuoteInfo;
+  ticker?: string;
+};
+
+export const PriceDisplay = (props: PriceDisplayProps) => {
   return (
     <DisplayWrapper {...props}>
       {props.data && (

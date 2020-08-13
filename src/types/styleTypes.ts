@@ -18,5 +18,5 @@ export type StyleProps = BorderProps &
   TypographyProps;
 
 export interface VariantProp {
-  variant?: string;
+  variant?: string | string[];
 }
