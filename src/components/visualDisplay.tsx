@@ -1,6 +1,6 @@
 import "chartjs-plugin-annotation";
 import React, { useEffect, useState } from "react";
-import ChartComponent, { Line } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "./generics/button";
 import { Text } from "./generics/text";
@@ -14,7 +14,7 @@ import { POSSIBLE_CHART_RANGES } from "../utils/constants";
 import { DisplayWrapper } from "./generics/displayWrapper";
 import type { Period } from "../utils/serverUtils";
 import type { StyleProps } from "../types/styleTypes";
-import type { Chart, ChartOptions } from "chart.js";
+import type { ChartOptions } from "chart.js";
 
 export const VisualDisplay = (props: StyleProps) => {
   const dispatch = useDispatch();
