@@ -36,6 +36,9 @@ const producerMiddleWare = (
   const socket = socketIOClient(WEBSOCKET_URL);
 
   const dispatch: Dispatch<StockAction> = (a) => {
+    // Redux's dispatch type is weird in that its accepted actions are subtypes of the type you give it.
+    // We only ever dispatch our own StockActions, so we coerce this so typescript can work
+    // with the action's specific payload type.
     let action = a as StockAction;
     switch (action.type) {
       case SEARCH_SYMBOL: {
