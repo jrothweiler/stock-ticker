@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, Store, Dispatch } from "redux";
 import { Provider } from "react-redux";
 import stockReducer from "./reducers/stockReducer";
 import errorReducer from "./reducers/errorReducer";
@@ -27,12 +27,16 @@ import socketIOClient from "socket.io-client";
 import { StockTrader } from "./stockTrader";
 import { ThemeProvider } from "styled-components";
 import theme from "./themes/theme";
+import type { StockAction, QuoteData, ReduxState } from "./types/reduxTypes";
 
 //Triggers dispatches (May need to be broken down into multiple Middlewares chained together)
-const producerMiddleWare = (rawStore) => {
+const producerMiddleWare = (
+  rawStore: Store<ReduxState, StockAction>
+): Store<ReduxState, StockAction> => {
   const socket = socketIOClient(WEBSOCKET_URL);
 
-  const dispatch = (action) => {
+  const dispatch: Dispatch<StockAction> = (a) => {
+    let action = a as StockAction;
     switch (action.type) {
       case SEARCH_SYMBOL: {
         let symbol = action.payload;
@@ -62,6 +66,7 @@ const producerMiddleWare = (rawStore) => {
                   companyInfo,
                   statInfo,
                   peersInfo,
+                  historyInfo: null, // history info is fetched separately
                 },
               },
             });
@@ -99,13 +104,15 @@ const producerMiddleWare = (rawStore) => {
       default:
         rawStore.dispatch(action);
     }
+
+    return a;
   };
 
-  socket.on("realTimeQuoteData", (data) => {
+  socket.on("realTimeQuoteData", (data: QuoteData) => {
     rawStore.dispatch({ type: NEW_QUOTE_DATA, payload: data });
   });
 
-  socket.on("realTimeIndexData", (dataArray) => {
+  socket.on("realTimeIndexData", (dataArray: any) => {
     rawStore.dispatch({ type: NEW_INDEX_DATA, payload: dataArray });
   });
 
@@ -121,6 +128,7 @@ const dataStore = producerMiddleWare(
       stocks: stockReducer,
       errors: errorReducer,
     }),
+    // @ts-ignore
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );

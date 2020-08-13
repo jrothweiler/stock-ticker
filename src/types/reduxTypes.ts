@@ -11,6 +11,7 @@ import {
   FETCH_HISTORY,
   SEARCH_SYMBOL,
 } from "../utils/constants";
+import type { Action } from "redux";
 
 export interface QuoteData {
   symbol: string;
@@ -131,8 +132,7 @@ type ActionTypes =
   | typeof FETCH_HISTORY
   | typeof SEARCH_SYMBOL;
 
-export interface GenericAction<T extends ActionTypes, P> {
-  type: T;
+export interface GenericAction<T extends ActionTypes, P> extends Action<T> {
   payload: P;
 }
 
