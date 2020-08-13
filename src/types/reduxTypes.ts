@@ -24,7 +24,7 @@ interface QuoteData {
   latestVolume: number;
   open: number;
   avgTotalVolume: number;
-  isUSMarketOpen: number;
+  isUSMarketOpen: boolean;
   latestUpdate: number;
 }
 
@@ -52,7 +52,7 @@ export type CompanyInfo = CompanyData | null;
 
 interface StatData {
   dividendYield: number;
-  ttmEPS: number;
+  earningsPerShare: number;
   peRatio: number;
 }
 

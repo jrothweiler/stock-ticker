@@ -11,7 +11,11 @@ export const Header = () => {
       variant="flexRow"
     >
       <DisplayWrapper>
-        <img src={logo} height="65%"></img>
+        <img
+          src={logo}
+          height="65%"
+          alt="Adaptive Financial Consulting logo"
+        ></img>
       </DisplayWrapper>
       <DisplayWrapper>
         <BannerButton variant="selected">QUOTES</BannerButton>

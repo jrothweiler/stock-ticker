@@ -9,6 +9,11 @@ import { formatDate } from "../utils/dateUtils";
 
 export const MarketInfo = () => {
   const quoteData = useQuoteSelector();
+
+  if (!quoteData) {
+    return null;
+  }
+
   const marketOpen = quoteData.isUSMarketOpen;
   const latestTime = quoteData.latestUpdate;
   const latestTimeString = formatDate(latestTime);

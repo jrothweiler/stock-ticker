@@ -5,13 +5,18 @@ import { Text } from "./generics/text";
 import { StatWrapper } from "./generics/statWrapper";
 import { useStatsSelector } from "./componentHooks/useStatsSelector";
 import { useQuoteSelector } from "./componentHooks/useQuoteSelector";
+import type { StyleProps } from "../types/styleTypes";
 
-export const KeyStats = (props) => {
-  //Call necessary selectors for display data
+export const KeyStats = (props: StyleProps) => {
   const stats = useStatsSelector();
   const quote = useQuoteSelector();
 
-  function rowDataToJSX(labels, values) {
+  if (!quote || !stats) {
+    return null;
+  }
+
+  // given arrays of row labels and row values, return one column of the key stats table JSX
+  function rowDataToJSX(labels: string[], values: string[]) {
     return (
       <DisplayWrapper width={["100%", "46%"]}>
         {labels.map((label, indx) => (

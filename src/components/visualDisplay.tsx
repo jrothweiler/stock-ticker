@@ -1,9 +1,9 @@
 import "chartjs-plugin-annotation";
 import React, { useEffect, useState } from "react";
-import { Line } from "react-chartjs-2";
+import ChartComponent, { Line } from "react-chartjs-2";
 import { useDispatch, useSelector } from "react-redux";
-import { Button } from "../components/generics/button";
-import { Text } from "../components/generics/text";
+import { Button } from "./generics/button";
+import { Text } from "./generics/text";
 import {
   chartRangeSelector,
   historySelector,
@@ -12,7 +12,11 @@ import { currentPriceSelector } from "../selectors/quoteSelector";
 import { tickerSelector } from "../selectors/tickerSelector";
 import { POSSIBLE_CHART_RANGES } from "../utils/constants";
 import { DisplayWrapper } from "./generics/displayWrapper";
-export const VisualDisplay = (props) => {
+import type { Period } from "../utils/serverUtils";
+import type { StyleProps } from "../types/styleTypes";
+import type { Chart, ChartOptions } from "chart.js";
+
+export const VisualDisplay = (props: StyleProps) => {
   const dispatch = useDispatch();
 
   const currentPrice = useSelector(currentPriceSelector);
@@ -20,14 +24,14 @@ export const VisualDisplay = (props) => {
   const chartRange = useSelector(chartRangeSelector);
   // we keep track of the previous range in the middle of a fetch of new history data,
   // so we don't change the formatting of the x axis times until new data is fetched
-  const [prevRange, setPrevRange] = useState(null);
+  const [prevRange, setPrevRange] = useState<Period | null>(null);
 
   const historyData = useSelector(historySelector) || [];
   const currentSymbol = useSelector(tickerSelector);
 
   // when a chart range button is clicked, track the current range, and store the new
   // range in redux
-  const handleChartRangeClick = (period) => {
+  const handleChartRangeClick = (period: Period) => {
     setPrevRange(chartRange);
     dispatch({ type: "newChartRange", payload: period });
   };
@@ -69,20 +73,20 @@ export const VisualDisplay = (props) => {
       },
     ],
   };
-  const options = {
+  const options: ChartOptions = {
     annotation: {
       annotations: [
         {
           type: "line",
           mode: "horizontal",
           scaleID: "y-axis-0",
-          value: currentPrice,
+          value: currentPrice || 0,
           borderColor: "rgb(233, 86, 86)",
           borderWidth: 2,
           borderDash: [5, 3],
           label: {
             position: "right",
-            content: currentPrice,
+            content: `${currentPrice || 0}`,
             enabled: true,
             backgroundColor: "rgb(233,86,86)",
           },
@@ -96,16 +100,14 @@ export const VisualDisplay = (props) => {
       xAxes: [
         {
           type: "time",
-          distribution: "series",
           time: {
             minUnit: "hour",
             displayFormats: {
               hour: xAxisRange === "1D" ? "h:mm a" : "MMM DD  h:mm a",
             },
-            format: "YYYY-MM-DD HH:mm",
           },
+          distribution: "series",
           ticks: {
-            fontWeight: "lighter",
             fontFamily: "Lato",
             autoSkip: true,
             maxTicksLimit: 10,
@@ -120,9 +122,8 @@ export const VisualDisplay = (props) => {
         {
           position: "right",
           ticks: {
-            fontWeight: "lighter",
             fontFamily: "Lato",
-            callback: function (label) {
+            callback: function (label: number) {
               return label.toFixed(2);
             },
           },
@@ -141,12 +142,15 @@ export const VisualDisplay = (props) => {
 
       // whenever the chart's sets its layout (on initial render or after resizing), set the background gradient based on
       // the new layout's height
-      afterLayout: (chart) => {
+      afterLayout: (chart: Chart) => {
+        if (!chart.ctx || !chart.config.data?.datasets) {
+          return;
+        }
         const newGradient = chart.ctx.createLinearGradient(
           0,
           0,
           0,
-          chart.height
+          chart.height || 0
         );
         newGradient.addColorStop(0, "rgba(127,149,255,.7)");
         newGradient.addColorStop(1, "rgba(1,30,72,0)");
@@ -163,7 +167,6 @@ export const VisualDisplay = (props) => {
           <Button
             key={period}
             variant="unstyled"
-            mr="8px"
             onClick={() => handleChartRangeClick(period)}
           >
             <Text variant={period === chartRange ? "primary" : "secondary"}>
