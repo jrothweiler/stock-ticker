@@ -66,6 +66,6 @@
   },
   "proxy": "http://localhost:3001",
   "jest": {
-    "globalSetup": "./src/globalTestSetup.js"
+    "globalSetup": "./src/globalTestSetup.ts"
   }
 }
