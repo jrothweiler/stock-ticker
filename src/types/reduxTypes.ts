@@ -75,13 +75,7 @@ export type PeersData = string[];
 
 export type PeersInfo = PeersData | null;
 
-interface Index {
-  symbol: string;
-  latestPrice: number;
-  open: number;
-}
-
-type IndexData = Index[];
+type IndexData = QuoteData[];
 
 export type Indexes = IndexData | null;
 
