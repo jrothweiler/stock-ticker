@@ -2,19 +2,35 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { MarketInfo } from "./marketInfo";
 import { useQuoteSelector } from "./componentHooks/useQuoteSelector";
+import { mocked } from "ts-jest/utils";
 
 jest.mock("./componentHooks/useQuoteSelector", () => ({
   useQuoteSelector: jest.fn(),
 }));
 
+const mockUseQuoteSelector = mocked(useQuoteSelector);
+
+let mockStockData = {
+  symbol: "symbol",
+  previousClose: 0,
+  week52High: 9,
+  week52Low: 8,
+  high: 7,
+  low: 6,
+  latestPrice: 5,
+  marketCap: 4,
+  latestVolume: 3,
+  open: 2,
+  avgTotalVolume: 1,
+  isUSMarketOpen: true,
+  latestUpdate: 1596480448000,
+};
+
 describe("Market Info component", () => {
   describe("market status", () => {
     describe("when the market is open", () => {
       beforeEach(async () => {
-        useQuoteSelector.mockReturnValueOnce({
-          isUSMarketOpen: true,
-          latestUpdate: 1596480448000,
-        });
+        mockUseQuoteSelector.mockReturnValueOnce(mockStockData);
       });
 
       it("shows Market Open", async () => {
@@ -25,9 +41,9 @@ describe("Market Info component", () => {
 
     describe("when the market is closed", () => {
       beforeEach(async () => {
-        useQuoteSelector.mockReturnValueOnce({
+        mockUseQuoteSelector.mockReturnValueOnce({
+          ...mockStockData,
           isUSMarketOpen: false,
-          latestUpdate: 1596480448000,
         });
       });
 
@@ -40,10 +56,7 @@ describe("Market Info component", () => {
 
   describe("Latest Update Text", () => {
     beforeEach(async () => {
-      useQuoteSelector.mockReturnValueOnce({
-        isUSMarketOpen: true,
-        latestUpdate: 1596480448000,
-      });
+      mockUseQuoteSelector.mockReturnValueOnce(mockStockData);
 
       render(<MarketInfo />);
     });

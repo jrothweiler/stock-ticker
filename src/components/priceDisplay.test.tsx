@@ -7,17 +7,25 @@ import {
 import React from "react";
 import { PriceDisplay } from "./priceDisplay";
 
+let mockStockData = {
+  symbol: "symbol",
+  previousClose: 0,
+  week52High: 9,
+  week52Low: 8,
+  high: 7,
+  low: 6,
+  latestPrice: 300.0,
+  marketCap: 4,
+  latestVolume: 3,
+  open: 200.0,
+  avgTotalVolume: 1,
+  isUSMarketOpen: true,
+  latestUpdate: 1,
+};
+
 describe("Price Display component", () => {
   beforeEach(async () => {
-    render(
-      <PriceDisplay
-        data={{
-          latestPrice: 300.0,
-          open: 200.0,
-        }}
-        ticker={"MSFT"}
-      />
-    );
+    render(<PriceDisplay data={mockStockData} ticker={"MSFT"} />);
     waitForElement(() => screen.getByText("MSFT"));
   });
 

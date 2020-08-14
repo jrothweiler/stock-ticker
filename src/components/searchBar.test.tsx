@@ -32,7 +32,7 @@ describe("Search bar component", () => {
   });
 
   test("Badly formatted symbols are stopped client side", () => {
-    const input = screen.getByRole("textbox");
+    const input = screen.getByRole("textbox") as HTMLInputElement;
     fireEvent.change(input, { target: { value: "jklasjdf&^^^" } });
     fireEvent.submit(input);
 
@@ -48,7 +48,7 @@ describe("Search bar component", () => {
   });
 
   test("Nonexistent symbols are stopped server side", async () => {
-    const input = screen.getByRole("textbox");
+    const input = screen.getByRole("textbox") as HTMLInputElement;
     fireEvent.change(input, { target: { value: "BADSYMBOL" } });
     fireEvent.submit(input);
 
@@ -78,7 +78,7 @@ describe("Search bar component", () => {
 
   test("Unfocusing when there is no text shows the company name again", async () => {
     const companyText = screen.getByText("Apple, Inc.");
-    const input = screen.queryByRole("textbox");
+    const input = screen.queryByRole("textbox") as HTMLInputElement;
     expect(screen.getByText("Apple, Inc.")).toBeInTheDocument();
     fireEvent.click(companyText);
     expect(input === document.activeElement).toBe(true);
@@ -93,7 +93,7 @@ describe("Search bar component", () => {
   });
 
   test("Searching for a new symbol updates the experience", async () => {
-    const input = screen.getByRole("textbox");
+    const input = screen.getByRole("textbox") as HTMLInputElement;
 
     expect(screen.getByText("Apple, Inc.")).toBeInTheDocument();
     // initially shows apple's price

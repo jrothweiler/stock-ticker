@@ -26,7 +26,6 @@ describe("Top Peers component", () => {
   });
 
   afterEach(cleanup);
-
   test("Top Peers are rendered properly", () => {
     const topPeersHeader = screen.getByText("TOP PEERS");
     expect(topPeersHeader).toBeInTheDocument();

@@ -62,7 +62,7 @@ describe("Latest News component", () => {
   });
 
   test("Headline links redirect properly ", () => {
-    const articleLinks = screen.getAllByRole("link");
+    const articleLinks = screen.getAllByRole("link") as HTMLAnchorElement[];
     const validArticleLinks = [
       "https://www.article1.com/",
       "https://www.article2.com/",
