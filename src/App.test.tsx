@@ -26,6 +26,17 @@ jest.mock("socket.io-client", () => {
   return jest.fn(() => socket);
 });
 
+interface TestSocket {
+  emit: jest.Mock<void>;
+  on: jest.Mock<void>;
+  receiveEvent: jest.Mock<void>;
+}
+
+// we do a forced conversion here because the TS compiler does not know about the jest.mock,
+// and we build a mock object which has methods the main socket type doesn't for testing purposes,
+// so the two arent compatible
+const mockedSocketClient = (socketIOClient as unknown) as jest.Mock<TestSocket>;
+
 // Integration tests for the general application experience
 describe("Application", () => {
   beforeEach(async () => {
@@ -64,7 +75,7 @@ describe("Application", () => {
   });
 
   test("a socket connection is made", () => {
-    expect(socketIOClient).toHaveBeenCalled();
+    expect(mockedSocketClient).toHaveBeenCalled();
   });
 
   test("responds to real time quote data events by updating UI", () => {
@@ -72,7 +83,7 @@ describe("Application", () => {
     expect(screen.getByText("387.46")).toBeInTheDocument();
     expect(screen.queryByText("400.46")).not.toBeInTheDocument();
 
-    socketIOClient().receiveEvent("realTimeQuoteData", {
+    mockedSocketClient().receiveEvent("realTimeQuoteData", {
       symbol: "AAPL",
       previousClose: "479.47",
       week52High: "517.16",
@@ -92,8 +103,11 @@ describe("Application", () => {
   });
 
   test("searched symbols send newSymbol events over socket", async () => {
-    expect(socketIOClient().emit).toHaveBeenCalledWith("newSymbol", "AAPL");
-    expect(socketIOClient().emit).not.toHaveBeenCalledWith("newSymbol", "WORK");
+    expect(mockedSocketClient().emit).toHaveBeenCalledWith("newSymbol", "AAPL");
+    expect(mockedSocketClient().emit).not.toHaveBeenCalledWith(
+      "newSymbol",
+      "WORK"
+    );
 
     const input = screen.getByRole("textbox");
     fireEvent.change(input, { target: { value: "WORK" } });
@@ -101,7 +115,7 @@ describe("Application", () => {
 
     await waitForElement(() => screen.getByText("Slack Technologies, Inc."));
 
-    expect(socketIOClient().emit).toHaveBeenCalledWith("newSymbol", "WORK");
+    expect(mockedSocketClient().emit).toHaveBeenCalledWith("newSymbol", "WORK");
   });
 
   // TODO: do integration test of footer index searches once we consistently hook that up to real data.

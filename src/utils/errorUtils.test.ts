@@ -1,14 +1,14 @@
 import { formatErrorMessage } from "./errorUtils";
 
-let exampleNotFoundError = {
+let exampleNotFoundError = new Response(null, {
   status: 404,
   statusText: "Not Found",
-};
+});
 
-let exampleOtherError = {
+let exampleOtherError = new Response(null, {
   status: 490,
   statusText: "Something else bad happened",
-};
+});
 
 describe("formatErrorMessages", () => {
   it("formats 404 errors", () => {
