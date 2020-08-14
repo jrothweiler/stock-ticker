@@ -1,94 +1,25 @@
-import { INITIAL_CHART_RANGE } from "../utils/constants";
+import {
+  INITIAL_CHART_RANGE,
+  INITIAL_STOCK,
+  SEARCH_SYMBOL,
+  SEARCH_INDEXES,
+  FETCH_HISTORY,
+  NEW_QUOTE_DATA,
+  NEW_TICKER_DATA,
+  NEW_INDEX_DATA,
+  NEW_HISTORY_DATA,
+  NEW_CHART_RANGE,
+  SEARCH_ERROR,
+  CLEAR_SEARCH_ERRORS,
+  NEW_INDEXES,
+  NEW_SYMBOL,
+  REAL_TIME_QUOTE_DATA,
+  REAL_TIME_INDEX_DATA,
+} from "../utils/constants";
 
-interface QuoteData {
-  symbol: string,
-  previousClose: number,
-  week52High: number,
-  week52Low: number,
-  high: number,
-  low: number,
-  latestPrice: number,
-  marketCap: number, 
-  latestVolume: number,
-  open: number,
-  avgTotalVolume: number,
-  isUsMarketOpen: number,
-  latestUpdate: boolean
-}
+import type { StockState, DispatchAction } from "../types";
 
-interface QuoteData {
-  symbol: string,
-  previousClose: number,
-  week52High: number,
-  week52Low: number,
-  high: number,
-  low: number,
-  latestPrice: number,
-  marketCap: number, 
-  latestVolume: number,
-  open: number,
-  avgTotalVolume: number,
-  isUsMarketOpen: number,
-  latestUpdate: boolean
-}
-
-interface NewsData {
-  datetime: number,
-  headline: string,
-  source: string,
-  url: string
-}
-
-interface CompanyData {
-  companyName: string,
-  website: string,
-  description: string,
-  exchange: string,
-  sector: string,
-  currency: string
-}
-
-interface StatsData {
-  dividendYield: number,
-  earningsPerShare: number,
-  peRatio: number
-}
-
-interface HistoryData {
-  date: number,
-  minute: number,
-  price: number
-}
-
-interface PeersData {
-  peers: string[]
-}
-
-interface TickerInfo {
-  quoteInfo: QuoteData | null,
-  newsInfo: NewsData | null,
-  companyInfo: CompanyData | null,
-  statInfo: StatsData | null,
-  historyInfo: HistoryData | null,
-  peersInfo: PeersData | null
-}
-
-interface State {
-  ticker: string | null,
-  chartRange: string,
-  tickerInfo: TickerInfo,
-  indexes: string[]
-};
-
-interface Payload {
-  symbol: string,
-  data: TickerInfo
-}
-interface Action {
-  type: string,
-  payload: Payload
-}
-const initialState: State = {
+const initialState: StockState = {
   ticker: null,
   chartRange: INITIAL_CHART_RANGE,
   tickerInfo: {
@@ -102,9 +33,9 @@ const initialState: State = {
   indexes: [],
 };
 
-export default (state: State = initialState, action: Action) => {
+export default (state: StockState = initialState, action: DispatchAction) => {
   switch (action.type) {
-    case "newQuoteData": {
+    case NEW_QUOTE_DATA: {
       return {
         ...state,
         tickerInfo: {
@@ -113,7 +44,7 @@ export default (state: State = initialState, action: Action) => {
         },
       };
     }
-    case "newTickerData": {
+    case NEW_TICKER_DATA: {
       return {
         ...state,
         ticker: action.payload.symbol,
@@ -123,13 +54,13 @@ export default (state: State = initialState, action: Action) => {
         },
       };
     }
-    case "newIndexData": {
+    case NEW_INDEX_DATA: {
       return {
         ...state,
         indexes: action.payload,
       };
     }
-    case "newHistoryData": {
+    case NEW_HISTORY_DATA: {
       return {
         ...state,
         tickerInfo: {
@@ -138,7 +69,7 @@ export default (state: State = initialState, action: Action) => {
         },
       };
     }
-    case "newChartRange": {
+    case NEW_CHART_RANGE: {
       return {
         ...state,
         chartRange: action.payload,

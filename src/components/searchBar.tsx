@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { mdiMagnify } from "@mdi/js";
 import Icon from "@mdi/react";
 import { VALID_SEARCH_REGEXP } from "../utils/constants";
-import { DisplayWrapper } from "../components/generics/displayWrapper";
-import { Text } from "../components/generics/text";
+import { DisplayWrapper } from "./generics/displayWrapper";
+import { Text } from "./generics/text";
 import { searchErrorsSelector } from "../selectors/errorsSelectors";
 import { searchFetch } from "../utils/serverUtils";
-import { TableRow } from "../components/generics/tableRow";
-import { TableColumn } from "../components/generics/tableColumn";
+import { TableRow } from "./generics/tableRow";
+import { TableColumn } from "./generics/tableColumn";
 
 export const SearchBar = (props) => {
   let [currentText, setCurrentText] = useState("");

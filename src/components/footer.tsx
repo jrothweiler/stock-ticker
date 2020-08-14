@@ -4,20 +4,14 @@ import { PriceDisplay } from "./priceDisplay";
 import { Text } from "./generics/text";
 import { useIndexSelector } from "./componentHooks/useIndexSelector";
 
-interface Props = {
-  height: string,
-  width: string
+interface Props {
+  width?: string;
+  height?: string;
 }
-
-export const Footer: React.FC<{height: string, width: string}> = ({height, width}) => {
+export const Footer: React.FC<Props> = (Props) => {
   const indexes = useIndexSelector();
-  //const indexes = []
   return (
-    <DisplayWrapper
-      className="footer"
-      width={props.width}
-      height={props.height}
-    >
+    <DisplayWrapper className="footer" width={width} height={height}>
       <DisplayWrapper ml="1.0rem" paddingTop="0.6rem" mb="0.5rem">
         <Text variant="primary" size="small" fontWeight="lighter">
           US MARKET

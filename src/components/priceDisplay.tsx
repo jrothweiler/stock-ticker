@@ -4,7 +4,14 @@ import { mdiArrowDown, mdiArrowUp } from "@mdi/js";
 import Icon from "@mdi/react";
 import { DisplayWrapper } from "./generics/displayWrapper";
 
-export const PriceDisplay = (props) => {
+interface Props {
+  width?: string | Array<string>;
+  height?: string | Array<string>;
+  size?: string | Array<string>;
+  data?: QuoteData;
+  ticker?: string;
+}
+export const PriceDisplay = (props: Props) => {
   return (
     <DisplayWrapper {...props}>
       {props.data && (

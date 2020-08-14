@@ -9,8 +9,8 @@ import {
 import { currentPriceSelector } from "../selectors/quoteSelector";
 import { tickerSelector } from "../selectors/tickerSelector";
 import { POSSIBLE_CHART_RANGES } from "../utils/constants";
-import { Text } from "../components/generics/text";
-import { Button } from "../components/generics/button";
+import { Text } from "./generics/text";
+import { Button } from "./generics/button";
 import "chartjs-plugin-annotation";
 import { layout } from "styled-system";
 import { useCurrentPriceSelector } from "./componentHooks/useCurrentPriceSelector";
