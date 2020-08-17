@@ -13,14 +13,18 @@ import {
 } from "./utils/serverUtils";
 import {
   INITIAL_STOCK,
-  SEARCH_ERROR,
+  SEARCH_SYMBOL,
+  SEARCH_INDEXES,
+  FETCH_HISTORY,
+  NEW_QUOTE_DATA,
   NEW_TICKER_DATA,
   NEW_INDEX_DATA,
   NEW_HISTORY_DATA,
-  NEW_QUOTE_DATA,
-  SEARCH_INDEXES,
-  FETCH_HISTORY,
-  SEARCH_SYMBOL,
+  SEARCH_ERROR,
+  NEW_INDEXES,
+  NEW_SYMBOL,
+  REAL_TIME_QUOTE_DATA,
+  REAL_TIME_INDEX_DATA,
   WEBSOCKET_URL,
 } from "./utils/constants";
 import socketIOClient from "socket.io-client";
@@ -66,7 +70,7 @@ const producerMiddleWare = (rawStore) => {
               },
             });
 
-            socket.emit("newSymbol", symbol);
+            socket.emit(NEW_SYMBOL, symbol);
           })
           .catch((e) => {
             rawStore.dispatch({ type: SEARCH_ERROR, payload: e.message });
@@ -81,7 +85,7 @@ const producerMiddleWare = (rawStore) => {
               type: NEW_INDEX_DATA,
               payload: dataArray,
             });
-            socket.emit("newIndexes", indexes);
+            socket.emit(NEW_INDEXES, indexes);
           })
           .catch((e) => {
             rawStore.dispatch({ type: SEARCH_ERROR, payload: e.message });
@@ -101,11 +105,11 @@ const producerMiddleWare = (rawStore) => {
     }
   };
 
-  socket.on("realTimeQuoteData", (data) => {
+  socket.on(REAL_TIME_QUOTE_DATA, (data) => {
     rawStore.dispatch({ type: NEW_QUOTE_DATA, payload: data });
   });
 
-  socket.on("realTimeIndexData", (dataArray) => {
+  socket.on(REAL_TIME_INDEX_DATA, (dataArray) => {
     rawStore.dispatch({ type: NEW_INDEX_DATA, payload: dataArray });
   });
 

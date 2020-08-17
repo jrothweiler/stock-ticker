@@ -1,4 +1,11 @@
-import { INITIAL_CHART_RANGE } from "../utils/constants";
+import {
+  INITIAL_CHART_RANGE,
+  NEW_QUOTE_DATA,
+  NEW_TICKER_DATA,
+  NEW_INDEX_DATA,
+  NEW_HISTORY_DATA,
+  NEW_CHART_RANGE,
+} from "../utils/constants";
 
 const initialState = {
   ticker: null,
@@ -16,7 +23,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case "newQuoteData": {
+    case NEW_QUOTE_DATA: {
       // if the symbol fetched for does not match the current symbol,
       // this action might be leftover from the previous symbol, so disregard it
       if (state.ticker !== action.payload.symbol) {
@@ -30,7 +37,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case "newTickerData": {
+    case NEW_TICKER_DATA: {
       return {
         ...state,
         ticker: action.payload.symbol,
@@ -40,13 +47,13 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case "newIndexData": {
+    case NEW_INDEX_DATA: {
       return {
         ...state,
         indexes: action.payload,
       };
     }
-    case "newHistoryData": {
+    case NEW_HISTORY_DATA: {
       return {
         ...state,
         tickerInfo: {
@@ -55,7 +62,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case "newChartRange": {
+    case NEW_CHART_RANGE: {
       return {
         ...state,
         chartRange: action.payload,
