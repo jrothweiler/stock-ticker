@@ -12,14 +12,14 @@ import socketIOClient from "socket.io-client";
 jest.mock("socket.io-client", () => {
   const emit = jest.fn();
   // keep track in this mock of any callbacks added through 'on'
-  const eventHandlers = {};
+  const eventHandlers: { [actionName: string]: (...args: any[]) => void } = {};
   const on = jest.fn((event, cb) => {
     eventHandlers[event] = cb;
   });
 
   // test helper that simulates the socket receiving an event from the server
   // side of the socket, calling the appropriate callback
-  const receiveEvent = (event, ...args) => {
+  const receiveEvent = (event: string, ...args: any[]) => {
     eventHandlers[event](...args);
   };
   const socket = { emit, on, receiveEvent };

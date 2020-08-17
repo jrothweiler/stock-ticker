@@ -1,9 +1,4 @@
-import {
-  cleanup,
-  render,
-  screen,
-  waitForElement,
-} from "@testing-library/react";
+import { render, screen, waitForElement } from "@testing-library/react";
 import React from "react";
 import { LatestNews } from "./latestNews";
 
