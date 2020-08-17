@@ -25,7 +25,7 @@ describe("Search bar component", () => {
 
   test("focusing on the form removes the company text", () => {
     const companyText = screen.queryByText("Apple, Inc.");
-    const input = screen.queryByRole("textbox");
+    const input = screen.queryByRole("textbox") as HTMLInputElement;
     expect(companyText).toBeInTheDocument();
     fireEvent.focus(input);
     expect(companyText).not.toBeInTheDocument();
@@ -70,7 +70,7 @@ describe("Search bar component", () => {
     fireEvent.click(companyText);
     expect(input === document.activeElement).toBe(true);
     expect(screen.queryByText("Apple, Inc.")).not.toBeInTheDocument();
-    input.blur();
+    input?.blur();
 
     await waitForElement(() => input !== document.activeElement);
     expect(screen.getByText("Apple, Inc.")).toBeInTheDocument();
