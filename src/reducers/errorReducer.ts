@@ -1,11 +1,15 @@
 import { SEARCH_ERROR, CLEAR_SEARCH_ERRORS } from "../utils/constants";
 import type { ErrorState, StockAction } from "../types/reduxTypes";
+import type { Reducer } from "redux";
 
 const initialState: ErrorState = {
   search: null,
 };
 
-export default (state = initialState, action: StockAction): ErrorState => {
+const errorReducer: Reducer<ErrorState, StockAction> = (
+  state = initialState,
+  action
+) => {
   switch (action.type) {
     case SEARCH_ERROR:
       return {
@@ -21,3 +25,5 @@ export default (state = initialState, action: StockAction): ErrorState => {
       return state;
   }
 };
+
+export default errorReducer;
