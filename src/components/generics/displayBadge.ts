@@ -20,7 +20,7 @@ type PropTypes =
   | PositionProps
   | Variant;
 
-export const DisplayBadge = styled.div`
+export const DisplayBadge = styled.div<PropTypes>`
   font-family: Arial;
   font-size: 1rem;
   border: none;

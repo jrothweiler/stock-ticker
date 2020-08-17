@@ -2,8 +2,8 @@ import React from "react";
 import { useCompanyBadgeInfo } from "./componentHooks/useCompanyBadgeInfo";
 import { DisplayWrapper } from "./generics/displayWrapper";
 import { DisplayBadge } from "./generics/displayBadge";
-
-export const CompanyBadges = (props) => {
+import { StyledSystem } from "../types";
+export const CompanyBadges = (props: StyledSystem) => {
   const badgeInfo = useCompanyBadgeInfo();
 
   return (
