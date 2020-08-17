@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
-import stockReducer from "./reducers/stockReducer";
-import errorReducer from "./reducers/errorReducer";
+import { StockReducer } from "./reducers/stockReducer";
+import { ErrorReducer } from "./reducers/errorReducer";
 import {
   quoteFetch,
   companyFetch,
@@ -122,8 +122,8 @@ const producerMiddleWare = (rawStore) => {
 const dataStore = producerMiddleWare(
   createStore(
     combineReducers({
-      stocks: stockReducer,
-      errors: errorReducer,
+      stocks: StockReducer,
+      errors: ErrorReducer,
     }),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )

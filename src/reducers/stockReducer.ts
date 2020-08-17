@@ -1,3 +1,5 @@
+import type { Reducer } from "redux";
+import type { StockState, StockAction } from "../types";
 import {
   INITIAL_CHART_RANGE,
   NEW_QUOTE_DATA,
@@ -7,7 +9,7 @@ import {
   NEW_CHART_RANGE,
 } from "../utils/constants";
 
-const initialState = {
+const initialState: StockState = {
   ticker: null,
   chartRange: INITIAL_CHART_RANGE,
   tickerInfo: {
@@ -21,7 +23,10 @@ const initialState = {
   indexes: [],
 };
 
-export default (state = initialState, action) => {
+export const StockReducer: Reducer<StockState, StockAction> = (
+  state = initialState,
+  action
+) => {
   switch (action.type) {
     case NEW_QUOTE_DATA: {
       // if the symbol fetched for does not match the current symbol,

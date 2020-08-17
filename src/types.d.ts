@@ -18,8 +18,6 @@ import {
 } from "./utils/constants";
 import type { Action } from "redux";
 
-// Stock Reducer and State
-
 export interface QuoteData {
   symbol: string;
   previousClose: number;
@@ -81,7 +79,11 @@ interface StockState {
   ticker: string | null;
   chartRange: string;
   tickerInfo: TickerInfo;
-  indexes: string[];
+  indexes: QuoteData[];
+}
+
+export interface ErrorState {
+  search: string | null;
 }
 
 type ActionTypes =
@@ -118,3 +120,8 @@ interface StockReducer<StockState, A extends StockAction> {
 }
 
 type Period = "1D" | "5D" | "1M" | "1Y" | "5Y";
+
+export interface CombinedReducers<S extends StockState, E extends ErrorState> {
+  stocks: S;
+  errors: E;
+}
