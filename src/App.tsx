@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, Store, Dispatch } from "redux";
 import { Provider } from "react-redux";
 import { StockReducer } from "./reducers/stockReducer";
 import { ErrorReducer } from "./reducers/errorReducer";
@@ -31,12 +31,26 @@ import socketIOClient from "socket.io-client";
 import { StockTrader } from "./stockTrader";
 import { ThemeProvider } from "styled-components";
 import theme from "./themes/theme";
+import type {
+  StockAction,
+  CombinedReducers,
+  StockState,
+  ErrorState,
+  QuoteData,
+  NewsData,
+  CompanyData,
+  StatsData,
+  PeersData,
+  HistoryData,
+} from "./types";
 
 //Triggers dispatches (May need to be broken down into multiple Middlewares chained together)
-const producerMiddleWare = (rawStore) => {
+const producerMiddleWare = (
+  rawStore: Store<CombinedReducers<StockState, ErrorState>, StockAction>
+): Store<CombinedReducers<StockState, ErrorState>, StockAction> => {
   const socket = socketIOClient(WEBSOCKET_URL);
 
-  const dispatch = (action) => {
+  const dispatch: any = (action: StockAction) => {
     switch (action.type) {
       case SEARCH_SYMBOL: {
         let symbol = action.payload;
@@ -48,30 +62,41 @@ const producerMiddleWare = (rawStore) => {
           statsFetch(symbol),
           peersFetch(symbol),
         ])
-          .then((dataArray) => {
-            let [
-              quoteInfo,
-              companyInfo,
-              newsInfo,
-              statInfo,
-              peersInfo,
-            ] = dataArray;
-            rawStore.dispatch({
-              type: NEW_TICKER_DATA,
-              payload: {
-                symbol,
-                data: {
-                  quoteInfo,
-                  newsInfo,
-                  companyInfo,
-                  statInfo,
-                  peersInfo,
+          .then(
+            (
+              dataArray: [
+                QuoteData,
+                CompanyData,
+                NewsData,
+                StatsData,
+                PeersData
+              ]
+            ) => {
+              let [
+                quoteInfo,
+                companyInfo,
+                newsInfo,
+                statInfo,
+                peersInfo,
+              ] = dataArray;
+              rawStore.dispatch({
+                type: NEW_TICKER_DATA,
+                payload: {
+                  symbol,
+                  data: {
+                    quoteInfo,
+                    newsInfo,
+                    companyInfo,
+                    statInfo,
+                    peersInfo,
+                    historyInfo: null,
+                  },
                 },
-              },
-            });
+              });
 
-            socket.emit(NEW_SYMBOL, symbol);
-          })
+              socket.emit(NEW_SYMBOL, symbol);
+            }
+          )
           .catch((e) => {
             rawStore.dispatch({ type: SEARCH_ERROR, payload: e.message });
           });
@@ -95,7 +120,7 @@ const producerMiddleWare = (rawStore) => {
 
       case FETCH_HISTORY: {
         let { symbol, period } = action.payload;
-        historyFetch(symbol, period).then((data) => {
+        historyFetch(symbol, period).then((data: HistoryData) => {
           rawStore.dispatch({ type: NEW_HISTORY_DATA, payload: data });
         });
         break;
@@ -105,11 +130,11 @@ const producerMiddleWare = (rawStore) => {
     }
   };
 
-  socket.on(REAL_TIME_QUOTE_DATA, (data) => {
+  socket.on(REAL_TIME_QUOTE_DATA, (data: QuoteData) => {
     rawStore.dispatch({ type: NEW_QUOTE_DATA, payload: data });
   });
 
-  socket.on(REAL_TIME_INDEX_DATA, (dataArray) => {
+  socket.on(REAL_TIME_INDEX_DATA, (dataArray: QuoteData[]) => {
     rawStore.dispatch({ type: NEW_INDEX_DATA, payload: dataArray });
   });
 
@@ -124,8 +149,9 @@ const dataStore = producerMiddleWare(
     combineReducers({
       stocks: StockReducer,
       errors: ErrorReducer,
-    }),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    })
+    //following line produces error in TypeScript for some reason
+    //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 

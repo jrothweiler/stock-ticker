@@ -17,6 +17,14 @@ import {
   WEBSOCKET_URL,
 } from "./utils/constants";
 import type { Action } from "redux";
+import type {
+  SpaceProps,
+  FlexboxProps,
+  LayoutProps,
+  BorderProps,
+  TypographyProps,
+  PositionProps,
+} from "styled-system";
 
 export interface QuoteData {
   symbol: string;
@@ -103,6 +111,8 @@ export interface PossibleAction<Type extends ActionTypes, Payload>
   payload: Payload;
 }
 
+type Period = "1D" | "5D" | "1M" | "1Y" | "5Y";
+
 export type StockAction =
   | PossibleAction<typeof NEW_QUOTE_DATA, QuoteData>
   | PossibleAction<typeof NEW_TICKER_DATA, { symbol: string; data: TickerInfo }>
@@ -119,9 +129,19 @@ interface StockReducer<StockState, A extends StockAction> {
   (state: StockState, action: A): StockState;
 }
 
-type Period = "1D" | "5D" | "1M" | "1Y" | "5Y";
-
 export interface CombinedReducers<S extends StockState, E extends ErrorState> {
   stocks: S;
   errors: E;
+}
+
+//Styled systems types
+export type StyledSystem = SpaceProps &
+  FlexboxProps &
+  LayoutProps &
+  BorderProps &
+  TypographyProps &
+  PositionProps;
+
+export interface Variant {
+  variant: string | string[] | null;
 }

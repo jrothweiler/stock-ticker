@@ -1,7 +1,26 @@
 import styled from "styled-components";
 import { layout, typography, variant, space, color } from "styled-system";
 
-export const Text = styled("div")(
+import type {
+  SpaceProps,
+  FlexboxProps,
+  LayoutProps,
+  BorderProps,
+  TypographyProps,
+  PositionProps,
+} from "styled-system";
+import type { Variant } from "../../types";
+
+type PropTypes =
+  | SpaceProps
+  | FlexboxProps
+  | LayoutProps
+  | BorderProps
+  | TypographyProps
+  | PositionProps
+  | Variant;
+
+export const Text = styled("div")<PropTypes>(
   {
     fontFamily: "Lato",
     display: "block",
@@ -32,7 +51,7 @@ export const Text = styled("div")(
       secondary: {
         color: "#beccdc",
         opacity: 0.8,
-        fontWeight: 'lighter'
+        fontWeight: "lighter",
       },
       gain: {
         color: "#91e4a5",
@@ -50,7 +69,7 @@ export const Text = styled("div")(
         color: "#beccdc",
         opacity: 0.8,
         fontSize: "1.0rem",
-        fontWeight: 'lighter',
+        fontWeight: "lighter",
         display: "inline-block",
         paddingBottom: "1.0rem",
       },

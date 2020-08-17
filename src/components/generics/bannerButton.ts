@@ -1,6 +1,26 @@
 import styled from "styled-components";
 import { variant } from "styled-system";
-export const BannerButton = styled("button")(
+
+import type {
+  SpaceProps,
+  FlexboxProps,
+  LayoutProps,
+  BorderProps,
+  TypographyProps,
+  PositionProps,
+} from "styled-system";
+import type { Variant } from "../../types";
+
+type PropTypes =
+  | SpaceProps
+  | FlexboxProps
+  | LayoutProps
+  | BorderProps
+  | TypographyProps
+  | PositionProps
+  | Variant;
+
+export const BannerButton = styled("button")<PropTypes>(
   {
     fontFamily: "Lato",
     fontSize: "18px",

@@ -1,5 +1,5 @@
 import React from "react";
-import { DisplayWrapper } from "./generics/displayWrapper";
+import { DisplayWrapper } from "./generics/displayWrapper.ts";
 import { TitleHeader } from "./generics/titleHeader";
 import { Text } from "./generics/text";
 import { StatWrapper } from "./generics/statWrapper";

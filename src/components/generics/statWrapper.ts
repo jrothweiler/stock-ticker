@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { layout, space } from "styled-system";
-export const StatWrapper = styled.div`
+import { LayoutProps, SpaceProps } from "styled-system";
+
+export const StatWrapper = styled.div<LayoutProps | SpaceProps>`
   display: flex;
   wrap: true;
   justify-content: space-between;

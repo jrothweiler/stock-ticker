@@ -3,8 +3,13 @@ import { DisplayWrapper } from "./generics/displayWrapper";
 import { PriceDisplay } from "./priceDisplay";
 import { Text } from "./generics/text";
 import { useIndexSelector } from "./componentHooks/useIndexSelector";
+import { StyledSystem, QuoteData } from "../types";
 
-export const Footer = (props) => {
+interface Props {
+  height: string;
+  width: string;
+}
+export const Footer = (props: StyledSystem) => {
   const indexes = useIndexSelector();
   //const indexes = [];
   return (
@@ -25,7 +30,7 @@ export const Footer = (props) => {
         justifyContent="flex-start"
       >
         {indexes &&
-          indexes.map((index) => (
+          indexes.map((index: QuoteData) => (
             <PriceDisplay
               key={index.symbol}
               data={index}
