@@ -8,6 +8,8 @@ export const companySelector = (state: ReduxState): CompanyInfo => {
 export const companyBadgeInfoSelector = createSelector(
   [companySelector],
   (companyInfo) => {
-    return [companyInfo?.exchange, companyInfo?.sector, companyInfo?.currency];
+    return companyInfo
+      ? [companyInfo.exchange, companyInfo.sector, companyInfo.currency]
+      : [];
   }
 );
