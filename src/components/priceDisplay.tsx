@@ -3,8 +3,18 @@ import { Text } from "./generics/text";
 import { mdiArrowDown, mdiArrowUp } from "@mdi/js";
 import Icon from "@mdi/react";
 import { DisplayWrapper } from "./generics/displayWrapper";
+import { StyledSystem, QuoteData } from "../types";
+import { AnyTxtRecord } from "dns";
 
-export const PriceDisplay = (props) => {
+interface AdditionalProps {
+  data: QuoteData;
+  ticker: string;
+  size: "small" | "medium" | "large";
+}
+
+type Props = AdditionalProps & StyledSystem;
+
+export const PriceDisplay = (props: Props) => {
   return (
     <DisplayWrapper {...props}>
       {props.data && (

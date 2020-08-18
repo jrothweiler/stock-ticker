@@ -1,20 +1,21 @@
 import React from "react";
-import { DisplayWrapper } from "./generics/displayWrapper.ts";
+import { DisplayWrapper } from "./generics/displayWrapper";
 import { TitleHeader } from "./generics/titleHeader";
 import { Text } from "./generics/text";
 import { StatWrapper } from "./generics/statWrapper";
 import { useStatsSelector } from "./componentHooks/useStatsSelector";
 import { useQuoteSelector } from "./componentHooks/useQuoteSelector";
+import { StyledSystem, StatsData, QuoteData } from "../types";
 
-export const KeyStats = (props) => {
+export const KeyStats = (props: StyledSystem) => {
   //Call necessary selectors for display data
-  const stats = useStatsSelector();
-  const quote = useQuoteSelector();
+  const stats: StatsData = useStatsSelector();
+  const quote: QuoteData = useQuoteSelector();
 
-  function rowDataToJSX(labels, values) {
+  function rowDataToJSX(labels: string[], values: string[]) {
     return (
       <DisplayWrapper width={["100%", "46%"]}>
-        {labels.map((label, indx) => (
+        {labels.map((label: string, indx: number) => (
           <StatWrapper key={label}>
             <Text variant="statLabel">{label}</Text>
             <Text variant="statValue">{values[indx]}</Text>

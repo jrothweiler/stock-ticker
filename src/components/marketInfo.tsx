@@ -6,9 +6,10 @@ import { mdiWeatherSunny } from "@mdi/js";
 import { mdiWeatherNight } from "@mdi/js";
 import Icon from "@mdi/react";
 import { formatDate } from "../utils/dateUtils";
+import { QuoteData } from "../types";
 
 export const MarketInfo = () => {
-  const quoteData = useQuoteSelector();
+  const quoteData: QuoteData = useQuoteSelector();
   const marketOpen = quoteData.isUSMarketOpen;
   const latestTime = quoteData.latestUpdate;
   const latestTimeString = formatDate(latestTime);

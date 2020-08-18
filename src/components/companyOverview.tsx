@@ -4,14 +4,16 @@ import { TitleHeader } from "./generics/titleHeader";
 import { Text } from "./generics/text";
 import { useCompanySelector } from "./componentHooks/useCompanySelector";
 import { useTickerSelector } from "./componentHooks/useTickerSelector";
-export const CompanyOverview = (props) => {
+import { StyledSystem } from "../types";
+
+export const CompanyOverview = (props: StyledSystem) => {
   //Call necessary selectors for display data
   const companyInfo = useCompanySelector();
   const ticker = useTickerSelector();
   return (
-    <DisplayWrapper mb = {props.mb}>
+    <DisplayWrapper mb={props.mb}>
       <TitleHeader>COMPANY OVERVIEW</TitleHeader>
-      <Text  height={props.height} overflow="auto">
+      <Text height={props.height} overflow="auto">
         <Text variant="primary" fontSize="1.8rem">
           {companyInfo.companyName} ({ticker})
         </Text>

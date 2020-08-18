@@ -4,9 +4,11 @@ import { TitleHeader } from "./generics/titleHeader";
 import { Text } from "./generics/text";
 import * as timeago from "timeago.js";
 import { useNewsSelector } from "./componentHooks/useNewsSelector";
-export const LatestNews = (props) => {
+import { StyledSystem, NewsData } from "../types";
+
+export const LatestNews = (props: StyledSystem) => {
   //Call necessary selectors for display data
-  const newsInfo = useNewsSelector();
+  const newsInfo: NewsData[] = useNewsSelector();
 
   return (
     <DisplayWrapper {...props}>
