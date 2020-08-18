@@ -7,6 +7,12 @@ import type { StyleProps } from "../types/styleTypes";
 
 export const Footer = (props: StyleProps) => {
   const indexes = useIndexSelector();
+
+  if (!indexes) {
+    console.error("Something went wrong, Footer was mounted with no data");
+    return null;
+  }
+
   return (
     <DisplayWrapper className="footer" {...props}>
       <DisplayWrapper ml="1.0rem" paddingTop="0.6rem" mb="0.5rem">
@@ -20,16 +26,15 @@ export const Footer = (props: StyleProps) => {
         variant="flexRow"
         justifyContent="flex-start"
       >
-        {indexes &&
-          indexes.map((index) => (
-            <PriceDisplay
-              key={index.symbol}
-              data={index}
-              ticker={index.symbol}
-              size="medium"
-              mr="24px"
-            />
-          ))}
+        {indexes.map((index) => (
+          <PriceDisplay
+            key={index.symbol}
+            data={index}
+            ticker={index.symbol}
+            size="medium"
+            mr="24px"
+          />
+        ))}
       </DisplayWrapper>
     </DisplayWrapper>
   );

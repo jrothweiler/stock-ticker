@@ -7,6 +7,13 @@ import { StyleProps } from "../types/styleTypes";
 export const CompanyBadges = (props: StyleProps) => {
   const badgeInfo = useCompanyBadgeInfo();
 
+  if (badgeInfo.length === 0) {
+    console.error(
+      "Something went wrong, CompanyBadges was mounted with no data"
+    );
+    return null;
+  }
+
   return (
     <DisplayWrapper {...props} variant="flexRow" justifyContent="flex-start">
       {badgeInfo.map((badgeText, indx) => (

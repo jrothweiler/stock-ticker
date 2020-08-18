@@ -7,8 +7,12 @@ import { useNewsSelector } from "./componentHooks/useNewsSelector";
 import type { StyleProps } from "../types/styleTypes";
 
 export const LatestNews = (props: StyleProps) => {
-  //Call necessary selectors for display data
   const newsInfo = useNewsSelector();
+
+  if (!newsInfo) {
+    console.error("Something went wrong, LatestNews was mounted with no data");
+    return null;
+  }
 
   return (
     newsInfo && (

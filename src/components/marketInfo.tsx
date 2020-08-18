@@ -11,6 +11,7 @@ export const MarketInfo = () => {
   const quoteData = useQuoteSelector();
 
   if (!quoteData) {
+    console.error("Something went wrong, MarketInfo was mounted with no data");
     return null;
   }
 

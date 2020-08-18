@@ -12,6 +12,7 @@ export const KeyStats = (props: StyleProps) => {
   const quote = useQuoteSelector();
 
   if (!quote || !stats) {
+    console.error("Something went wrong, KeyStats was mounted with no data");
     return null;
   }
 

@@ -11,6 +11,11 @@ export const TopPeers = (props: StyleProps) => {
   const peersInfo = usePeersSelector();
   const searchSymbol = useSearchSymbol();
 
+  if (!peersInfo) {
+    console.error("Something went wrong, TopPeers was mounted with no data");
+    return null;
+  }
+
   return (
     peersInfo && (
       <DisplayWrapper {...props}>
