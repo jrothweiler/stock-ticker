@@ -9,9 +9,12 @@ import { StyledSystem, StatsData, QuoteData } from "../types";
 
 export const KeyStats = (props: StyledSystem) => {
   //Call necessary selectors for display data
-  const stats: StatsData = useStatsSelector();
-  const quote: QuoteData = useQuoteSelector();
+  const stats = useStatsSelector();
+  const quote = useQuoteSelector();
 
+  if (!quote || !stats) {
+    return null;
+  }
   function rowDataToJSX(labels: string[], values: string[]) {
     return (
       <DisplayWrapper width={["100%", "46%"]}>
@@ -35,7 +38,7 @@ export const KeyStats = (props: StyledSystem) => {
 
   const rowValuesFirstColumn = [
     quote.previousClose.toLocaleString("en"),
-    `${quote.low.toLocaleString("en")} - ${quote.high.toLocaleString("en")}`,
+    `${quote.low.toLocaleString("en")} - ${quote?.high.toLocaleString("en")}`,
     quote.latestVolume.toLocaleString("en"),
     quote.marketCap.toLocaleString("en"),
     stats.peRatio.toLocaleString("en"),
@@ -50,14 +53,14 @@ export const KeyStats = (props: StyledSystem) => {
   ];
 
   const rowValuesSecondColumn = [
-    quote.open.toLocaleString("en"),
-    `${quote.week52Low.toLocaleString(
+    quote?.open.toLocaleString("en"),
+    `${quote?.week52Low.toLocaleString(
       "en"
-    )} - ${quote.week52High.toLocaleString("en")}`,
-    quote.avgTotalVolume.toLocaleString("en"),
-    stats.earningsPerShare.toLocaleString("en"),
-    stats.dividendYield
-      ? `${(stats.dividendYield * 100).toLocaleString("en")}%`
+    )} - ${quote?.week52High.toLocaleString("en")}`,
+    quote?.avgTotalVolume.toLocaleString("en"),
+    stats?.earningsPerShare.toLocaleString("en"),
+    stats?.dividendYield
+      ? `${(stats?.dividendYield * 100).toLocaleString("en")}%`
       : "N/A",
   ];
 

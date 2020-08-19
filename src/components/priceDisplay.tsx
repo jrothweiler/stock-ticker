@@ -6,9 +6,9 @@ import { DisplayWrapper } from "./generics/displayWrapper";
 import { StyledSystem, QuoteData } from "../types";
 
 interface AdditionalProps {
-  data: QuoteData;
-  ticker: string;
-  size: string | string[];
+  data?: QuoteData;
+  ticker?: string;
+  size?: string | string[];
 }
 
 type Props = AdditionalProps & StyledSystem;

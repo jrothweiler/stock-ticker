@@ -8,25 +8,27 @@ import { StyledSystem, NewsData } from "../types";
 
 export const LatestNews = (props: StyledSystem) => {
   //Call necessary selectors for display data
-  const newsInfo: NewsData[] = useNewsSelector();
+  const newsInfo: NewsData[] | null = useNewsSelector();
 
   return (
-    <DisplayWrapper {...props}>
-      <TitleHeader>LATEST NEWS</TitleHeader>
-      <DisplayWrapper overflow="auto" height="100%">
-        {newsInfo.map((article) => (
-          <div key={article.headline}>
-            <a href={`${article.url}`} target="_blank">
-              <Text className="headline" variant="primary">
-                {article.headline}
+    newsInfo && (
+      <DisplayWrapper {...props}>
+        <TitleHeader>LATEST NEWS</TitleHeader>
+        <DisplayWrapper overflow="auto" height="100%">
+          {newsInfo.map((article) => (
+            <div key={article.headline}>
+              <a href={`${article.url}`} target="_blank">
+                <Text className="headline" variant="primary">
+                  {article.headline}
+                </Text>
+              </a>
+              <Text mt="0.3rem" variant="secondary" mb="1.0rem">
+                {timeago.format(article.datetime)} - {article.source}
               </Text>
-            </a>
-            <Text mt="0.3rem" variant="secondary" mb="1.0rem">
-              {timeago.format(article.datetime)} - {article.source}
-            </Text>
-          </div>
-        ))}
+            </div>
+          ))}
+        </DisplayWrapper>
       </DisplayWrapper>
-    </DisplayWrapper>
+    )
   );
 };

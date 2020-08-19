@@ -46,8 +46,8 @@ import type {
 
 //Triggers dispatches (May need to be broken down into multiple Middlewares chained together)
 const producerMiddleWare = (
-  rawStore: Store<CombinedReducers<StockState, ErrorState>, StockAction>
-): Store<CombinedReducers<StockState, ErrorState>, StockAction> => {
+  rawStore: Store<CombinedReducers, StockAction>
+): Store<CombinedReducers, StockAction> => {
   const socket = socketIOClient(WEBSOCKET_URL);
 
   const dispatch: any = (action: StockAction) => {
@@ -67,7 +67,7 @@ const producerMiddleWare = (
               dataArray: [
                 QuoteData,
                 CompanyData,
-                NewsData,
+                NewsData[],
                 StatsData,
                 PeersData
               ]
@@ -88,8 +88,8 @@ const producerMiddleWare = (
                     newsInfo,
                     companyInfo,
                     statInfo,
-                    peersInfo,
                     historyInfo: null,
+                    peersInfo,
                   },
                 },
               });
@@ -120,7 +120,7 @@ const producerMiddleWare = (
 
       case FETCH_HISTORY: {
         let { symbol, period } = action.payload;
-        historyFetch(symbol, period).then((data: HistoryData) => {
+        historyFetch(symbol, period).then((data: HistoryData[]) => {
           rawStore.dispatch({ type: NEW_HISTORY_DATA, payload: data });
         });
         break;

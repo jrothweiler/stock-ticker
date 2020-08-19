@@ -18,15 +18,15 @@ import { StyledSystem, Period, HistoryData } from "../types";
 export const VisualDisplay = (props: StyledSystem) => {
   const dispatch = useDispatch();
 
-  const currentPrice: number = useSelector(currentPriceSelector);
+  const currentPrice: number | undefined = useSelector(currentPriceSelector);
 
-  const chartRange = useSelector(chartRangeSelector);
+  const chartRange: Period = useSelector(chartRangeSelector);
   // we keep track of the previous range in the middle of a fetch of new history data,
   // so we don't change the formatting of the x axis times until new data is fetched
-  const [prevRange, setPrevRange] = useState(null);
+  const [prevRange, setPrevRange] = useState<Period | null>(null);
 
   const historyData: HistoryData[] = useSelector(historySelector) || [];
-  const currentSymbol: string = useSelector(tickerSelector);
+  const currentSymbol: string | null = useSelector(tickerSelector);
 
   // when a chart range button is clicked, track the current range, and store the new
   // range in redux
@@ -72,7 +72,7 @@ export const VisualDisplay = (props: StyledSystem) => {
       },
     ],
   };
-  const options = {
+  const options: ChartOptions = {
     annotation: {
       annotations: [
         {
@@ -105,10 +105,10 @@ export const VisualDisplay = (props: StyledSystem) => {
             displayFormats: {
               hour: xAxisRange === "1D" ? "h:mm a" : "MMM DD  h:mm a",
             },
-            format: "YYYY-MM-DD HH:mm",
+            //format: "YYYY-MM-DD HH:mm",
           },
           ticks: {
-            fontWeight: "lighter",
+            //fontWeight: "lighter",
             fontFamily: "Lato",
             autoSkip: true,
             maxTicksLimit: 10,
@@ -123,7 +123,7 @@ export const VisualDisplay = (props: StyledSystem) => {
         {
           position: "right",
           ticks: {
-            fontWeight: "lighter",
+            //fontWeight: "lighter",
             fontFamily: "Lato",
             callback: function (label: number) {
               return label.toFixed(2);

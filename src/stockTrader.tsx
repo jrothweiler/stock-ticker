@@ -16,8 +16,13 @@ import { tickerSelector } from "./selectors/tickerSelector";
 import { MarketInfo } from "./components/marketInfo";
 import { StyledSystem, QuoteData } from "./types";
 export const StockTrader = () => {
-  const quote: QuoteData = useSelector(quoteSelector);
-  const ticker: string = useSelector(tickerSelector);
+  const quote: QuoteData | null = useSelector(quoteSelector);
+  const ticker: string | null = useSelector(tickerSelector);
+
+  if (!quote) {
+    console.error("Quote Data could not be fetched properly");
+    return null;
+  }
 
   return (
     <DisplayWrapper mt="2.5%" mb="5%" max-width="100%">

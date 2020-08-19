@@ -15,20 +15,20 @@ export const CompanyOverview = (props: StyledSystem) => {
       <TitleHeader>COMPANY OVERVIEW</TitleHeader>
       <Text height={props.height} overflow="auto">
         <Text variant="primary" fontSize="1.8rem">
-          {companyInfo.companyName} ({ticker})
+          {companyInfo?.companyName} ({ticker})
         </Text>
-        <a href={`${companyInfo.website}`} target="_blank">
+        <a href={`${companyInfo?.website}`} target="_blank">
           <Text
             className="companyLink"
             mt="0.5rem"
             variant="secondary"
             fontStyle="italic"
           >
-            {companyInfo.website}
+            {companyInfo?.website}
           </Text>
         </a>
         <Text mt="0.5rem" variant="primary">
-          {companyInfo.description}
+          {companyInfo?.description}
         </Text>
       </Text>
     </DisplayWrapper>

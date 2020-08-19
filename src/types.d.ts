@@ -26,7 +26,7 @@ import type {
   PositionProps,
 } from "styled-system";
 
-export interface QuoteData {
+interface QuoteData {
   symbol: string;
   previousClose: number;
   week52High: number;
@@ -70,9 +70,7 @@ interface HistoryData {
   price: number;
 }
 
-interface PeersData {
-  peers: Array<string>;
-}
+type PeersData = string[];
 
 type IndexData = QuoteData[];
 
@@ -86,16 +84,16 @@ interface SearchFill {
 
 interface TickerInfo {
   quoteInfo: QuoteData | null;
-  newsInfo: NewsData | null;
+  newsInfo: NewsData[] | null;
   companyInfo: CompanyData | null;
   statInfo: StatsData | null;
-  historyInfo: HistoryData | null;
+  historyInfo: HistoryData[] | null;
   peersInfo: PeersData | null;
 }
 
 interface StockState {
   ticker: string | null;
-  chartRange: string;
+  chartRange: Period;
   tickerInfo: TickerInfo;
   indexes: QuoteData[];
 }
@@ -127,7 +125,7 @@ export type StockAction =
   | PossibleAction<typeof NEW_QUOTE_DATA, QuoteData>
   | PossibleAction<typeof NEW_TICKER_DATA, { symbol: string; data: TickerInfo }>
   | PossibleAction<typeof NEW_CHART_RANGE, Period>
-  | PossibleAction<typeof NEW_HISTORY_DATA, HistoryData>
+  | PossibleAction<typeof NEW_HISTORY_DATA, HistoryData[]>
   | PossibleAction<typeof NEW_INDEX_DATA, QuoteData[]>
   | PossibleAction<typeof SEARCH_INDEXES, string[]>
   | PossibleAction<typeof FETCH_HISTORY, { symbol: string; period: Period }>

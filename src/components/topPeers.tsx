@@ -7,34 +7,36 @@ import { usePeersSelector } from "./componentHooks/usePeersSelector";
 import { useSearchSymbol } from "./componentHooks/useSearchSymbol";
 import { StyledSystem, PeersData } from "../types";
 export const TopPeers = (props: StyledSystem) => {
-  const peersInfo: string[] = usePeersSelector();
+  const peersInfo: PeersData | null = usePeersSelector();
   const searchSymbol = useSearchSymbol();
   return (
-    <DisplayWrapper {...props}>
-      <TitleHeader>TOP PEERS</TitleHeader>
-      {peersInfo.map((peer) => (
+    peersInfo && (
+      <DisplayWrapper {...props}>
+        <TitleHeader>TOP PEERS</TitleHeader>
+        {peersInfo.map((peer) => (
+          <Text
+            key={peer}
+            className="topPeer"
+            mr="18px"
+            display="inline-block"
+            variant="secondary"
+            opacity={1}
+            onClick={() => searchSymbol(peer)}
+          >
+            {peer}
+          </Text>
+        ))}
+        {/* WORK is added here as a valid default stock for demonstration purposes */}
         <Text
-          key={peer}
           className="topPeer"
-          mr="18px"
           display="inline-block"
           variant="secondary"
           opacity={1}
-          onClick={() => searchSymbol(peer)}
+          onClick={() => searchSymbol("WORK")}
         >
-          {peer}
+          WORK
         </Text>
-      ))}
-      {/* WORK is added here as a valid default stock for demonstration purposes */}
-      <Text
-        className="topPeer"
-        display="inline-block"
-        variant="secondary"
-        opacity={1}
-        onClick={() => searchSymbol("WORK")}
-      >
-        WORK
-      </Text>
-    </DisplayWrapper>
+      </DisplayWrapper>
+    )
   );
 };

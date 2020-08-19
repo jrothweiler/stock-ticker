@@ -1,13 +1,15 @@
 import { createSelector } from "reselect";
 import type { CombinedReducers, CompanyData } from "../types";
 
-export const companySelector = (state: CombinedReducers): CompanyData => {
+export const companySelector = (
+  state: CombinedReducers
+): CompanyData | null => {
   return state.stocks.tickerInfo.companyInfo;
 };
 
 export const companyBadgeInfoSelector = createSelector(
   [companySelector],
   (companyInfo) => {
-    return [companyInfo.exchange, companyInfo.sector, companyInfo.currency];
+    return [companyInfo?.exchange, companyInfo?.sector, companyInfo?.currency];
   }
 );
