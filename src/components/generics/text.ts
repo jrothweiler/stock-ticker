@@ -8,26 +8,19 @@ import type {
   BorderProps,
   TypographyProps,
   PositionProps,
+  ColorProps,
 } from "styled-system";
 import type { Variant, PeersData } from "../../types";
 
 type PropTypes =
+  | ColorProps
   | SpaceProps
-  | FlexboxProps
   | LayoutProps
   | BorderProps
   | TypographyProps
-  | PositionProps
   | Variant;
 
-interface TextProps {
-  key: PeersData;
-  opacity: number;
-}
-
-type Props = TextProps & PropTypes;
-
-export const Text = styled("div")<Props>(
+export const Text = styled("div")<PropTypes>(
   {
     fontFamily: "Lato",
     display: "block",

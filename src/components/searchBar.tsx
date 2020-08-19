@@ -13,19 +13,11 @@ import { searchErrorsSelector } from "../selectors/errorsSelectors";
 import { searchFetch } from "../utils/serverUtils";
 import { TableRow } from "../components/generics/tableRow";
 import { TableColumn } from "../components/generics/tableColumn";
-import { StyledSystem } from "../types";
+import { StyledSystem, SearchFill } from "../types";
 import { tickerSelector } from "../selectors/tickerSelector";
 import { companySelector } from "../selectors/companySelector";
-import type { SuggestionData, SearchSuggestion } from "../types/reduxTypes";
 import type { ChangeEvent } from "react";
 
-interface SearchFill {
-  exchange: string;
-  region: string;
-  securityName: string;
-  securityType: string;
-  symbol: string;
-}
 export const SearchBar = (props: StyledSystem) => {
   let [currentText, setCurrentText] = useState<string>("");
   let [symbolSuggestions, setSymbolSuggestions] = useState<SearchFill[]>([]);
@@ -66,7 +58,7 @@ export const SearchBar = (props: StyledSystem) => {
       setCurrentText("");
       setShowBadInputError(false);
       dispatch({ type: CLEAR_SEARCH_ERRORS });
-      inputRef.current.blur();
+      inputRef.current?.blur();
       setSymbolSuggestions([]);
     } else {
       setShowBadInputError(true);
@@ -82,7 +74,7 @@ export const SearchBar = (props: StyledSystem) => {
   }
 
   function onCompanyTextClick() {
-    inputRef.current.focus();
+    inputRef.current?.focus();
   }
 
   function handleRenderSuggestion(item: SearchFill) {

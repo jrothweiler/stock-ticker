@@ -7,7 +7,7 @@ import { usePeersSelector } from "./componentHooks/usePeersSelector";
 import { useSearchSymbol } from "./componentHooks/useSearchSymbol";
 import { StyledSystem, PeersData } from "../types";
 export const TopPeers = (props: StyledSystem) => {
-  const peersInfo: PeersData[] = usePeersSelector();
+  const peersInfo: string[] = usePeersSelector();
   const searchSymbol = useSearchSymbol();
   return (
     <DisplayWrapper {...props}>

@@ -74,6 +74,16 @@ interface PeersData {
   peers: Array<string>;
 }
 
+type IndexData = QuoteData[];
+
+interface SearchFill {
+  exchange: string;
+  region: string;
+  securityName: string;
+  securityType: string;
+  symbol: string;
+}
+
 interface TickerInfo {
   quoteInfo: QuoteData | null;
   newsInfo: NewsData | null;
@@ -111,7 +121,7 @@ export interface PossibleAction<Type extends ActionTypes, Payload>
   payload: Payload;
 }
 
-type Period = "1D" | "5D" | "1M" | "1Y" | "5Y";
+type Period = "1D" | "5D" | "1M" | "1Y" | "5Y" | "MAX" | null;
 
 export type StockAction =
   | PossibleAction<typeof NEW_QUOTE_DATA, QuoteData>
@@ -129,9 +139,9 @@ interface StockReducer<StockState, A extends StockAction> {
   (state: StockState, action: A): StockState;
 }
 
-export interface CombinedReducers<S extends StockState, E extends ErrorState> {
-  stocks: S;
-  errors: E;
+export interface CombinedReducers {
+  stocks: StockState;
+  errors: ErrorState;
 }
 
 //Styled systems types

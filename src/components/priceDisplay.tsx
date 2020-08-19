@@ -4,12 +4,11 @@ import { mdiArrowDown, mdiArrowUp } from "@mdi/js";
 import Icon from "@mdi/react";
 import { DisplayWrapper } from "./generics/displayWrapper";
 import { StyledSystem, QuoteData } from "../types";
-import { AnyTxtRecord } from "dns";
 
 interface AdditionalProps {
   data: QuoteData;
   ticker: string;
-  size: "small" | "medium" | "large";
+  size: string | string[];
 }
 
 type Props = AdditionalProps & StyledSystem;
