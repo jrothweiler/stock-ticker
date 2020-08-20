@@ -35,14 +35,14 @@ const producerMiddleWare = (
 ): Store<ReduxState, StockAction> => {
   const socket = socketIOClient(WEBSOCKET_URL);
 
-  const dispatch: Dispatch<StockAction> = (a) => {
+  const dispatch: Dispatch<StockAction> = (action) => {
     // Redux's dispatch type is interesting in that its accepted actions are subtypes of the type you give it.
     // StockAction is a union, meaning we don't know what actual actions are in the variable a above.
     // We know the actions passed in are StockActions, so we coerce this so typescript can work with the action's specific payload type.
-    const action = a as StockAction;
-    switch (action.type) {
+    const stockAction = action as StockAction;
+    switch (stockAction.type) {
       case SEARCH_SYMBOL: {
-        let symbol = action.payload;
+        let symbol = stockAction.payload;
 
         Promise.all([
           quoteFetch(symbol),
@@ -82,7 +82,7 @@ const producerMiddleWare = (
         break;
       }
       case SEARCH_INDEXES: {
-        let indexes = action.payload;
+        let indexes = stockAction.payload;
         Promise.all(indexes.map((index) => quoteFetch(index)))
           .then((dataArray) => {
             rawStore.dispatch({
@@ -98,17 +98,17 @@ const producerMiddleWare = (
       }
 
       case FETCH_HISTORY: {
-        let { symbol, period } = action.payload;
+        let { symbol, period } = stockAction.payload;
         historyFetch(symbol, period).then((data) => {
           rawStore.dispatch({ type: NEW_HISTORY_DATA, payload: data });
         });
         break;
       }
       default:
-        rawStore.dispatch(action);
+        rawStore.dispatch(stockAction);
     }
 
-    return a;
+    return action;
   };
 
   socket.on("realTimeQuoteData", (data: QuoteData) => {

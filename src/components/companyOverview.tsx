@@ -19,9 +19,9 @@ export const CompanyOverview = (props: StyleProps) => {
   }
 
   return (
-    <DisplayWrapper mb={props.mb}>
+    <DisplayWrapper {...props}>
       <TitleHeader>COMPANY OVERVIEW</TitleHeader>
-      <Text height={props.height} overflow="auto">
+      <Text height="200px" overflow="auto">
         <Text variant="primary" fontSize="1.8rem">
           {companyInfo.companyName} ({ticker})
         </Text>

@@ -58,7 +58,7 @@ export const StockTrader = () => {
                   width={["100%", null, "33%"]}
                   variant="flexColumn"
                 >
-                  <CompanyOverview height="200px" mb="32px" />
+                  <CompanyOverview mb="32px" />
                   <TopPeers />
                 </DisplayWrapper>
               </DisplayWrapper>
