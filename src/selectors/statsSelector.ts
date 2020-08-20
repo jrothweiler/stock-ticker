@@ -1,5 +1,5 @@
-import type { ReduxState, StatInfo } from "../types/reduxTypes";
+import type { ReduxState } from "../types/reduxTypes";
 
-export const statsSelector = (state: ReduxState): StatInfo => {
+export const statsSelector = (state: ReduxState) => {
   return state.stocks.tickerInfo.statInfo;
 };

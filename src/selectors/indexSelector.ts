@@ -1,5 +1,5 @@
-import type { ReduxState, Indexes } from "../types/reduxTypes";
+import type { ReduxState } from "../types/reduxTypes";
 
-export const indexSelector = (state: ReduxState): Indexes => {
+export const indexSelector = (state: ReduxState) => {
   return state.stocks.indexes;
 };

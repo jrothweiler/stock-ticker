@@ -1,8 +1,7 @@
-import type { ReduxState, HistoryInfo } from "../types/reduxTypes";
-import type { Period } from "../utils/serverUtils";
+import type { ReduxState } from "../types/reduxTypes";
 
-export const historySelector = (state: ReduxState): HistoryInfo =>
+export const historySelector = (state: ReduxState) =>
   state.stocks.tickerInfo.historyInfo;
 
-export const chartRangeSelector = (state: ReduxState): Period =>
+export const chartRangeSelector = (state: ReduxState) =>
   state.stocks.chartRange;

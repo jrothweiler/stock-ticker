@@ -4,10 +4,10 @@ import { mdiArrowDown, mdiArrowUp } from "@mdi/js";
 import Icon from "@mdi/react";
 import { DisplayWrapper } from "./generics/displayWrapper";
 import { StyleProps } from "../types/styleTypes";
-import { QuoteInfo } from "../types/reduxTypes";
+import { QuoteState } from "../types/reduxTypes";
 
 type PriceDisplayProps = StyleProps & {
-  data: QuoteInfo;
+  data: QuoteState;
   ticker?: string;
 };
 

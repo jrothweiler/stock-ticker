@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
-import type { ReduxState, QuoteInfo } from "../types/reduxTypes";
+import type { ReduxState } from "../types/reduxTypes";
 
-export const quoteSelector = (state: ReduxState): QuoteInfo => {
+export const quoteSelector = (state: ReduxState) => {
   return state.stocks.tickerInfo.quoteInfo;
 };
 

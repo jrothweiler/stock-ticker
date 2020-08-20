@@ -36,10 +36,10 @@ const producerMiddleWare = (
   const socket = socketIOClient(WEBSOCKET_URL);
 
   const dispatch: Dispatch<StockAction> = (a) => {
-    // Redux's dispatch type is weird in that its accepted actions are subtypes of the type you give it.
-    // We only ever dispatch our own StockActions, so we coerce this so typescript can work
-    // with the action's specific payload type.
-    let action = a as StockAction;
+    // Redux's dispatch type is interesting in that its accepted actions are subtypes of the type you give it.
+    // StockAction is a union, meaning we don't know what actual actions are in the variable a above.
+    // We know the actions passed in are StockActions, so we coerce this so typescript can work with the action's specific payload type.
+    const action = a as StockAction;
     switch (action.type) {
       case SEARCH_SYMBOL: {
         let symbol = action.payload;
@@ -52,7 +52,7 @@ const producerMiddleWare = (
           peersFetch(symbol),
         ])
           .then((dataArray) => {
-            let [
+            const [
               quoteInfo,
               companyInfo,
               newsInfo,

@@ -29,7 +29,7 @@ export interface QuoteData {
   latestUpdate: number;
 }
 
-export type QuoteInfo = QuoteData | null;
+export type QuoteState = QuoteData | null;
 
 interface NewsArticle {
   datetime: number;
@@ -40,7 +40,7 @@ interface NewsArticle {
 
 export type NewsData = NewsArticle[];
 
-export type NewsInfo = NewsData | null;
+export type NewsState = NewsData | null;
 
 export interface CompanyData {
   companyName: string;
@@ -51,7 +51,7 @@ export interface CompanyData {
   currency: string;
 }
 
-export type CompanyInfo = CompanyData | null;
+export type CompanyState = CompanyData | null;
 
 export interface StatData {
   dividendYield: number;
@@ -59,7 +59,7 @@ export interface StatData {
   peRatio: number;
 }
 
-export type StatInfo = StatData | null;
+export type StatState = StatData | null;
 
 interface HistoryPoint {
   date: string;
@@ -69,30 +69,30 @@ interface HistoryPoint {
 
 export type HistoryData = HistoryPoint[];
 
-export type HistoryInfo = HistoryData | null;
+export type HistoryState = HistoryData | null;
 
 export type PeersData = string[];
 
-export type PeersInfo = PeersData | null;
+export type PeersState = PeersData | null;
 
 type IndexData = QuoteData[];
 
-export type Indexes = IndexData | null;
+export type IndexState = IndexData | null;
 
 interface TickerInfo {
-  quoteInfo: QuoteInfo;
-  newsInfo: NewsInfo;
-  companyInfo: CompanyInfo;
-  statInfo: StatInfo;
-  historyInfo: HistoryInfo;
-  peersInfo: PeersInfo;
+  quoteInfo: QuoteState;
+  newsInfo: NewsState;
+  companyInfo: CompanyState;
+  statInfo: StatState;
+  historyInfo: HistoryState;
+  peersInfo: PeersState;
 }
 
 export interface StockState {
   ticker: string | null;
   chartRange: Period;
   tickerInfo: TickerInfo;
-  indexes: Indexes;
+  indexes: IndexState;
 }
 
 export interface ErrorState {

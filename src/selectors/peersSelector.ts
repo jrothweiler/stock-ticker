@@ -1,5 +1,5 @@
-import type { ReduxState, PeersInfo } from "../types/reduxTypes";
+import type { ReduxState } from "../types/reduxTypes";
 
-export const peersSelector = (state: ReduxState): PeersInfo => {
+export const peersSelector = (state: ReduxState) => {
   return state.stocks.tickerInfo.peersInfo;
 };

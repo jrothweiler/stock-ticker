@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
-import type { ReduxState, ErrorState } from "../types/reduxTypes";
+import type { ReduxState } from "../types/reduxTypes";
 
-export const errorsSelector = (state: ReduxState): ErrorState => state.errors;
+export const errorsSelector = (state: ReduxState) => state.errors;
 
 export const searchErrorsSelector = createSelector(
   [errorsSelector],
