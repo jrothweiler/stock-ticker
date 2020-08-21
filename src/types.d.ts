@@ -119,7 +119,7 @@ export interface PossibleAction<Type extends ActionTypes, Payload>
   payload: Payload;
 }
 
-type Period = "1D" | "5D" | "1M" | "1Y" | "5Y" | "MAX" | null;
+type Period = "1D" | "5D" | "1M" | "1Y" | "5Y" | "MAX";
 
 export type StockAction =
   | PossibleAction<typeof NEW_QUOTE_DATA, QuoteData>

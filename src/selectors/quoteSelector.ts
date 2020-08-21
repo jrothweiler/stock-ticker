@@ -7,5 +7,5 @@ export const quoteSelector = (state: CombinedReducers): QuoteData | null => {
 
 export const currentPriceSelector = createSelector(
   [quoteSelector],
-  (quoteData) => quoteData?.latestPrice
+  (quoteData) => quoteData ? quoteData.latestPrice : 0
 );

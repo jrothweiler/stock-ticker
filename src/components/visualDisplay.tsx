@@ -18,7 +18,7 @@ import { StyledSystem, Period, HistoryData } from "../types";
 export const VisualDisplay = (props: StyledSystem) => {
   const dispatch = useDispatch();
 
-  const currentPrice: number | undefined = useSelector(currentPriceSelector);
+  const currentPrice = useSelector(currentPriceSelector);
 
   const chartRange: Period = useSelector(chartRangeSelector);
   // we keep track of the previous range in the middle of a fetch of new history data,
@@ -85,7 +85,7 @@ export const VisualDisplay = (props: StyledSystem) => {
           borderDash: [5, 3],
           label: {
             position: "right",
-            content: currentPrice,
+            content: currentPrice?.toString(),
             enabled: true,
             backgroundColor: "rgb(233,86,86)",
           },
