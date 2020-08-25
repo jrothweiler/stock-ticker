@@ -8,24 +8,30 @@ import {
 import App from "./App";
 import socketIOClient from "socket.io-client";
 
+interface MockSocket {
+  emit: jest.Mock<void>;
+  on: jest.Mock<void>;
+  receiveEvent: jest.Mock<void>;
+}
 // mock the socket io client with an object that resembles a socket
 jest.mock("socket.io-client", () => {
   const emit = jest.fn();
   // keep track in this mock of any callbacks added through 'on'
-  const eventHandlers = {};
+  const eventHandlers: any = {};
   const on = jest.fn((event, cb) => {
     eventHandlers[event] = cb;
   });
 
   // test helper that simulates the socket receiving an event from the server
   // side of the socket, calling the appropriate callback
-  const receiveEvent = (event, ...args) => {
+  const receiveEvent = (event: string, ...args: any) => {
     eventHandlers[event](...args);
   };
   const socket = { emit, on, receiveEvent };
   return jest.fn(() => socket);
 });
 
+const socketMock = (socketIOClient as unknown) as jest.Mock<MockSocket>;
 // Integration tests for the general application experience
 describe("Application", () => {
   beforeEach(async () => {
@@ -72,7 +78,7 @@ describe("Application", () => {
     expect(screen.getByText("387.46")).toBeInTheDocument();
     expect(screen.queryByText("400.46")).not.toBeInTheDocument();
 
-    socketIOClient().receiveEvent("realTimeQuoteData", {
+    socketMock().receiveEvent("realTimeQuoteData", {
       symbol: "AAPL",
       previousClose: "479.47",
       week52High: "517.16",

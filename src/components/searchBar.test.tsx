@@ -6,6 +6,7 @@ import {
   fireEvent,
 } from "@testing-library/react";
 import App from "../App";
+import { exception } from "console";
 
 // Tests for search bar functionality
 // Done as integration tests due to the dependencies across the
@@ -25,14 +26,17 @@ describe("Search bar component", () => {
 
   test("focusing on the form removes the company text", () => {
     const companyText = screen.queryByText("Apple, Inc.");
-    const input = screen.queryByRole("textbox");
+    const input: HTMLElement | null = screen.queryByRole("textbox");
+    if (!input) {
+      throw new Error("");
+    }
     expect(companyText).toBeInTheDocument();
     fireEvent.focus(input);
     expect(companyText).not.toBeInTheDocument();
   });
 
   test("Badly formatted symbols are stopped client side", () => {
-    const input = screen.getByRole("textbox");
+    const input = screen.getByRole("textbox") as HTMLInputElement;
     fireEvent.change(input, { target: { value: "jklasjdf&^^^" } });
     fireEvent.submit(input);
 
@@ -48,7 +52,7 @@ describe("Search bar component", () => {
   });
 
   test("Nonexistent symbols are stopped server side", async () => {
-    const input = screen.getByRole("textbox");
+    const input = screen.getByRole("textbox") as HTMLInputElement;
     fireEvent.change(input, { target: { value: "BADSYMBOL" } });
     fireEvent.submit(input);
 
@@ -65,7 +69,7 @@ describe("Search bar component", () => {
 
   test("Unfocusing when there is no text shows the company name again", async () => {
     const companyText = screen.getByText("Apple, Inc.");
-    const input = screen.queryByRole("textbox");
+    const input = screen.queryByRole("textbox") as HTMLInputElement;
     expect(screen.getByText("Apple, Inc.")).toBeInTheDocument();
     fireEvent.click(companyText);
     expect(input === document.activeElement).toBe(true);
@@ -78,7 +82,7 @@ describe("Search bar component", () => {
 
   test("Unfocusing when there is no text shows the company name again", async () => {
     const companyText = screen.getByText("Apple, Inc.");
-    const input = screen.queryByRole("textbox");
+    const input = screen.queryByRole("textbox") as HTMLInputElement;
     expect(screen.getByText("Apple, Inc.")).toBeInTheDocument();
     fireEvent.click(companyText);
     expect(input === document.activeElement).toBe(true);
@@ -93,7 +97,7 @@ describe("Search bar component", () => {
   });
 
   test("Searching for a new symbol updates the experience", async () => {
-    const input = screen.getByRole("textbox");
+    const input = screen.getByRole("textbox") as HTMLInputElement;
 
     expect(screen.getByText("Apple, Inc.")).toBeInTheDocument();
     // initially shows apple's price
